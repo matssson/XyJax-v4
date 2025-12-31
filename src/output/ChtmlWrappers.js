@@ -21,7 +21,7 @@ import {ChtmlWrappers} from "@mathjax/src/js/output/chtml/Wrappers.js";
 import {BBox} from '@mathjax/src/js/util/BBox.js';
 
 import createXypicError from "../core/XypicError.js";
-import {xypicGlobalContext} from "../core/xypicGlobalContext.js";
+import {XypicGlobalContext} from "../core/XypicGlobalContext.js";
 import {AST} from "../input/XyNodes.js";
 import {Shape} from "./Shapes.js";
 import {Frame} from "./Frames.js";
@@ -42,7 +42,7 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 		constructor(factory, node, parent=null) {
 			super(factory, node, parent);
 
-			const wrapperOfTextObjectMap = xypicGlobalContext.wrapperOfTextObjectMap;
+			const wrapperOfTextObjectMap = XypicGlobalContext.wrapperOfTextObjectMap;
 			const textMmls = node.textMmls;
 			const wrappers = this.childNodes;
 			const childCount = textMmls.length;
@@ -69,7 +69,7 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 				// 不到達コード
 				throw createXypicError("IllegalStateError", "BUG");
 			}
-			const wrapper = xypicGlobalContext.wrapperOfTextObjectMap[textObjectId];
+			const wrapper = XypicGlobalContext.wrapperOfTextObjectMap[textObjectId];
 			if (wrapper == undefined) {
 				// 不到達コード
 				throw createXypicError("IllegalStateError", "unknown textObjectId:" + textObjectId);
@@ -79,16 +79,16 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 		}
 
 		toCHTML(parents) {
-			const oldSvgForDebug = xypicGlobalContext.svgForDebug;
-			const oldSvgForTestLayout = xypicGlobalContext.svgForTestLayout;
+			const oldSvgForDebug = XypicGlobalContext.svgForDebug;
+			const oldSvgForTestLayout = XypicGlobalContext.svgForTestLayout;
 
 			this._textObjects = [];
 			this.setupMeasure(this);
 
 			this._toCHTML(parents);
 
-			xypicGlobalContext.svgForDebug = oldSvgForDebug;
-			xypicGlobalContext.svgForTestLayout = oldSvgForTestLayout;
+			XypicGlobalContext.svgForDebug = oldSvgForDebug;
+			XypicGlobalContext.svgForTestLayout = oldSvgForTestLayout;
 		}
 
 		setupMeasure(wrapper) {
@@ -99,7 +99,7 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 			const thickness = wrapper.length2em("0.15em");
 			const em2px = function (n) { return Math.round(parseFloat(wrapper.px(n * 100).replace("px", ""))) / 100; };
 
-			xypicGlobalContext.measure = {
+			XypicGlobalContext.measure = {
 				length2em: function (len) { return round2(wrapper.length2em(len)); },
 				oneem: oneem,
 				em2length: function (len) { return round2(len / oneem) + "em"; },
@@ -144,7 +144,7 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 		}
 
 		drawTextObject(textObject, svg, test) {
-			const p = xypicGlobalContext.measure.length2em("0.2em");
+			const p = XypicGlobalContext.measure.length2em("0.2em");
 			const parent = svg.xypicWrapper;
 			const textObjectWrapper = parent.getChildWrapper(textObject.math);
 			const adaptor = textObjectWrapper.adaptor;
@@ -176,17 +176,17 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 
 				// for DEBUGGING
 				// svg.createSvgElement("rect", {
-				// 	x: xypicGlobalContext.measure.em2px(c.x - halfW),
-				// 	y: -xypicGlobalContext.measure.em2px(c.y - (H - D) / 2),
-				// 	width: xypicGlobalContext.measure.em2px(W),
+				// 	x: XypicGlobalContext.measure.em2px(c.x - halfW),
+				// 	y: -XypicGlobalContext.measure.em2px(c.y - (H - D) / 2),
+				// 	width: XypicGlobalContext.measure.em2px(W),
 				// 	height: 0.01,
 				// 	stroke: "green", "stroke-width": 0.3
 				// });
 				// svg.createSvgElement("rect", {
-				// 	x: xypicGlobalContext.measure.em2px(c.x - halfW),
-				// 	y: -xypicGlobalContext.measure.em2px(c.y + halfHD),
-				// 	width: xypicGlobalContext.measure.em2px(W),
-				// 	height: xypicGlobalContext.measure.em2px(H + D),
+				// 	x: XypicGlobalContext.measure.em2px(c.x - halfW),
+				// 	y: -XypicGlobalContext.measure.em2px(c.y + halfHD),
+				// 	width: XypicGlobalContext.measure.em2px(W),
+				// 	height: XypicGlobalContext.measure.em2px(H + D),
 				// 	stroke: "green", "stroke-width":0.5
 				// });
 			}
@@ -211,18 +211,18 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 				const p = this.length2em("0.2em");
 
 				if (this.shape == null) {
-					const oldSvgForDebug = xypicGlobalContext.svgForDebug;
-					const oldSvgForTestLayout = xypicGlobalContext.svgForTestLayout;
+					const oldSvgForDebug = XypicGlobalContext.svgForDebug;
+					const oldSvgForTestLayout = XypicGlobalContext.svgForTestLayout;
 					this._textObjects = [];
 					this.setupMeasure(this);
 		
 					const adaptor = this.adaptor;
 		
-					const t = xypicGlobalContext.measure.strokeWidth;
+					const t = XypicGlobalContext.measure.strokeWidth;
 		
 					const H = 1, D = 0, W = 1;
 		
-					const em2px = xypicGlobalContext.measure.em2px;
+					const em2px = XypicGlobalContext.measure.em2px;
 		
 					const color = "black";
 					const svg = Graphics.createSvg(this, H, D, W, t, color, {
@@ -232,8 +232,8 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 						overflow: "visible"
 					});
 		
-					xypicGlobalContext.svgForDebug = svg;
-					xypicGlobalContext.svgForTestLayout = svg;
+					XypicGlobalContext.svgForDebug = svg;
+					XypicGlobalContext.svgForTestLayout = svg;
 		
 					const env = new Env();
 					const context = new DrawingContext(Shape.none, env);
@@ -241,8 +241,8 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 					const shape = context.shape;
 					this.shape = shape;
 
-					xypicGlobalContext.svgForDebug = oldSvgForDebug;
-					xypicGlobalContext.svgForTestLayout = oldSvgForTestLayout;
+					XypicGlobalContext.svgForDebug = oldSvgForDebug;
+					XypicGlobalContext.svgForTestLayout = oldSvgForTestLayout;
 				}
 
 				const shape = this.shape;
@@ -291,12 +291,12 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 			const adaptor = this.adaptor;
 
 			const p = this.length2em("0.2em");
-			const t = xypicGlobalContext.measure.strokeWidth;
+			const t = XypicGlobalContext.measure.strokeWidth;
 
 			const bbox = { h:1, d:0, w:1, lw:0, rw:1 };
 			const H = bbox.h, D = bbox.d, W = bbox.w;
 
-			const em2px = xypicGlobalContext.measure.em2px;
+			const em2px = XypicGlobalContext.measure.em2px;
 
 			const color = "black";
 			const svg = Graphics.createSvg(this, H, D, W, t, color, {
@@ -306,8 +306,8 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 				overflow: "visible"
 			});
 
-			xypicGlobalContext.svgForDebug = svg;
-			xypicGlobalContext.svgForTestLayout = svg;
+			XypicGlobalContext.svgForDebug = svg;
+			XypicGlobalContext.svgForTestLayout = svg;
 
 			adaptor.append(chtml, svg.svg);
 
@@ -348,7 +348,7 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 							em2px(xOffsetEm), em2px(yOffsetEm), 
 							em2px(svgWidth), em2px(svgHeight)
 						].join(" "));
-					adaptor.setStyle(chtml, "vertical-align", round2(- box.d - p + xypicGlobalContext.measure.axis_height) + "em");
+					adaptor.setStyle(chtml, "vertical-align", round2(- box.d - p + XypicGlobalContext.measure.axis_height) + "em");
 
 					for (let to of this._textObjects) {
 						const tx = parseFloat(adaptor.getAttribute(to, "data-x"));
@@ -381,7 +381,7 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 
 		_toCHTML(parents) {
 			let newdir = this.node.cmd;
-			xypicGlobalContext.repositories.dirRepository.put(newdir.dirMain, newdir.compositeObject);
+			XypicGlobalContext.repositories.dirRepository.put(newdir.dirMain, newdir.compositeObject);
 		}
 	}
 

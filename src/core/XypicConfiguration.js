@@ -32,7 +32,7 @@ import {Parsers, StringReader} from "../fp/Parsers.js";
 import {AST} from "../input/XyNodes.js"
 import {XyParser} from "../input/XyParser.js"
 
-import {xypicGlobalContext} from "./xypicGlobalContext.js";
+import {XypicGlobalContext} from "./XypicGlobalContext.js";
 import {ModifierRepository, DirRepository} from "../output/Repositories.js";
 
 import {} from "../output/AugmentXyNodes.js";
@@ -44,8 +44,8 @@ function parseXypic(texParser, xyParser, mmlKind) {
 
 	const createTextNode = function (text) {
 		const textMml = new TexParser(text, texParser.stack.env, texParser.configuration).mml();
-		const textObjectId = xypicGlobalContext.textObjectIdCounter;
-		xypicGlobalContext.textObjectIdCounter++;
+		const textObjectId = XypicGlobalContext.textObjectIdCounter;
+		XypicGlobalContext.textObjectIdCounter++;
 		textMmls.push(textMml);
 		textMmlIds.push(textObjectId);
 		return textMml;
@@ -61,9 +61,9 @@ function parseXypic(texParser, xyParser, mmlKind) {
 	texParser.i = result.next.offset;
 
 	if (result.successful) {
-		const commandId = "" + xypicGlobalContext.xypicCommandIdCounter;
-		xypicGlobalContext.xypicCommandIdCounter++;
-		xypicGlobalContext.xypicCommandMap[commandId] = result.get();
+		const commandId = "" + XypicGlobalContext.xypicCommandIdCounter;
+		XypicGlobalContext.xypicCommandIdCounter++;
+		XypicGlobalContext.xypicCommandMap[commandId] = result.get();
 
 		const textMmlIdsJson = JSON.stringify(textMmlIds);
 
@@ -124,12 +124,12 @@ const XypicEnvironmentMap = new EnvironmentMap("xypic-environment", ParseMethods
 }, XypicMethods);
 
 function initializeXypicGlobalContext() {
-	// xypicGlobalContext.repositories.modifierRepository = new ModifierRepository();
-	// xypicGlobalContext.repositories.dirRepository = new DirRepository();
-	xypicGlobalContext.xypicCommandIdCounter = 0;
-	xypicGlobalContext.xypicCommandMap = {};
-	xypicGlobalContext.textObjectIdCounter = 0;
-	xypicGlobalContext.wrapperOfTextObjectMap = {};
+	// XypicGlobalContext.repositories.modifierRepository = new ModifierRepository();
+	// XypicGlobalContext.repositories.dirRepository = new DirRepository();
+	XypicGlobalContext.xypicCommandIdCounter = 0;
+	XypicGlobalContext.xypicCommandMap = {};
+	XypicGlobalContext.textObjectIdCounter = 0;
+	XypicGlobalContext.wrapperOfTextObjectMap = {};
 }
 
 const XypicConfiguration = Configuration.create(

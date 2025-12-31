@@ -16,7 +16,7 @@
  */
 
 
-import {xypicGlobalContext} from "../core/xypicGlobalContext.js";
+import {XypicGlobalContext} from "../core/XypicGlobalContext.js";
 import {XypicUtil} from "../util/XypicUtil.js";
 import {List} from "../fp/List.js";
 import {Frame} from "./Frames.js";
@@ -180,7 +180,7 @@ Shape.CircleSegmentShape = class Shape_CircleSegmentShape extends Shape {
 
 	draw(svg) {
 		svg.createSvgElement("path", {
-			d:"M" + xypicGlobalContext.measure.em2px(this.sx) + "," + xypicGlobalContext.measure.em2px(-this.sy) + " A" + xypicGlobalContext.measure.em2px(this.r) + "," + xypicGlobalContext.measure.em2px(this.r) + " 0 " + this.large + "," + this.flip + " " + xypicGlobalContext.measure.em2px(this.ex) + "," + xypicGlobalContext.measure.em2px(-this.ey)
+			d:"M" + XypicGlobalContext.measure.em2px(this.sx) + "," + XypicGlobalContext.measure.em2px(-this.sy) + " A" + XypicGlobalContext.measure.em2px(this.r) + "," + XypicGlobalContext.measure.em2px(this.r) + " 0 " + this.large + "," + this.flip + " " + XypicGlobalContext.measure.em2px(this.ex) + "," + XypicGlobalContext.measure.em2px(-this.ey)
 		});
 	}
 
@@ -205,7 +205,7 @@ Shape.FullCircleShape = class Shape_FullCircleShape extends Shape {
 
 	draw(svg) {
 		svg.createSvgElement("circle", {
-			cx:xypicGlobalContext.measure.em2px(this.x), cy:xypicGlobalContext.measure.em2px(-this.y), r:xypicGlobalContext.measure.em2px(this.r)
+			cx:XypicGlobalContext.measure.em2px(this.x), cy:XypicGlobalContext.measure.em2px(-this.y), r:XypicGlobalContext.measure.em2px(this.r)
 		});
 	}
 
@@ -240,11 +240,11 @@ Shape.RectangleShape = class Shape_RectangleShape extends Shape {
 	draw(svg) {
 		var def;
 		def = {
-			x:xypicGlobalContext.measure.em2px(this.x - this.left), 
-			y:-xypicGlobalContext.measure.em2px(this.y + this.up), 
-			width:xypicGlobalContext.measure.em2px(this.left + this.right), 
-			height:xypicGlobalContext.measure.em2px(this.up + this.down), 
-			rx:xypicGlobalContext.measure.em2px(this.r)
+			x:XypicGlobalContext.measure.em2px(this.x - this.left), 
+			y:-XypicGlobalContext.measure.em2px(this.y + this.up), 
+			width:XypicGlobalContext.measure.em2px(this.left + this.right), 
+			height:XypicGlobalContext.measure.em2px(this.up + this.down), 
+			rx:XypicGlobalContext.measure.em2px(this.r)
 		};
 		if (this.dasharray !== undefined) {
 			def["stroke-dasharray"] = this.dasharray;
@@ -260,11 +260,11 @@ Shape.RectangleShape = class Shape_RectangleShape extends Shape {
 		svg.createSvgElement("rect", def);
 		if (this.isDoubled) {
 			def = {
-				x:xypicGlobalContext.measure.em2px(this.x - this.left + xypicGlobalContext.measure.thickness), 
-				y:-xypicGlobalContext.measure.em2px(this.y + this.up - xypicGlobalContext.measure.thickness), 
-				width:xypicGlobalContext.measure.em2px(this.left + this.right - 2 * xypicGlobalContext.measure.thickness), 
-				height:xypicGlobalContext.measure.em2px(this.up + this.down - 2 * xypicGlobalContext.measure.thickness), 
-				rx:xypicGlobalContext.measure.em2px(Math.max(this.r - xypicGlobalContext.measure.thickness, 0))
+				x:XypicGlobalContext.measure.em2px(this.x - this.left + XypicGlobalContext.measure.thickness), 
+				y:-XypicGlobalContext.measure.em2px(this.y + this.up - XypicGlobalContext.measure.thickness), 
+				width:XypicGlobalContext.measure.em2px(this.left + this.right - 2 * XypicGlobalContext.measure.thickness), 
+				height:XypicGlobalContext.measure.em2px(this.up + this.down - 2 * XypicGlobalContext.measure.thickness), 
+				rx:XypicGlobalContext.measure.em2px(Math.max(this.r - XypicGlobalContext.measure.thickness, 0))
 			};
 			if (this.dasharray !== undefined) {
 				def["stroke-dasharray"] = this.dasharray;
@@ -309,10 +309,10 @@ Shape.EllipseShape = class Shape_EllipseShape extends Shape {
 	draw(svg) {
 		var def;
 		def = {
-			cx:xypicGlobalContext.measure.em2px(this.x), 
-			cy:-xypicGlobalContext.measure.em2px(this.y), 
-			rx:xypicGlobalContext.measure.em2px(this.rx), 
-			ry:xypicGlobalContext.measure.em2px(this.ry)
+			cx:XypicGlobalContext.measure.em2px(this.x), 
+			cy:-XypicGlobalContext.measure.em2px(this.y), 
+			rx:XypicGlobalContext.measure.em2px(this.rx), 
+			ry:XypicGlobalContext.measure.em2px(this.ry)
 		};
 		if (this.dasharray !== undefined) {
 			def["stroke-dasharray"] = this.dasharray;
@@ -328,10 +328,10 @@ Shape.EllipseShape = class Shape_EllipseShape extends Shape {
 		svg.createSvgElement("ellipse", def);
 		if (this.isDoubled) {
 			def = {
-				cx:xypicGlobalContext.measure.em2px(this.x), 
-				cy:-xypicGlobalContext.measure.em2px(this.y), 
-				rx:xypicGlobalContext.measure.em2px(Math.max(this.rx - xypicGlobalContext.measure.thickness)), 
-				ry:xypicGlobalContext.measure.em2px(Math.max(this.ry - xypicGlobalContext.measure.thickness))
+				cx:XypicGlobalContext.measure.em2px(this.x), 
+				cy:-XypicGlobalContext.measure.em2px(this.y), 
+				rx:XypicGlobalContext.measure.em2px(Math.max(this.rx - XypicGlobalContext.measure.thickness)), 
+				ry:XypicGlobalContext.measure.em2px(Math.max(this.ry - XypicGlobalContext.measure.thickness))
 			};
 			if (this.dasharray !== undefined) {
 				def["stroke-dasharray"] = this.dasharray;
@@ -373,13 +373,13 @@ Shape.BoxShadeShape = class Shape_BoxShadeShape extends Shape {
 	}
 
 	draw(svg) {
-		var x = xypicGlobalContext.measure.em2px(this.x);
-		var y = xypicGlobalContext.measure.em2px(this.y);
-		var l = xypicGlobalContext.measure.em2px(this.left);
-		var r = xypicGlobalContext.measure.em2px(this.right);
-		var u = xypicGlobalContext.measure.em2px(this.up);
-		var d = xypicGlobalContext.measure.em2px(this.down);
-		var depth = xypicGlobalContext.measure.em2px(this.depth);
+		var x = XypicGlobalContext.measure.em2px(this.x);
+		var y = XypicGlobalContext.measure.em2px(this.y);
+		var l = XypicGlobalContext.measure.em2px(this.left);
+		var r = XypicGlobalContext.measure.em2px(this.right);
+		var u = XypicGlobalContext.measure.em2px(this.up);
+		var d = XypicGlobalContext.measure.em2px(this.down);
+		var depth = XypicGlobalContext.measure.em2px(this.depth);
 		svg.createSvgElement("path", {
 			d: "M" + (x - l + depth) + "," + (-y + d) + 
 				"L" + (x + r) + "," + (-y + d) + 
@@ -416,99 +416,99 @@ Shape.LeftBrace = class Shape_LeftBrace extends Shape {
 	}
 
 	draw(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		var down = Math.max(0.759375 + 0.660375, this.down / scale * 1.125) - 0.660375;
 		var up = - Math.max(0.759375 + 0.660375, this.up / scale * 1.125) + 0.660375;
 		
 		var d;
-		d = "M" + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(down) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.068625) + " " + xypicGlobalContext.measure.em2px(0.07875 + down) + 
-			"Q" + xypicGlobalContext.measure.em2px(-0.068625) + " " + xypicGlobalContext.measure.em2px(0.190125 + down) + 
-			" " + xypicGlobalContext.measure.em2px(-0.0585) + " " + xypicGlobalContext.measure.em2px(0.250875 + down) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.01125) + " " + xypicGlobalContext.measure.em2px(0.387 + down) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.07425) + " " + xypicGlobalContext.measure.em2px(0.55575 + down) + 
-			" " + xypicGlobalContext.measure.em2px(0.2475) + " " + xypicGlobalContext.measure.em2px(0.6525 + down) + 
-			"L" + xypicGlobalContext.measure.em2px(0.262125) + " " + xypicGlobalContext.measure.em2px(0.660375 + down) + 
-			"L" + xypicGlobalContext.measure.em2px(0.3015) + " " + xypicGlobalContext.measure.em2px(0.660375 + down) + 
-			"L" + xypicGlobalContext.measure.em2px(0.30825) + " " + xypicGlobalContext.measure.em2px(0.653625 + down) + 
-			"V" + xypicGlobalContext.measure.em2px(0.622125 + down) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.30825) + " " + xypicGlobalContext.measure.em2px(0.60975 + down) + 
-			" " + xypicGlobalContext.measure.em2px(0.2925) + " " + xypicGlobalContext.measure.em2px(0.60075 + down) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.205875) + " " + xypicGlobalContext.measure.em2px(0.541125 + down) + 
-			" " + xypicGlobalContext.measure.em2px(0.149625) + " " + xypicGlobalContext.measure.em2px(0.44775 + down) + 
-			"T" + xypicGlobalContext.measure.em2px(0.07425) + " " + xypicGlobalContext.measure.em2px(0.239625 + down) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.07425) + " " + xypicGlobalContext.measure.em2px(0.2385 + down) + 
-			" " + xypicGlobalContext.measure.em2px(0.073125) + " " + xypicGlobalContext.measure.em2px(0.235125 + down) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.068625) + " " + xypicGlobalContext.measure.em2px(0.203625 + down) + 
-			" " + xypicGlobalContext.measure.em2px(0.0675) + " " + xypicGlobalContext.measure.em2px(0.041625 + down) + 
-			"L" + xypicGlobalContext.measure.em2px(0.0675) + " " + xypicGlobalContext.measure.em2px(0.75825) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.0675) + " " + xypicGlobalContext.measure.em2px(0.496125) + 
-			" " + xypicGlobalContext.measure.em2px(0.066375) + " " + xypicGlobalContext.measure.em2px(0.486) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.05625) + " " + xypicGlobalContext.measure.em2px(0.336375) + 
-			" " + xypicGlobalContext.measure.em2px(-0.021375) + " " + xypicGlobalContext.measure.em2px(0.212625) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.226125) + " " + xypicGlobalContext.measure.em2px(0.010125) + 
-			"L" + xypicGlobalContext.measure.em2px(-0.241875) + " 0" + 
-			"L" + xypicGlobalContext.measure.em2px(-0.226125) + " " + xypicGlobalContext.measure.em2px(-0.010125) + 
-			"Q" + xypicGlobalContext.measure.em2px(-0.106875) + " " + xypicGlobalContext.measure.em2px(-0.084375) + 
-			" " + xypicGlobalContext.measure.em2px(-0.025875) + " " + xypicGlobalContext.measure.em2px(-0.207) + 
-			"T" + xypicGlobalContext.measure.em2px(0.066375) + " " + xypicGlobalContext.measure.em2px(-0.486) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.0675) + " " + xypicGlobalContext.measure.em2px(-0.496125) + 
-			" " + xypicGlobalContext.measure.em2px(0.0675) + " " + xypicGlobalContext.measure.em2px(-0.75825) + 
-			"L" + xypicGlobalContext.measure.em2px(0.0675) + " " + xypicGlobalContext.measure.em2px(-0.041625 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.068625) + " " + xypicGlobalContext.measure.em2px(-0.203625 + up) + 
-			" " + xypicGlobalContext.measure.em2px(0.073125) + " " + xypicGlobalContext.measure.em2px(-0.235125 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.07425) + " " + xypicGlobalContext.measure.em2px(-0.2385 + up) + 
-			" " + xypicGlobalContext.measure.em2px(0.07425) + " " + xypicGlobalContext.measure.em2px(-0.239625 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.093375) + " " + xypicGlobalContext.measure.em2px(-0.354375 + up) + 
-			" " + xypicGlobalContext.measure.em2px(0.149625) + " " + xypicGlobalContext.measure.em2px(-0.44775 + up) + 
-			"T" + xypicGlobalContext.measure.em2px(0.2925) + " " + xypicGlobalContext.measure.em2px(-0.60075 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.30825) + " " + xypicGlobalContext.measure.em2px(-0.60975 + up) + 
-			" " + xypicGlobalContext.measure.em2px(0.30825) + " " + xypicGlobalContext.measure.em2px(-0.622125 + up) + 
-			"L" + xypicGlobalContext.measure.em2px(0.30825) + " " + xypicGlobalContext.measure.em2px(-0.653625 + up) + 
-			"L" + xypicGlobalContext.measure.em2px(0.3015) + " " + xypicGlobalContext.measure.em2px(-0.660375 + up) + 
-			"L" + xypicGlobalContext.measure.em2px(0.262125) + " " + xypicGlobalContext.measure.em2px(-0.660375 + up) + 
-			"L" + xypicGlobalContext.measure.em2px(0.2475) + " " + xypicGlobalContext.measure.em2px(-0.6525 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.07425) + " " + xypicGlobalContext.measure.em2px(-0.55575 + up) + 
-			" " + xypicGlobalContext.measure.em2px(-0.01125) + " " + xypicGlobalContext.measure.em2px(-0.387 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(-0.048375) + " " + xypicGlobalContext.measure.em2px(-0.311625 + up) + 
-			" " + xypicGlobalContext.measure.em2px(-0.0585) + " " + xypicGlobalContext.measure.em2px(-0.250875 + up) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.068625) + " " + xypicGlobalContext.measure.em2px(-0.07875 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(up) + 
-			" " + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(up) + 
-			"L" + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(-0.759375) + 
-			"V" + xypicGlobalContext.measure.em2px(-0.5985) + 
-			"Q" + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(-0.47925) + 
-			" " + xypicGlobalContext.measure.em2px(-0.075375) + " " + xypicGlobalContext.measure.em2px(-0.41175) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.11475) + " " + xypicGlobalContext.measure.em2px(-0.27) + 
-			"Q" + xypicGlobalContext.measure.em2px(-0.133875) + " " + xypicGlobalContext.measure.em2px(-0.2205) + 
-			" " + xypicGlobalContext.measure.em2px(-0.160875) + " " + xypicGlobalContext.measure.em2px(-0.17775) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.212625) + " " + xypicGlobalContext.measure.em2px(-0.106875) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.25875) + " " + xypicGlobalContext.measure.em2px(-0.06075) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.293625) + " " + xypicGlobalContext.measure.em2px(-0.0315) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.307125) + " " + xypicGlobalContext.measure.em2px(-0.02025) + 
-			"Q" + xypicGlobalContext.measure.em2px(-0.30825) + " " + xypicGlobalContext.measure.em2px(-0.019125) + 
-			" " + xypicGlobalContext.measure.em2px(-0.30825) + " 0" + 
-			"T" + xypicGlobalContext.measure.em2px(-0.307125) + " " + xypicGlobalContext.measure.em2px(0.02025) + 
-			"Q" + xypicGlobalContext.measure.em2px(-0.307125) + " " + xypicGlobalContext.measure.em2px(0.021375) + 
-			" " + xypicGlobalContext.measure.em2px(-0.284625) + " " + xypicGlobalContext.measure.em2px(0.03825) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.2295) + " " + xypicGlobalContext.measure.em2px(0.091125) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.162) + " " + xypicGlobalContext.measure.em2px(0.176625) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.10125) + " " + xypicGlobalContext.measure.em2px(0.30825) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.068625) + " " + xypicGlobalContext.measure.em2px(0.482625) + 
-			"Q" + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(0.496125) + 
-			" " + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(0.759375) + 
+		d = "M" + XypicGlobalContext.measure.em2px(-0.0675) + " " + XypicGlobalContext.measure.em2px(down) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.068625) + " " + XypicGlobalContext.measure.em2px(0.07875 + down) + 
+			"Q" + XypicGlobalContext.measure.em2px(-0.068625) + " " + XypicGlobalContext.measure.em2px(0.190125 + down) + 
+			" " + XypicGlobalContext.measure.em2px(-0.0585) + " " + XypicGlobalContext.measure.em2px(0.250875 + down) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.01125) + " " + XypicGlobalContext.measure.em2px(0.387 + down) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.07425) + " " + XypicGlobalContext.measure.em2px(0.55575 + down) + 
+			" " + XypicGlobalContext.measure.em2px(0.2475) + " " + XypicGlobalContext.measure.em2px(0.6525 + down) + 
+			"L" + XypicGlobalContext.measure.em2px(0.262125) + " " + XypicGlobalContext.measure.em2px(0.660375 + down) + 
+			"L" + XypicGlobalContext.measure.em2px(0.3015) + " " + XypicGlobalContext.measure.em2px(0.660375 + down) + 
+			"L" + XypicGlobalContext.measure.em2px(0.30825) + " " + XypicGlobalContext.measure.em2px(0.653625 + down) + 
+			"V" + XypicGlobalContext.measure.em2px(0.622125 + down) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.30825) + " " + XypicGlobalContext.measure.em2px(0.60975 + down) + 
+			" " + XypicGlobalContext.measure.em2px(0.2925) + " " + XypicGlobalContext.measure.em2px(0.60075 + down) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.205875) + " " + XypicGlobalContext.measure.em2px(0.541125 + down) + 
+			" " + XypicGlobalContext.measure.em2px(0.149625) + " " + XypicGlobalContext.measure.em2px(0.44775 + down) + 
+			"T" + XypicGlobalContext.measure.em2px(0.07425) + " " + XypicGlobalContext.measure.em2px(0.239625 + down) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.07425) + " " + XypicGlobalContext.measure.em2px(0.2385 + down) + 
+			" " + XypicGlobalContext.measure.em2px(0.073125) + " " + XypicGlobalContext.measure.em2px(0.235125 + down) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.068625) + " " + XypicGlobalContext.measure.em2px(0.203625 + down) + 
+			" " + XypicGlobalContext.measure.em2px(0.0675) + " " + XypicGlobalContext.measure.em2px(0.041625 + down) + 
+			"L" + XypicGlobalContext.measure.em2px(0.0675) + " " + XypicGlobalContext.measure.em2px(0.75825) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.0675) + " " + XypicGlobalContext.measure.em2px(0.496125) + 
+			" " + XypicGlobalContext.measure.em2px(0.066375) + " " + XypicGlobalContext.measure.em2px(0.486) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.05625) + " " + XypicGlobalContext.measure.em2px(0.336375) + 
+			" " + XypicGlobalContext.measure.em2px(-0.021375) + " " + XypicGlobalContext.measure.em2px(0.212625) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.226125) + " " + XypicGlobalContext.measure.em2px(0.010125) + 
+			"L" + XypicGlobalContext.measure.em2px(-0.241875) + " 0" + 
+			"L" + XypicGlobalContext.measure.em2px(-0.226125) + " " + XypicGlobalContext.measure.em2px(-0.010125) + 
+			"Q" + XypicGlobalContext.measure.em2px(-0.106875) + " " + XypicGlobalContext.measure.em2px(-0.084375) + 
+			" " + XypicGlobalContext.measure.em2px(-0.025875) + " " + XypicGlobalContext.measure.em2px(-0.207) + 
+			"T" + XypicGlobalContext.measure.em2px(0.066375) + " " + XypicGlobalContext.measure.em2px(-0.486) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.0675) + " " + XypicGlobalContext.measure.em2px(-0.496125) + 
+			" " + XypicGlobalContext.measure.em2px(0.0675) + " " + XypicGlobalContext.measure.em2px(-0.75825) + 
+			"L" + XypicGlobalContext.measure.em2px(0.0675) + " " + XypicGlobalContext.measure.em2px(-0.041625 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.068625) + " " + XypicGlobalContext.measure.em2px(-0.203625 + up) + 
+			" " + XypicGlobalContext.measure.em2px(0.073125) + " " + XypicGlobalContext.measure.em2px(-0.235125 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.07425) + " " + XypicGlobalContext.measure.em2px(-0.2385 + up) + 
+			" " + XypicGlobalContext.measure.em2px(0.07425) + " " + XypicGlobalContext.measure.em2px(-0.239625 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.093375) + " " + XypicGlobalContext.measure.em2px(-0.354375 + up) + 
+			" " + XypicGlobalContext.measure.em2px(0.149625) + " " + XypicGlobalContext.measure.em2px(-0.44775 + up) + 
+			"T" + XypicGlobalContext.measure.em2px(0.2925) + " " + XypicGlobalContext.measure.em2px(-0.60075 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.30825) + " " + XypicGlobalContext.measure.em2px(-0.60975 + up) + 
+			" " + XypicGlobalContext.measure.em2px(0.30825) + " " + XypicGlobalContext.measure.em2px(-0.622125 + up) + 
+			"L" + XypicGlobalContext.measure.em2px(0.30825) + " " + XypicGlobalContext.measure.em2px(-0.653625 + up) + 
+			"L" + XypicGlobalContext.measure.em2px(0.3015) + " " + XypicGlobalContext.measure.em2px(-0.660375 + up) + 
+			"L" + XypicGlobalContext.measure.em2px(0.262125) + " " + XypicGlobalContext.measure.em2px(-0.660375 + up) + 
+			"L" + XypicGlobalContext.measure.em2px(0.2475) + " " + XypicGlobalContext.measure.em2px(-0.6525 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.07425) + " " + XypicGlobalContext.measure.em2px(-0.55575 + up) + 
+			" " + XypicGlobalContext.measure.em2px(-0.01125) + " " + XypicGlobalContext.measure.em2px(-0.387 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(-0.048375) + " " + XypicGlobalContext.measure.em2px(-0.311625 + up) + 
+			" " + XypicGlobalContext.measure.em2px(-0.0585) + " " + XypicGlobalContext.measure.em2px(-0.250875 + up) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.068625) + " " + XypicGlobalContext.measure.em2px(-0.07875 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(-0.0675) + " " + XypicGlobalContext.measure.em2px(up) + 
+			" " + XypicGlobalContext.measure.em2px(-0.0675) + " " + XypicGlobalContext.measure.em2px(up) + 
+			"L" + XypicGlobalContext.measure.em2px(-0.0675) + " " + XypicGlobalContext.measure.em2px(-0.759375) + 
+			"V" + XypicGlobalContext.measure.em2px(-0.5985) + 
+			"Q" + XypicGlobalContext.measure.em2px(-0.0675) + " " + XypicGlobalContext.measure.em2px(-0.47925) + 
+			" " + XypicGlobalContext.measure.em2px(-0.075375) + " " + XypicGlobalContext.measure.em2px(-0.41175) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.11475) + " " + XypicGlobalContext.measure.em2px(-0.27) + 
+			"Q" + XypicGlobalContext.measure.em2px(-0.133875) + " " + XypicGlobalContext.measure.em2px(-0.2205) + 
+			" " + XypicGlobalContext.measure.em2px(-0.160875) + " " + XypicGlobalContext.measure.em2px(-0.17775) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.212625) + " " + XypicGlobalContext.measure.em2px(-0.106875) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.25875) + " " + XypicGlobalContext.measure.em2px(-0.06075) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.293625) + " " + XypicGlobalContext.measure.em2px(-0.0315) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.307125) + " " + XypicGlobalContext.measure.em2px(-0.02025) + 
+			"Q" + XypicGlobalContext.measure.em2px(-0.30825) + " " + XypicGlobalContext.measure.em2px(-0.019125) + 
+			" " + XypicGlobalContext.measure.em2px(-0.30825) + " 0" + 
+			"T" + XypicGlobalContext.measure.em2px(-0.307125) + " " + XypicGlobalContext.measure.em2px(0.02025) + 
+			"Q" + XypicGlobalContext.measure.em2px(-0.307125) + " " + XypicGlobalContext.measure.em2px(0.021375) + 
+			" " + XypicGlobalContext.measure.em2px(-0.284625) + " " + XypicGlobalContext.measure.em2px(0.03825) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.2295) + " " + XypicGlobalContext.measure.em2px(0.091125) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.162) + " " + XypicGlobalContext.measure.em2px(0.176625) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.10125) + " " + XypicGlobalContext.measure.em2px(0.30825) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.068625) + " " + XypicGlobalContext.measure.em2px(0.482625) + 
+			"Q" + XypicGlobalContext.measure.em2px(-0.0675) + " " + XypicGlobalContext.measure.em2px(0.496125) + 
+			" " + XypicGlobalContext.measure.em2px(-0.0675) + " " + XypicGlobalContext.measure.em2px(0.759375) + 
 			"Z";
 		svg.createSvgElement("path", {
 			d:d, 
 			fill:this.color, 
 			stroke:this.color, 
 			"stroke-width":"0pt", 
-			transform:"translate(" + xypicGlobalContext.measure.em2px(this.x) + "," + xypicGlobalContext.measure.em2px(-this.y) +") rotate(" + (-this.degree) + ") scale(" + (scale / 1.125) + ")"
+			transform:"translate(" + XypicGlobalContext.measure.em2px(this.x) + "," + XypicGlobalContext.measure.em2px(-this.y) +") rotate(" + (-this.degree) + ") scale(" + (scale / 1.125) + ")"
 		});
 	}
 
 	getBoundingBox() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return new Frame.Rect(this.x, this.y, { l:0.274 * scale, r:0.274 * scale, u:Math.max((0.759375 + 0.660375) * scale / 1.125, this.up), d:Math.max((0.759375 + 0.660375) * scale / 1.125, this.down) }).rotate(this.degree * Math.PI / 180);
 	}
 
@@ -530,64 +530,64 @@ Shape.LeftParenthesis = class Shape_LeftParenthesis extends Shape {
 	}
 
 	draw(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		var down = Math.max(0.660375, this.height / 2 / scale * 1.125) - 0.660375;
 		var up = -down;
 		
 		var d;
-		d = "M" + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(down) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.068625) + " " + xypicGlobalContext.measure.em2px(0.07875 + down) + 
-			"Q" + xypicGlobalContext.measure.em2px(-0.068625) + " " + xypicGlobalContext.measure.em2px(0.190125 + down) + 
-			" " + xypicGlobalContext.measure.em2px(-0.0585) + " " + xypicGlobalContext.measure.em2px(0.250875 + down) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.01125) + " " + xypicGlobalContext.measure.em2px(0.387 + down) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.07425) + " " + xypicGlobalContext.measure.em2px(0.55575 + down) + 
-			" " + xypicGlobalContext.measure.em2px(0.2475) + " " + xypicGlobalContext.measure.em2px(0.6525 + down) + 
-			"L" + xypicGlobalContext.measure.em2px(0.262125) + " " + xypicGlobalContext.measure.em2px(0.660375 + down) + 
-			"L" + xypicGlobalContext.measure.em2px(0.3015) + " " + xypicGlobalContext.measure.em2px(0.660375 + down) + 
-			"L" + xypicGlobalContext.measure.em2px(0.30825) + " " + xypicGlobalContext.measure.em2px(0.653625 + down) + 
-			"V" + xypicGlobalContext.measure.em2px(0.622125 + down) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.30825) + " " + xypicGlobalContext.measure.em2px(0.60975 + down) + 
-			" " + xypicGlobalContext.measure.em2px(0.2925) + " " + xypicGlobalContext.measure.em2px(0.60075 + down) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.205875) + " " + xypicGlobalContext.measure.em2px(0.541125 + down) + 
-			" " + xypicGlobalContext.measure.em2px(0.149625) + " " + xypicGlobalContext.measure.em2px(0.44775 + down) + 
-			"T" + xypicGlobalContext.measure.em2px(0.07425) + " " + xypicGlobalContext.measure.em2px(0.239625 + down) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.07425) + " " + xypicGlobalContext.measure.em2px(0.2385 + down) + 
-			" " + xypicGlobalContext.measure.em2px(0.073125) + " " + xypicGlobalContext.measure.em2px(0.235125 + down) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.068625) + " " + xypicGlobalContext.measure.em2px(0.203625 + down) + 
-			" " + xypicGlobalContext.measure.em2px(0.0675) + " " + xypicGlobalContext.measure.em2px(0.041625 + down) + 
-			"L" + xypicGlobalContext.measure.em2px(0.0675) + " " + xypicGlobalContext.measure.em2px(-0.041625 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.068625) + " " + xypicGlobalContext.measure.em2px(-0.203625 + up) + 
-			" " + xypicGlobalContext.measure.em2px(0.073125) + " " + xypicGlobalContext.measure.em2px(-0.235125 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.07425) + " " + xypicGlobalContext.measure.em2px(-0.2385 + up) + 
-			" " + xypicGlobalContext.measure.em2px(0.07425) + " " + xypicGlobalContext.measure.em2px(-0.239625 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.093375) + " " + xypicGlobalContext.measure.em2px(-0.354375 + up) + 
-			" " + xypicGlobalContext.measure.em2px(0.149625) + " " + xypicGlobalContext.measure.em2px(-0.44775 + up) + 
-			"T" + xypicGlobalContext.measure.em2px(0.2925) + " " + xypicGlobalContext.measure.em2px(-0.60075 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.30825) + " " + xypicGlobalContext.measure.em2px(-0.60975 + up) + 
-			" " + xypicGlobalContext.measure.em2px(0.30825) + " " + xypicGlobalContext.measure.em2px(-0.622125 + up) + 
-			"L" + xypicGlobalContext.measure.em2px(0.30825) + " " + xypicGlobalContext.measure.em2px(-0.653625 + up) + 
-			"L" + xypicGlobalContext.measure.em2px(0.3015) + " " + xypicGlobalContext.measure.em2px(-0.660375 + up) + 
-			"L" + xypicGlobalContext.measure.em2px(0.262125) + " " + xypicGlobalContext.measure.em2px(-0.660375 + up) + 
-			"L" + xypicGlobalContext.measure.em2px(0.2475) + " " + xypicGlobalContext.measure.em2px(-0.6525 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(0.07425) + " " + xypicGlobalContext.measure.em2px(-0.55575 + up) + 
-			" " + xypicGlobalContext.measure.em2px(-0.01125) + " " + xypicGlobalContext.measure.em2px(-0.387 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(-0.048375) + " " + xypicGlobalContext.measure.em2px(-0.311625 + up) + 
-			" " + xypicGlobalContext.measure.em2px(-0.0585) + " " + xypicGlobalContext.measure.em2px(-0.250875 + up) + 
-			"T" + xypicGlobalContext.measure.em2px(-0.068625) + " " + xypicGlobalContext.measure.em2px(-0.07875 + up) + 
-			"Q" + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(up) + 
-			" " + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(up) + 
+		d = "M" + XypicGlobalContext.measure.em2px(-0.0675) + " " + XypicGlobalContext.measure.em2px(down) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.068625) + " " + XypicGlobalContext.measure.em2px(0.07875 + down) + 
+			"Q" + XypicGlobalContext.measure.em2px(-0.068625) + " " + XypicGlobalContext.measure.em2px(0.190125 + down) + 
+			" " + XypicGlobalContext.measure.em2px(-0.0585) + " " + XypicGlobalContext.measure.em2px(0.250875 + down) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.01125) + " " + XypicGlobalContext.measure.em2px(0.387 + down) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.07425) + " " + XypicGlobalContext.measure.em2px(0.55575 + down) + 
+			" " + XypicGlobalContext.measure.em2px(0.2475) + " " + XypicGlobalContext.measure.em2px(0.6525 + down) + 
+			"L" + XypicGlobalContext.measure.em2px(0.262125) + " " + XypicGlobalContext.measure.em2px(0.660375 + down) + 
+			"L" + XypicGlobalContext.measure.em2px(0.3015) + " " + XypicGlobalContext.measure.em2px(0.660375 + down) + 
+			"L" + XypicGlobalContext.measure.em2px(0.30825) + " " + XypicGlobalContext.measure.em2px(0.653625 + down) + 
+			"V" + XypicGlobalContext.measure.em2px(0.622125 + down) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.30825) + " " + XypicGlobalContext.measure.em2px(0.60975 + down) + 
+			" " + XypicGlobalContext.measure.em2px(0.2925) + " " + XypicGlobalContext.measure.em2px(0.60075 + down) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.205875) + " " + XypicGlobalContext.measure.em2px(0.541125 + down) + 
+			" " + XypicGlobalContext.measure.em2px(0.149625) + " " + XypicGlobalContext.measure.em2px(0.44775 + down) + 
+			"T" + XypicGlobalContext.measure.em2px(0.07425) + " " + XypicGlobalContext.measure.em2px(0.239625 + down) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.07425) + " " + XypicGlobalContext.measure.em2px(0.2385 + down) + 
+			" " + XypicGlobalContext.measure.em2px(0.073125) + " " + XypicGlobalContext.measure.em2px(0.235125 + down) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.068625) + " " + XypicGlobalContext.measure.em2px(0.203625 + down) + 
+			" " + XypicGlobalContext.measure.em2px(0.0675) + " " + XypicGlobalContext.measure.em2px(0.041625 + down) + 
+			"L" + XypicGlobalContext.measure.em2px(0.0675) + " " + XypicGlobalContext.measure.em2px(-0.041625 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.068625) + " " + XypicGlobalContext.measure.em2px(-0.203625 + up) + 
+			" " + XypicGlobalContext.measure.em2px(0.073125) + " " + XypicGlobalContext.measure.em2px(-0.235125 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.07425) + " " + XypicGlobalContext.measure.em2px(-0.2385 + up) + 
+			" " + XypicGlobalContext.measure.em2px(0.07425) + " " + XypicGlobalContext.measure.em2px(-0.239625 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.093375) + " " + XypicGlobalContext.measure.em2px(-0.354375 + up) + 
+			" " + XypicGlobalContext.measure.em2px(0.149625) + " " + XypicGlobalContext.measure.em2px(-0.44775 + up) + 
+			"T" + XypicGlobalContext.measure.em2px(0.2925) + " " + XypicGlobalContext.measure.em2px(-0.60075 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.30825) + " " + XypicGlobalContext.measure.em2px(-0.60975 + up) + 
+			" " + XypicGlobalContext.measure.em2px(0.30825) + " " + XypicGlobalContext.measure.em2px(-0.622125 + up) + 
+			"L" + XypicGlobalContext.measure.em2px(0.30825) + " " + XypicGlobalContext.measure.em2px(-0.653625 + up) + 
+			"L" + XypicGlobalContext.measure.em2px(0.3015) + " " + XypicGlobalContext.measure.em2px(-0.660375 + up) + 
+			"L" + XypicGlobalContext.measure.em2px(0.262125) + " " + XypicGlobalContext.measure.em2px(-0.660375 + up) + 
+			"L" + XypicGlobalContext.measure.em2px(0.2475) + " " + XypicGlobalContext.measure.em2px(-0.6525 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(0.07425) + " " + XypicGlobalContext.measure.em2px(-0.55575 + up) + 
+			" " + XypicGlobalContext.measure.em2px(-0.01125) + " " + XypicGlobalContext.measure.em2px(-0.387 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(-0.048375) + " " + XypicGlobalContext.measure.em2px(-0.311625 + up) + 
+			" " + XypicGlobalContext.measure.em2px(-0.0585) + " " + XypicGlobalContext.measure.em2px(-0.250875 + up) + 
+			"T" + XypicGlobalContext.measure.em2px(-0.068625) + " " + XypicGlobalContext.measure.em2px(-0.07875 + up) + 
+			"Q" + XypicGlobalContext.measure.em2px(-0.0675) + " " + XypicGlobalContext.measure.em2px(up) + 
+			" " + XypicGlobalContext.measure.em2px(-0.0675) + " " + XypicGlobalContext.measure.em2px(up) + 
 			"Z";
 		svg.createSvgElement("path", {
 			d:d, 
 			fill:this.color, 
 			stroke:this.color, 
 			"stroke-width":"0pt", 
-			transform:"translate(" + xypicGlobalContext.measure.em2px(this.x) + "," + xypicGlobalContext.measure.em2px(-this.y) +") rotate(" + (-this.degree) + ") scale(" + (scale / 1.125) + ")"
+			transform:"translate(" + XypicGlobalContext.measure.em2px(this.x) + "," + XypicGlobalContext.measure.em2px(-this.y) +") rotate(" + (-this.degree) + ") scale(" + (scale / 1.125) + ")"
 		});
 	}
 
 	getBoundingBox() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return new Frame.Rect(this.x, this.y, { l:0.06 * scale, r:0.274 * scale, u:Math.max(0.660375 * scale / 1.125, this.height / 2), d:Math.max(0.660375 * scale / 1.125, this.height / 2) }).rotate(this.degree * Math.PI / 180);
 	}
 
@@ -612,7 +612,7 @@ Shape.TextShape = class Shape_TextShape extends Shape {
 	}
 
 	getBoundingBox() {
-		return this._draw(xypicGlobalContext.svgForTestLayout, true);
+		return this._draw(XypicGlobalContext.svgForTestLayout, true);
 	}
 
 	_draw(svg, test) {
@@ -646,10 +646,10 @@ Shape.ImageShape = class Shape_ImageShape extends Shape {
 	draw(svg) {
 		var c = this.c;
 		svg.createSvgElement("image", {
-			x: xypicGlobalContext.measure.em2px(c.x - c.l),
-			y: xypicGlobalContext.measure.em2px(-c.y - c.u),
-			width: xypicGlobalContext.measure.em2px(c.l + c.r),
-			height: xypicGlobalContext.measure.em2px(c.u + c.d),
+			x: XypicGlobalContext.measure.em2px(c.x - c.l),
+			y: XypicGlobalContext.measure.em2px(-c.y - c.u),
+			width: XypicGlobalContext.measure.em2px(c.l + c.r),
+			height: XypicGlobalContext.measure.em2px(c.u + c.d),
 			preserveAspectRatio: "none",
 			"xlink:href": this.url
 		});
@@ -699,24 +699,24 @@ Shape.GT2ArrowheadShape = class Shape_GT2ArrowheadShape extends Shape.ArrowheadS
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return { l:0.456 * scale, r:0, d:0.229 * scale, u:0.229 * scale };
 	}
 
 	getRadius() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return 0.213 * scale;
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		var gu = svg.createGroup(svg.transformBuilder().rotateDegree(-10));
 		var gd = svg.createGroup(svg.transformBuilder().rotateDegree(10));
 		gu.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		gd.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + ","+xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + ","+XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -732,27 +732,27 @@ Shape.GT3ArrowheadShape = class Shape_GT3ArrowheadShape extends Shape.ArrowheadS
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return { l:0.507 * scale, r:0, d:0.268 * scale, u:0.268 * scale };
 	}
 
 	getRadius() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return 0.325 * scale;
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		var gu = svg.createGroup(svg.transformBuilder().rotateDegree(-15));
 		var gd = svg.createGroup(svg.transformBuilder().rotateDegree(15));
 		gu.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		svg.createSvgElement("line", {
-			x1:0, y1:0, x2:xypicGlobalContext.measure.em2px(-0.507 * scale), y2:0
+			x1:0, y1:0, x2:XypicGlobalContext.measure.em2px(-0.507 * scale), y2:0
 		});
 		gd.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -768,14 +768,14 @@ Shape.UpperGTArrowheadShape = class Shape_UpperGTArrowheadShape extends Shape.Ar
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return { l:0.489 * scale, r:0, d:0, u:0.147 * scale };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
 };
@@ -791,14 +791,14 @@ Shape.LowerGTArrowheadShape = class Shape_LowerGTArrowheadShape extends Shape.Ar
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return { l:0.489 * scale, r:0, d:0.147 * scale, u:0 };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -814,17 +814,17 @@ Shape.GTArrowheadShape = class Shape_GTArrowheadShape extends Shape.ArrowheadSha
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return { l:0.489 * scale, r:0, d:0.147 * scale, u:0.147 * scale };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
 };
@@ -840,24 +840,24 @@ Shape.LT2ArrowheadShape = class Shape_LT2ArrowheadShape extends Shape.ArrowheadS
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return { l:0, r:0.456 * scale, d:0.229 * scale, u:0.229  * scale };
 	}
 
 	getRadius() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return 0.213 * scale;
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		var gu = svg.createGroup(svg.transformBuilder().rotateDegree(10)); 
 		var gd = svg.createGroup(svg.transformBuilder().rotateDegree(-10));
 		gu.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		gd.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -873,27 +873,27 @@ Shape.LT3ArrowheadShape = class Shape_LT3ArrowheadShape extends Shape.ArrowheadS
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return { l:0, r:0.507 * scale, d:0.268 * scale, u:0.268 * scale };
 	}
 
 	getRadius() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return 0.325 * scale;
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		var gu = svg.createGroup(svg.transformBuilder().rotateDegree(15));
 		var gd = svg.createGroup(svg.transformBuilder().rotateDegree(-15));
 		gu.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		svg.createSvgElement("line", {
-			x1:0, y1:0, x2:xypicGlobalContext.measure.em2px(0.507 * scale), y2:0
+			x1:0, y1:0, x2:XypicGlobalContext.measure.em2px(0.507 * scale), y2:0
 		});
 		gd.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -909,14 +909,14 @@ Shape.UpperLTArrowheadShape = class Shape_UpperLTArrowheadShape extends Shape.Ar
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return { l:0, r:0.489 * scale, d:0, u:0.147 * scale };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
 };
@@ -932,14 +932,14 @@ Shape.LowerLTArrowheadShape = class Shape_LowerLTArrowheadShape extends Shape.Ar
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return { l:0, r:0.489 * scale, d:0.147 * scale, u:0 };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -955,17 +955,17 @@ Shape.LTArrowheadShape = class Shape_LTArrowheadShape extends Shape.ArrowheadSha
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return { l:0, r:0.489 * scale, d:0.147 * scale, u:0.147 * scale };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -981,11 +981,11 @@ Shape.UpperColumnArrowheadShape = class Shape_UpperColumnArrowheadShape extends 
 	}
 
 	getBox() {
-		return { l:0, r:0, u:xypicGlobalContext.measure.lineElementLength, d:0 };
+		return { l:0, r:0, u:XypicGlobalContext.measure.lineElementLength, d:0 };
 	}
 
 	drawDelegate(svg) {
-		var l = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
+		var l = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:0, y2:-l
 		});
@@ -1003,11 +1003,11 @@ Shape.LowerColumnArrowheadShape = class Shape_LowerColumnArrowheadShape extends 
 	}
 
 	getBox() {
-		return { l:0, r:0, u:0, d:xypicGlobalContext.measure.lineElementLength };
+		return { l:0, r:0, u:0, d:XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var l = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
+		var l = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:0, y2:l
 		});
@@ -1025,11 +1025,11 @@ Shape.Column2ArrowheadShape = class Shape_Column2ArrowheadShape extends Shape.Ar
 	}
 
 	getBox() {
-		return { l:0, r:0, u:0.5 * (xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness), d:0.5 * (xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness) };
+		return { l:0, r:0, u:0.5 * (XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness), d:0.5 * (XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness) };
 	}
 
 	drawDelegate(svg) {
-		var l = xypicGlobalContext.measure.em2px(0.5 * (xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness));
+		var l = XypicGlobalContext.measure.em2px(0.5 * (XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness));
 		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
@@ -1047,11 +1047,11 @@ Shape.Column3ArrowheadShape = class Shape_Column3ArrowheadShape extends Shape.Ar
 	}
 
 	getBox() {
-		return { l:0, r:0, u:0.5 * xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness, d:0.5 * xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness };
+		return { l:0, r:0, u:0.5 * XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness, d:0.5 * XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
-		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness);
+		var l = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness);
 		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
@@ -1069,12 +1069,12 @@ Shape.ColumnArrowheadShape = class Shape_ColumnArrowheadShape extends Shape.Arro
 	}
 
 	getBox() {
-		return { l:0, r:0, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		return { l:0, r:0, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var l = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
@@ -1092,12 +1092,12 @@ Shape.UpperLParenArrowheadShape = class Shape_UpperLParenArrowheadShape extends 
 	}
 
 	getBox() {
-		return { l:0.5 * xypicGlobalContext.measure.lineElementLength, r:0, u:xypicGlobalContext.measure.lineElementLength, d:0 };
+		return { l:0.5 * XypicGlobalContext.measure.lineElementLength, r:0, u:XypicGlobalContext.measure.lineElementLength, d:0 };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var r = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,1 0," + (-2 * r)
 		});
@@ -1115,12 +1115,12 @@ Shape.LowerLParenArrowheadShape = class Shape_LowerLParenArrowheadShape extends 
 	}
 
 	getBox() {
-		return { l:0.5 * xypicGlobalContext.measure.lineElementLength, r:0, u:0, d:xypicGlobalContext.measure.lineElementLength };
+		return { l:0.5 * XypicGlobalContext.measure.lineElementLength, r:0, u:0, d:XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var r = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,0 0," + (2 * r)
 		});
@@ -1138,12 +1138,12 @@ Shape.LParenArrowheadShape = class Shape_LParenArrowheadShape extends Shape.Arro
 	}
 
 	getBox() {
-		return { l:0, r:0.5 * xypicGlobalContext.measure.lineElementLength, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		return { l:0, r:0.5 * XypicGlobalContext.measure.lineElementLength, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var r = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("path", {
 			d:"M" + r + "," + (-r) + " A " + r + "," + r + " 0 0,0 " + r + "," + r
 		});
@@ -1161,12 +1161,12 @@ Shape.UpperRParenArrowheadShape = class Shape_UpperRParenArrowheadShape extends 
 	}
 
 	getBox() {
-		return { l:0, r:0.5 * xypicGlobalContext.measure.lineElementLength, u:xypicGlobalContext.measure.lineElementLength, d:0 };
+		return { l:0, r:0.5 * XypicGlobalContext.measure.lineElementLength, u:XypicGlobalContext.measure.lineElementLength, d:0 };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var r = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,0 0," + (-2 * r)
 		});
@@ -1184,12 +1184,12 @@ Shape.LowerRParenArrowheadShape = class Shape_LowerRParenArrowheadShape extends 
 	}
 
 	getBox() {
-		return { l:0, r:0.5 * xypicGlobalContext.measure.lineElementLength, u:0, d:xypicGlobalContext.measure.lineElementLength };
+		return { l:0, r:0.5 * XypicGlobalContext.measure.lineElementLength, u:0, d:XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var r = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,1 0," + (2 * r)
 		});
@@ -1207,12 +1207,12 @@ Shape.RParenArrowheadShape = class Shape_RParenArrowheadShape extends Shape.Arro
 	}
 
 	getBox() {
-		return { l:0.5 * xypicGlobalContext.measure.lineElementLength, r:0, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		return { l:0.5 * XypicGlobalContext.measure.lineElementLength, r:0, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var r = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("path", {
 			d:"M" + (-r) + "," + (-r) + " A " + r + "," + r + " 0 0,1 " + (-r) + "," + r
 		});
@@ -1230,12 +1230,12 @@ Shape.LowerBackquoteArrowheadShape = class Shape_LowerBackquoteArrowheadShape ex
 	}
 
 	getBox() {
-		return { l:0.5 * xypicGlobalContext.measure.lineElementLength, r:0, u:0, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		return { l:0.5 * XypicGlobalContext.measure.lineElementLength, r:0, u:0, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var r = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,0 " + (-r) + "," + (r)
 		});
@@ -1253,12 +1253,12 @@ Shape.UpperBackquoteArrowheadShape = class Shape_UpperBackquoteArrowheadShape ex
 	}
 
 	getBox() {
-		return { l:0.5 * xypicGlobalContext.measure.lineElementLength, r:0, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0 };
+		return { l:0.5 * XypicGlobalContext.measure.lineElementLength, r:0, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0 };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var r = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,1 " + (-r) + "," + (-r)
 		});
@@ -1276,12 +1276,12 @@ Shape.LowerQuoteArrowheadShape = class Shape_LowerQuoteArrowheadShape extends Sh
 	}
 
 	getBox() {
-		return { l:0, r:0.5 * xypicGlobalContext.measure.lineElementLength, u:0, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		return { l:0, r:0.5 * XypicGlobalContext.measure.lineElementLength, u:0, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var r = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,1 " + r + "," + (r)
 		});
@@ -1299,12 +1299,12 @@ Shape.UpperQuoteArrowheadShape = class Shape_UpperQuoteArrowheadShape extends Sh
 	}
 
 	getBox() {
-		return { l:0, r:0.5 * xypicGlobalContext.measure.lineElementLength, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0 };
+		return { l:0, r:0.5 * XypicGlobalContext.measure.lineElementLength, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0 };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var r = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,0 " + r + "," + (-r)
 		});
@@ -1322,12 +1322,12 @@ Shape.AsteriskArrowheadShape = class Shape_AsteriskArrowheadShape extends Shape.
 	}
 
 	getBox() {
-		return { l:xypicGlobalContext.measure.thickness, r:xypicGlobalContext.measure.thickness, u:xypicGlobalContext.measure.thickness, d:xypicGlobalContext.measure.thickness };
+		return { l:XypicGlobalContext.measure.thickness, r:XypicGlobalContext.measure.thickness, u:XypicGlobalContext.measure.thickness, d:XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
 		svg.createSvgElement("circle", {
-			cx:0, cy:0, r:xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness),
+			cx:0, cy:0, r:XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.thickness),
 			fill: "currentColor"
 		});
 	}
@@ -1344,12 +1344,12 @@ Shape.OArrowheadShape = class Shape_OArrowheadShape extends Shape.ArrowheadShape
 	}
 
 	getBox() {
-		return { l:xypicGlobalContext.measure.thickness, r:xypicGlobalContext.measure.thickness, u:xypicGlobalContext.measure.thickness, d:xypicGlobalContext.measure.thickness };
+		return { l:XypicGlobalContext.measure.thickness, r:XypicGlobalContext.measure.thickness, u:XypicGlobalContext.measure.thickness, d:XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
 		svg.createSvgElement("circle", {
-			cx:0, cy:0, r:xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness)
+			cx:0, cy:0, r:XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.thickness)
 		});
 	}
 };
@@ -1365,12 +1365,12 @@ Shape.PlusArrowheadShape = class Shape_PlusArrowheadShape extends Shape.Arrowhea
 	}
 
 	getBox() {
-		return { l:0.5 * xypicGlobalContext.measure.lineElementLength, r:0.5 * xypicGlobalContext.measure.lineElementLength, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		return { l:0.5 * XypicGlobalContext.measure.lineElementLength, r:0.5 * XypicGlobalContext.measure.lineElementLength, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var halfLen = xypicGlobalContext.measure.lineElementLength / 2;
-		var halfLenPx = xypicGlobalContext.measure.em2px(halfLen);
+		var halfLen = XypicGlobalContext.measure.lineElementLength / 2;
+		var halfLenPx = XypicGlobalContext.measure.em2px(halfLen);
 		svg.createSvgElement("line", {
 			x1:-halfLenPx, y1:0, x2:halfLenPx, y2:0
 		});
@@ -1391,12 +1391,12 @@ Shape.XArrowheadShape = class Shape_XArrowheadShape extends Shape.ArrowheadShape
 	}
 
 	getBox() {
-		return { l:0.5 * xypicGlobalContext.measure.lineElementLength, r:0.5 * xypicGlobalContext.measure.lineElementLength, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		return { l:0.5 * XypicGlobalContext.measure.lineElementLength, r:0.5 * XypicGlobalContext.measure.lineElementLength, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var halfLen = xypicGlobalContext.measure.lineElementLength / 2;
-		var halfLenPx = xypicGlobalContext.measure.em2px(halfLen);
+		var halfLen = XypicGlobalContext.measure.lineElementLength / 2;
+		var halfLenPx = XypicGlobalContext.measure.em2px(halfLen);
 		svg.createSvgElement("line", {
 			x1:-halfLenPx, y1:0, x2:halfLenPx, y2:0
 		});
@@ -1417,12 +1417,12 @@ Shape.SlashArrowheadShape = class Shape_SlashArrowheadShape extends Shape.Arrowh
 	}
 
 	getBox() {
-		return { l:0, r:0, u:xypicGlobalContext.measure.lineElementLength / 2, d:xypicGlobalContext.measure.lineElementLength / 2 };
+		return { l:0, r:0, u:XypicGlobalContext.measure.lineElementLength / 2, d:XypicGlobalContext.measure.lineElementLength / 2 };
 	}
 
 	drawDelegate(svg) {
-		var halfLen = xypicGlobalContext.measure.lineElementLength / 2;
-		var halfLenPx = xypicGlobalContext.measure.em2px(halfLen);
+		var halfLen = XypicGlobalContext.measure.lineElementLength / 2;
+		var halfLenPx = XypicGlobalContext.measure.em2px(halfLen);
 		svg.createSvgElement("line", {
 			x1:0, y1:halfLenPx, x2:0, y2:-halfLenPx
 		});
@@ -1440,12 +1440,12 @@ Shape.Line3ArrowheadShape = class Shape_Line3ArrowheadShape extends Shape.Arrowh
 	}
 
 	getBox() {
-		return { l:0, r:xypicGlobalContext.measure.lineElementLength, u:xypicGlobalContext.measure.thickness, d:xypicGlobalContext.measure.thickness };
+		return { l:0, r:XypicGlobalContext.measure.lineElementLength, u:XypicGlobalContext.measure.thickness, d:XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
-		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		var vshift = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
+		var lineLen = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
+		var vshift = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.thickness);
 		svg.createSvgElement("line", {
 			x1:0, y1:vshift, x2:lineLen, y2:vshift
 		});
@@ -1469,12 +1469,12 @@ Shape.Line2ArrowheadShape = class Shape_Line2ArrowheadShape extends Shape.Arrowh
 	}
 
 	getBox() {
-		return { l:0, r:xypicGlobalContext.measure.lineElementLength, u:0.5 * xypicGlobalContext.measure.thickness, d:0.5 * xypicGlobalContext.measure.thickness };
+		return { l:0, r:XypicGlobalContext.measure.lineElementLength, u:0.5 * XypicGlobalContext.measure.thickness, d:0.5 * XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
-		var vshift = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.thickness);
-		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
+		var vshift = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.thickness);
+		var lineLen = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:vshift, x2:lineLen, y2:vshift
 		});
@@ -1495,11 +1495,11 @@ Shape.LineArrowheadShape = class Shape_LineArrowheadShape extends Shape.Arrowhea
 	}
 
 	getBox() {
-		return { l:0, r:xypicGlobalContext.measure.lineElementLength, u:0, d:0 };
+		return { l:0, r:XypicGlobalContext.measure.lineElementLength, u:0, d:0 };
 	}
 
 	drawDelegate(svg) {
-		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
+		var lineLen = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:lineLen, y2:0
 		});
@@ -1517,14 +1517,14 @@ Shape.Dot3ArrowheadShape = class Shape_Dot3ArrowheadShape extends Shape.Arrowhea
 	}
 
 	getBox() {
-		return { l:0, r:0, u:xypicGlobalContext.measure.thickness, d:xypicGlobalContext.measure.thickness };
+		return { l:0, r:0, u:XypicGlobalContext.measure.thickness, d:XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var vshift = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
-		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
-		var dasharray = xypicGlobalContext.measure.dottedDasharray;
+		var scale = XypicGlobalContext.measure.oneem;
+		var vshift = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.thickness);
+		var lineLen = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.thickness);
+		var dasharray = XypicGlobalContext.measure.dottedDasharray;
 		svg.createSvgElement("line", {
 			x1:0, y1:vshift, x2:lineLen, y2:vshift,
 			"stroke-dasharray": dasharray
@@ -1552,13 +1552,13 @@ Shape.Dot2ArrowheadShape = class Shape_Dot2ArrowheadShape extends Shape.Arrowhea
 	}
 
 	getBox() {
-		return { l:0, r:0, u:0.5 * xypicGlobalContext.measure.thickness, d:0.5 * xypicGlobalContext.measure.thickness };
+		return { l:0, r:0, u:0.5 * XypicGlobalContext.measure.thickness, d:0.5 * XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
-		var vshift = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.thickness);
-		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
-		var dasharray = xypicGlobalContext.measure.dottedDasharray;
+		var vshift = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.thickness);
+		var lineLen = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.thickness);
+		var dasharray = XypicGlobalContext.measure.dottedDasharray;
 		svg.createSvgElement("line", {
 			x1:0, y1:vshift, x2:lineLen, y2:vshift,
 		"stroke-dasharray": dasharray
@@ -1585,9 +1585,9 @@ Shape.DotArrowheadShape = class Shape_DotArrowheadShape extends Shape.ArrowheadS
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
-		var dasharray = xypicGlobalContext.measure.dottedDasharray;
+		var scale = XypicGlobalContext.measure.oneem;
+		var lineLen = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.thickness);
+		var dasharray = XypicGlobalContext.measure.dottedDasharray;
 		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:lineLen, y2:0,
 			"stroke-dasharray": dasharray
@@ -1606,11 +1606,11 @@ Shape.Tilde3ArrowheadShape = class Shape_Tilde3ArrowheadShape extends Shape.Arro
 	}
 
 	getBox() {
-		return { l:-2 * xypicGlobalContext.measure.thickness, r:2 * xypicGlobalContext.measure.thickness, u:2 * xypicGlobalContext.measure.thickness, d:2* xypicGlobalContext.measure.thickness };
+		return { l:-2 * XypicGlobalContext.measure.thickness, r:2 * XypicGlobalContext.measure.thickness, u:2 * XypicGlobalContext.measure.thickness, d:2* XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
-		var s = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
+		var s = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.thickness);
 		svg.createSvgElement("path", {
 			d:"M" + (-2 * s) + "," + s + 
 				" Q" + (-s) + ",0" + 
@@ -1639,11 +1639,11 @@ Shape.Tilde2ArrowheadShape = class Shape_Tilde2ArrowheadShape extends Shape.Arro
 	}
 
 	getBox() {
-		return { l:-2 * xypicGlobalContext.measure.thickness, r:2 * xypicGlobalContext.measure.thickness, u:1.5 * xypicGlobalContext.measure.thickness, d:1.5 * xypicGlobalContext.measure.thickness };
+		return { l:-2 * XypicGlobalContext.measure.thickness, r:2 * XypicGlobalContext.measure.thickness, u:1.5 * XypicGlobalContext.measure.thickness, d:1.5 * XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
-		var s = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
+		var s = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.thickness);
 		svg.createSvgElement("path", {
 			d:"M" + (-2 * s) + "," + (0.5 * s) + 
 				" Q" + (-s) + "," + (-0.5 * s) +
@@ -1668,11 +1668,11 @@ Shape.TildeArrowheadShape = class Shape_TildeArrowheadShape extends Shape.Arrowh
 	}
 
 	getBox() {
-		return { l:-2 * xypicGlobalContext.measure.thickness, r:2 * xypicGlobalContext.measure.thickness, u:xypicGlobalContext.measure.thickness, d:xypicGlobalContext.measure.thickness };
+		return { l:-2 * XypicGlobalContext.measure.thickness, r:2 * XypicGlobalContext.measure.thickness, u:XypicGlobalContext.measure.thickness, d:XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
-		var s = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
+		var s = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.thickness);
 		svg.createSvgElement("path", {
 			d:"M" + (-2 * s) + ",0" + 
 				" Q" + (-s) + "," + (-s) +
@@ -1693,11 +1693,11 @@ Shape.TildeArrowheadShape = class Shape_TildeArrowheadShape extends Shape.Arrowh
 	}
 
 	getBox() {
-		return { l:-2 * xypicGlobalContext.measure.thickness, r:2 * xypicGlobalContext.measure.thickness, u:xypicGlobalContext.measure.thickness, d:xypicGlobalContext.measure.thickness };
+		return { l:-2 * XypicGlobalContext.measure.thickness, r:2 * XypicGlobalContext.measure.thickness, u:XypicGlobalContext.measure.thickness, d:XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
-		var s = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
+		var s = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.thickness);
 		svg.createSvgElement("path", {
 			d:"M" + (-2 * s) + ",0" + 
 				" Q" + (-s) + "," + (-s) +
@@ -1718,24 +1718,24 @@ Shape.GTGTArrowheadShape = class Shape_GTGTArrowheadShape extends Shape.Arrowhea
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem; return { l:0.489 * scale + 2 * xypicGlobalContext.measure.thickness, r:0, d:0.147 * scale, u:0.147 * scale };
+		var scale = XypicGlobalContext.measure.oneem; return { l:0.489 * scale + 2 * XypicGlobalContext.measure.thickness, r:0, d:0.147 * scale, u:0.147 * scale };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var t = xypicGlobalContext.measure.thickness;
-		var hshift = xypicGlobalContext.measure.em2px(2 * t);
+		var scale = XypicGlobalContext.measure.oneem;
+		var t = XypicGlobalContext.measure.thickness;
+		var hshift = XypicGlobalContext.measure.em2px(2 * t);
 		svg.createSvgElement("path", {
-			d:"M" + (-hshift) + ",0 Q" + (xypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M" + (-hshift) + ",0 Q" + (XypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + (XypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M" + (-hshift) + ",0 Q" + (xypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M" + (-hshift) + ",0 Q" + (XypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (XypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
 };
@@ -1751,19 +1751,19 @@ Shape.UpperGTGTArrowheadShape = class Shape_UpperGTGTArrowheadShape extends Shap
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:0.489 * scale + 2 * xypicGlobalContext.measure.thickness, r:0, d:0, u:0.147 * scale };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:0.489 * scale + 2 * XypicGlobalContext.measure.thickness, r:0, d:0, u:0.147 * scale };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var t = xypicGlobalContext.measure.thickness;
-		var hshift = xypicGlobalContext.measure.em2px(2 * t);
+		var scale = XypicGlobalContext.measure.oneem;
+		var t = XypicGlobalContext.measure.thickness;
+		var hshift = XypicGlobalContext.measure.em2px(2 * t);
 		svg.createSvgElement("path", {
-			d:"M" + (-hshift) + ",0 Q" + (xypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M" + (-hshift) + ",0 Q" + (XypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (XypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
 };
@@ -1779,19 +1779,19 @@ Shape.LowerGTGTArrowheadShape = class Shape_LowerGTGTArrowheadShape extends Shap
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:0.489 * scale + 2 * xypicGlobalContext.measure.thickness, r:0, d:0.147 * scale, u:0 };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:0.489 * scale + 2 * XypicGlobalContext.measure.thickness, r:0, d:0.147 * scale, u:0 };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var t = xypicGlobalContext.measure.thickness;
-		var hshift = xypicGlobalContext.measure.em2px(2 * t);
+		var scale = XypicGlobalContext.measure.oneem;
+		var t = XypicGlobalContext.measure.thickness;
+		var hshift = XypicGlobalContext.measure.em2px(2 * t);
 		svg.createSvgElement("path", {
-			d:"M" + (-hshift) + ",0 Q" + (xypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M" + (-hshift) + ",0 Q" + (XypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + (XypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -1807,33 +1807,33 @@ Shape.GTGT2ArrowheadShape = class Shape_GTGT2ArrowheadShape extends Shape.Arrowh
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:0.456 * scale + 2 * xypicGlobalContext.measure.thickness, r:0, d:0.229 * scale, u:0.229 * scale };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:0.456 * scale + 2 * XypicGlobalContext.measure.thickness, r:0, d:0.229 * scale, u:0.229 * scale };
 	}
 
 	getRadius() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return 0.213 * scale;
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var t = xypicGlobalContext.measure.thickness;
+		var scale = XypicGlobalContext.measure.oneem;
+		var t = XypicGlobalContext.measure.thickness;
 		var gu1 = svg.createGroup(svg.transformBuilder().rotateDegree(-10));
 		var gd1 = svg.createGroup(svg.transformBuilder().rotateDegree(10));
 		gu1.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		gd1.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + ","+xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + ","+XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		var gu2 = svg.createGroup(svg.transformBuilder().translate(-2 * t, 0).rotateDegree(-10));
 		var gd2 = svg.createGroup(svg.transformBuilder().translate(-2 * t, 0).rotateDegree(10));
 		gu2.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		gd2.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + ","+xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + ","+XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -1849,36 +1849,36 @@ Shape.GTGT3ArrowheadShape = class Shape_GTGT3ArrowheadShape extends Shape.Arrowh
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:0.507 * scale + 2 * xypicGlobalContext.measure.thickness, r:0, d:0.268 * scale, u:0.268 * scale };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:0.507 * scale + 2 * XypicGlobalContext.measure.thickness, r:0, d:0.268 * scale, u:0.268 * scale };
 	}
 
 	getRadius() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return 0.325 * scale;
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var t = xypicGlobalContext.measure.thickness;
+		var scale = XypicGlobalContext.measure.oneem;
+		var t = XypicGlobalContext.measure.thickness;
 		var gu1 = svg.createGroup(svg.transformBuilder().rotateDegree(-15));
 		var gd1 = svg.createGroup(svg.transformBuilder().rotateDegree(15));
 		gu1.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		gd1.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + ","+xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + ","+XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		var gu2 = svg.createGroup(svg.transformBuilder().translate(-2 * t, 0).rotateDegree(-15));
 		var gd2 = svg.createGroup(svg.transformBuilder().translate(-2 * t, 0).rotateDegree(15));
 		gu2.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		gd2.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + ","+xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + ","+XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		svg.createSvgElement("line", {
-			x1:0, y1:0, x2:xypicGlobalContext.measure.em2px(-0.507 * scale - 2 * t), y2:0
+			x1:0, y1:0, x2:XypicGlobalContext.measure.em2px(-0.507 * scale - 2 * t), y2:0
 		});
 	}
 };
@@ -1894,25 +1894,25 @@ Shape.LTLTArrowheadShape = class Shape_LTLTArrowheadShape extends Shape.Arrowhea
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:0, r:0.489 * scale + 2 * xypicGlobalContext.measure.thickness, d:0.147 * scale, u:0.147 * scale };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:0, r:0.489 * scale + 2 * XypicGlobalContext.measure.thickness, d:0.147 * scale, u:0.147 * scale };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var t = xypicGlobalContext.measure.thickness;
-		var hshift = xypicGlobalContext.measure.em2px(2 * t);
+		var scale = XypicGlobalContext.measure.oneem;
+		var t = XypicGlobalContext.measure.thickness;
+		var hshift = XypicGlobalContext.measure.em2px(2 * t);
 		svg.createSvgElement("path", {
-			d:"M" + hshift + ",0 Q" + (xypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M" + hshift + ",0 Q" + (XypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (XypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M" + hshift + ",0 Q" + (xypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M" + hshift + ",0 Q" + (XypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + (XypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -1928,19 +1928,19 @@ Shape.UpperLTLTArrowheadShape = class Shape_UpperLTLTArrowheadShape extends Shap
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:0, r:0.489 * scale + 2 * xypicGlobalContext.measure.thickness, d:0, u:0.147 * scale };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:0, r:0.489 * scale + 2 * XypicGlobalContext.measure.thickness, d:0, u:0.147 * scale };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var t = xypicGlobalContext.measure.thickness;
-		var hshift = xypicGlobalContext.measure.em2px(2 * t);
+		var scale = XypicGlobalContext.measure.oneem;
+		var t = XypicGlobalContext.measure.thickness;
+		var hshift = XypicGlobalContext.measure.em2px(2 * t);
 		svg.createSvgElement("path", {
-			d:"M" + hshift + ",0 Q" + (xypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M" + hshift + ",0 Q" + (XypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (XypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
 };
@@ -1956,19 +1956,19 @@ Shape.LowerLTLTArrowheadShape = class Shape_LowerLTLTArrowheadShape extends Shap
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:0, r:0.489 * scale + 2 * xypicGlobalContext.measure.thickness, d:0.147 * scale, u:0 };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:0, r:0.489 * scale + 2 * XypicGlobalContext.measure.thickness, d:0.147 * scale, u:0 };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var t = xypicGlobalContext.measure.thickness;
-		var hshift = xypicGlobalContext.measure.em2px(2 * t);
+		var scale = XypicGlobalContext.measure.oneem;
+		var t = XypicGlobalContext.measure.thickness;
+		var hshift = XypicGlobalContext.measure.em2px(2 * t);
 		svg.createSvgElement("path", {
-			d:"M" + hshift + ",0 Q" + (xypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M" + hshift + ",0 Q" + (XypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + (XypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -1984,33 +1984,33 @@ Shape.LTLT2ArrowheadShape = class Shape_LTLT2ArrowheadShape extends Shape.Arrowh
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:0, r:0.456 + scale + 2 * xypicGlobalContext.measure.thickness, d:0.229 * scale, u:0.229 * scale };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:0, r:0.456 + scale + 2 * XypicGlobalContext.measure.thickness, d:0.229 * scale, u:0.229 * scale };
 	}
 
 	getRadius() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return 0.213 * scale;
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var t = xypicGlobalContext.measure.thickness;
+		var scale = XypicGlobalContext.measure.oneem;
+		var t = XypicGlobalContext.measure.thickness;
 		var gu1 = svg.createGroup(svg.transformBuilder().translate(2 * t, 0).rotateDegree(10)); 
 		var gd1 = svg.createGroup(svg.transformBuilder().translate(2 * t, 0).rotateDegree(-10));
 		gu1.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		gd1.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		var gu2 = svg.createGroup(svg.transformBuilder().rotateDegree(10)); 
 		var gd2 = svg.createGroup(svg.transformBuilder().rotateDegree(-10));
 		gu2.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		gd2.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -2026,36 +2026,36 @@ Shape.LTLT3ArrowheadShape = class Shape_LTLT3ArrowheadShape extends Shape.Arrowh
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:0, r:0.507 * scale + 2 * xypicGlobalContext.measure.thickness, d:0.268 * scale, u:0.268 * scale };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:0, r:0.507 * scale + 2 * XypicGlobalContext.measure.thickness, d:0.268 * scale, u:0.268 * scale };
 	}
 
 	getRadius() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return 0.325 * scale;
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var t = xypicGlobalContext.measure.thickness;
+		var scale = XypicGlobalContext.measure.oneem;
+		var t = XypicGlobalContext.measure.thickness;
 		var gu1 = svg.createGroup(svg.transformBuilder().translate(2 * t, 0).rotateDegree(15)); 
 		var gd1 = svg.createGroup(svg.transformBuilder().translate(2 * t, 0).rotateDegree(-15));
 		gu1.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		gd1.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		var gu2 = svg.createGroup(svg.transformBuilder().rotateDegree(15)); 
 		var gd2 = svg.createGroup(svg.transformBuilder().rotateDegree(-15));
 		gu2.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		gd2.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		svg.createSvgElement("line", {
-			x1:0, y1:0, x2:xypicGlobalContext.measure.em2px(0.507 * scale + 2 * t), y2:0
+			x1:0, y1:0, x2:XypicGlobalContext.measure.em2px(0.507 * scale + 2 * t), y2:0
 		});
 	}
 };
@@ -2071,17 +2071,17 @@ Shape.ColumnColumnArrowheadShape = class Shape_ColumnColumnArrowheadShape extend
 	}
 
 	getBox() {
-		return { l:xypicGlobalContext.measure.thickness, r:0, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		return { l:XypicGlobalContext.measure.thickness, r:0, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var l = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
 		svg.createSvgElement("line", {
-			x1:-xypicGlobalContext.measure.em2px(t), y1:l, x2:-xypicGlobalContext.measure.em2px(t), y2:-l
+			x1:-XypicGlobalContext.measure.em2px(t), y1:l, x2:-XypicGlobalContext.measure.em2px(t), y2:-l
 		});
 	}
 };
@@ -2097,17 +2097,17 @@ Shape.UpperColumnColumnArrowheadShape = class Shape_UpperColumnColumnArrowheadSh
 	}
 
 	getBox() {
-		return { l:xypicGlobalContext.measure.thickness, r:0, u:xypicGlobalContext.measure.lineElementLength, d:0 };
+		return { l:XypicGlobalContext.measure.thickness, r:0, u:XypicGlobalContext.measure.lineElementLength, d:0 };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var l = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var l = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:0, y2:-l
 		});
 		svg.createSvgElement("line", {
-			x1:-xypicGlobalContext.measure.em2px(t), y1:0, x2:-xypicGlobalContext.measure.em2px(t), y2:-l
+			x1:-XypicGlobalContext.measure.em2px(t), y1:0, x2:-XypicGlobalContext.measure.em2px(t), y2:-l
 		});
 	}
 };
@@ -2123,17 +2123,17 @@ Shape.LowerColumnColumnArrowheadShape = class Shape_LowerColumnColumnArrowheadSh
 	}
 
 	getBox() {
-		return { l:xypicGlobalContext.measure.thickness, r:0, u:0, d:xypicGlobalContext.measure.lineElementLength };
+		return { l:XypicGlobalContext.measure.thickness, r:0, u:0, d:XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var l = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var l = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:0, y2:l
 		});
 		svg.createSvgElement("line", {
-			x1:-xypicGlobalContext.measure.em2px(t), y1:0, x2:-xypicGlobalContext.measure.em2px(t), y2:l
+			x1:-XypicGlobalContext.measure.em2px(t), y1:0, x2:-XypicGlobalContext.measure.em2px(t), y2:l
 		});
 	}
 };
@@ -2149,17 +2149,17 @@ Shape.ColumnColumn2ArrowheadShape = class Shape_ColumnColumn2ArrowheadShape exte
 	}
 
 	getBox() {
-		return { l:xypicGlobalContext.measure.thickness, r:0, u:0.5 * (xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness), d:0.5 * (xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness) };
+		return { l:XypicGlobalContext.measure.thickness, r:0, u:0.5 * (XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness), d:0.5 * (XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness) };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var l = xypicGlobalContext.measure.em2px(0.5 * (xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness));
+		var t = XypicGlobalContext.measure.thickness;
+		var l = XypicGlobalContext.measure.em2px(0.5 * (XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness));
 		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
 		svg.createSvgElement("line", {
-			x1:-xypicGlobalContext.measure.em2px(t), y1:l, x2:-xypicGlobalContext.measure.em2px(t), y2:-l
+			x1:-XypicGlobalContext.measure.em2px(t), y1:l, x2:-XypicGlobalContext.measure.em2px(t), y2:-l
 		});
 	}
 };
@@ -2175,18 +2175,18 @@ Shape.ColumnColumn3ArrowheadShape = class Shape_ColumnColumn3ArrowheadShape exte
 	}
 
 	getBox() {
-		return { l:xypicGlobalContext.measure.thickness, r:0, u:0.5 * xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness, d:0.5 * xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness };
+		return { l:XypicGlobalContext.measure.thickness, r:0, u:0.5 * XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness, d:0.5 * XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var t = xypicGlobalContext.measure.thickness;
-		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness);
+		var t = XypicGlobalContext.measure.thickness;
+		var t = XypicGlobalContext.measure.thickness;
+		var l = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness);
 		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
 		svg.createSvgElement("line", {
-			x1:-xypicGlobalContext.measure.em2px(t), y1:l, x2:-xypicGlobalContext.measure.em2px(t), y2:-l
+			x1:-XypicGlobalContext.measure.em2px(t), y1:l, x2:-XypicGlobalContext.measure.em2px(t), y2:-l
 		});
 	}
 };
@@ -2202,15 +2202,15 @@ Shape.ColumnLineArrowheadShape = class Shape_ColumnLineArrowheadShape extends Sh
 	}
 
 	getBox() {
-		return { l:0, r:xypicGlobalContext.measure.lineElementLength, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		return { l:0, r:XypicGlobalContext.measure.lineElementLength, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var l = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
-		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
+		var lineLen = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:lineLen, y2:0
 		});
@@ -2228,16 +2228,16 @@ Shape.UpperColumnLineArrowheadShape = class Shape_UpperColumnLineArrowheadShape 
 	}
 
 	getBox() {
-		return { l:0, r:xypicGlobalContext.measure.lineElementLength, u:xypicGlobalContext.measure.lineElementLength, d:0 };
+		return { l:0, r:XypicGlobalContext.measure.lineElementLength, u:XypicGlobalContext.measure.lineElementLength, d:0 };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var l = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var l = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:0, y2:-l
 		});
-		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
+		var lineLen = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:lineLen, y2:0
 		});
@@ -2255,16 +2255,16 @@ Shape.LowerColumnLineArrowheadShape = class Shape_LowerColumnLineArrowheadShape 
 	}
 
 	getBox() {
-		return { l:0, r:xypicGlobalContext.measure.lineElementLength, u:0, d:xypicGlobalContext.measure.lineElementLength };
+		return { l:0, r:XypicGlobalContext.measure.lineElementLength, u:0, d:XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var l = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
+		var t = XypicGlobalContext.measure.thickness;
+		var l = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:0, y2:l
 		});
-		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
+		var lineLen = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:lineLen, y2:0
 		});
@@ -2282,17 +2282,17 @@ Shape.ColumnLine2ArrowheadShape = class Shape_ColumnLine2ArrowheadShape extends 
 	}
 
 	getBox() {
-		return { l:0, r:xypicGlobalContext.measure.lineElementLength, u:0.5 * (xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness), d:0.5 * (xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness) };
+		return { l:0, r:XypicGlobalContext.measure.lineElementLength, u:0.5 * (XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness), d:0.5 * (XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness) };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var l = xypicGlobalContext.measure.em2px(0.5 * (xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness));
+		var t = XypicGlobalContext.measure.thickness;
+		var l = XypicGlobalContext.measure.em2px(0.5 * (XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness));
 		svg.createSvgElement("line", {
 			x1:0, y1:-l, x2:0, y2:l
 		});
-		var vshift = xypicGlobalContext.measure.em2px(0.5 * t);
-		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
+		var vshift = XypicGlobalContext.measure.em2px(0.5 * t);
+		var lineLen = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:vshift, x2:lineLen, y2:vshift
 		});
@@ -2313,17 +2313,17 @@ Shape.ColumnLine3ArrowheadShape = class Shape_ColumnLine3ArrowheadShape extends 
 	}
 
 	getBox() {
-		return { l:0, r:xypicGlobalContext.measure.lineElementLength, u:0.5 * xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness, d:0.5 * xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness };
+		return { l:0, r:XypicGlobalContext.measure.lineElementLength, u:0.5 * XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness, d:0.5 * XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
-		var t = xypicGlobalContext.measure.thickness;
-		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness);
+		var t = XypicGlobalContext.measure.thickness;
+		var l = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength + XypicGlobalContext.measure.thickness);
 		svg.createSvgElement("line", {
 			x1:0, y1:-l, x2:0, y2:l
 		});
-		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		var vshift = xypicGlobalContext.measure.em2px(t);
+		var lineLen = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
+		var vshift = XypicGlobalContext.measure.em2px(t);
 		svg.createSvgElement("line", {
 			x1:0, y1:vshift, x2:lineLen, y2:vshift
 		});
@@ -2347,21 +2347,21 @@ Shape.GTColumnArrowheadShape = class Shape_GTColumnArrowheadShape extends Shape.
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:0.489 * scale, r:0, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:0.489 * scale, r:0, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var scale = XypicGlobalContext.measure.oneem;
+		var l = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
 };
@@ -2377,29 +2377,29 @@ Shape.GTGTColumnArrowheadShape = class Shape_GTGTColumnArrowheadShape extends Sh
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:0.489 * scale + 2 * xypicGlobalContext.measure.thickness, r:0, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:0.489 * scale + 2 * XypicGlobalContext.measure.thickness, r:0, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var t = xypicGlobalContext.measure.thickness;
-		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var scale = XypicGlobalContext.measure.oneem;
+		var t = XypicGlobalContext.measure.thickness;
+		var l = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
-		var hshift = xypicGlobalContext.measure.em2px(2 * t);
+		var hshift = XypicGlobalContext.measure.em2px(2 * t);
 		svg.createSvgElement("path", {
-			d:"M" + (-hshift) + ",0 Q" + (xypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M" + (-hshift) + ",0 Q" + (XypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + (XypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M" + (-hshift) + ",0 Q" + (xypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M" + (-hshift) + ",0 Q" + (XypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (XypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
 };
@@ -2415,22 +2415,22 @@ Shape.ColumnLTArrowheadShape = class Shape_ColumnLTArrowheadShape extends Shape.
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:0, r:0.489 * scale, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:0, r:0.489 * scale, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var t = xypicGlobalContext.measure.thickness;
-		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var scale = XypicGlobalContext.measure.oneem;
+		var t = XypicGlobalContext.measure.thickness;
+		var l = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -2446,29 +2446,29 @@ Shape.ColumnLTLTArrowheadShape = class Shape_ColumnLTLTArrowheadShape extends Sh
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:0, r:0.489 * scale + 2 * xypicGlobalContext.measure.thickness, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:0, r:0.489 * scale + 2 * XypicGlobalContext.measure.thickness, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var t = xypicGlobalContext.measure.thickness;
-		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var scale = XypicGlobalContext.measure.oneem;
+		var t = XypicGlobalContext.measure.thickness;
+		var l = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
-		var hshift = xypicGlobalContext.measure.em2px(2 * t);
+		var hshift = XypicGlobalContext.measure.em2px(2 * t);
 		svg.createSvgElement("path", {
-			d:"M" + hshift + ",0 Q" + (xypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M" + hshift + ",0 Q" + (XypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (XypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M" + hshift + ",0 Q" + (xypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M" + hshift + ",0 Q" + (XypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + (XypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		svg.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(0.222 * scale) + "," + XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
 };
@@ -2484,12 +2484,12 @@ Shape.SlashSlashArrowheadShape = class Shape_SlashSlashArrowheadShape extends Sh
 	}
 
 	getBox() {
-		return { l:xypicGlobalContext.measure.thickness, r:0, u:0.5 * xypicGlobalContext.measure.lineElementLength, d:0.5 * xypicGlobalContext.measure.lineElementLength };
+		return { l:XypicGlobalContext.measure.thickness, r:0, u:0.5 * XypicGlobalContext.measure.lineElementLength, d:0.5 * XypicGlobalContext.measure.lineElementLength };
 	}
 
 	drawDelegate(svg) {
-		var hshift = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
-		var halfLenPx = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
+		var hshift = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.thickness);
+		var halfLenPx = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.lineElementLength);
 		svg.createSvgElement("line", {
 			x1:0, y1:halfLenPx, x2:0, y2:-halfLenPx
 		});
@@ -2510,31 +2510,31 @@ Shape.LineGT2ArrowheadShape = class Shape_LineGT2ArrowheadShape extends Shape.Ar
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:xypicGlobalContext.measure.lineElementLength, r:xypicGlobalContext.measure.lineElementLength, d:0.229 * scale, u:0.229 * scale };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:XypicGlobalContext.measure.lineElementLength, r:XypicGlobalContext.measure.lineElementLength, d:0.229 * scale, u:0.229 * scale };
 	}
 
 	getRadius() {
-		var scale = xypicGlobalContext.measure.oneem;
+		var scale = XypicGlobalContext.measure.oneem;
 		return 0.213 * scale;
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var halfLen = xypicGlobalContext.measure.lineElementLength;
-		var hshift = xypicGlobalContext.measure.em2px(halfLen);
-		var v = 0.5 * xypicGlobalContext.measure.thickness;
-		var vshift = xypicGlobalContext.measure.em2px(v);
+		var scale = XypicGlobalContext.measure.oneem;
+		var halfLen = XypicGlobalContext.measure.lineElementLength;
+		var hshift = XypicGlobalContext.measure.em2px(halfLen);
+		var v = 0.5 * XypicGlobalContext.measure.thickness;
+		var vshift = XypicGlobalContext.measure.em2px(v);
 		var r = this.getRadius();
-		var delta = xypicGlobalContext.measure.em2px(Math.sqrt(r * r - v * v));
+		var delta = XypicGlobalContext.measure.em2px(Math.sqrt(r * r - v * v));
 		
 		var gu = svg.createGroup(svg.transformBuilder().translate(halfLen, 0).rotateDegree(-10));
 		var gd = svg.createGroup(svg.transformBuilder().translate(halfLen, 0).rotateDegree(10));
 		gu.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + "," + XypicGlobalContext.measure.em2px(-0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 		gd.createSvgElement("path", {
-			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + ","+xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
+			d:"M0,0 Q" + XypicGlobalContext.measure.em2px(-0.222 * scale) + ","+XypicGlobalContext.measure.em2px(0.020 * scale) + " " + XypicGlobalContext.measure.em2px(-0.489 * scale) + "," + XypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		svg.createSvgElement("path", {
 			d:"M" + (-hshift) + "," + vshift + " L" + (hshift - delta) + "," + vshift + 
@@ -2554,14 +2554,14 @@ Shape.TwocellEqualityArrowheadShape = class Shape_TwocellEqualityArrowheadShape 
 	}
 
 	getBox() {
-		var scale = xypicGlobalContext.measure.oneem;
-		return { l:xypicGlobalContext.measure.lineElementLength, r:xypicGlobalContext.measure.lineElementLength, d:0.5 * xypicGlobalContext.measure.thickness, u:0.5 * xypicGlobalContext.measure.thickness };
+		var scale = XypicGlobalContext.measure.oneem;
+		return { l:XypicGlobalContext.measure.lineElementLength, r:XypicGlobalContext.measure.lineElementLength, d:0.5 * XypicGlobalContext.measure.thickness, u:0.5 * XypicGlobalContext.measure.thickness };
 	}
 
 	drawDelegate(svg) {
-		var scale = xypicGlobalContext.measure.oneem;
-		var hshift = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		var vshift = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.thickness);
+		var scale = XypicGlobalContext.measure.oneem;
+		var hshift = XypicGlobalContext.measure.em2px(XypicGlobalContext.measure.lineElementLength);
+		var vshift = XypicGlobalContext.measure.em2px(0.5 * XypicGlobalContext.measure.thickness);
 		svg.createSvgElement("path", {
 			d:"M" + (-hshift) + "," + vshift + " L" + hshift + "," + vshift + 
 				" M" + (-hshift) + "," + (-vshift) + " L" + hshift + "," + (-vshift)

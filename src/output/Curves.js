@@ -18,7 +18,7 @@
 
 import createXypicError from "../core/XypicError.js";
 import {XypicConstants} from "../util/XypicConstants.js";
-import {xypicGlobalContext} from "../core/xypicGlobalContext.js";
+import {XypicGlobalContext} from "../core/XypicGlobalContext.js";
 import {XypicUtil} from "../util/XypicUtil.js";
 import {List} from "../fp/List.js";
 import {Range} from "../fp/Range.js";
@@ -29,7 +29,7 @@ import {Shape} from "./Shapes.js";
 
 export class Env {
 	constructor() {
-		var onemm = xypicGlobalContext.measure.length2em("1mm");
+		var onemm = XypicGlobalContext.measure.length2em("1mm");
 		this.origin = {x:0, y:0};
 		this.xBase = {x:onemm, y:0};
 		this.yBase = {x:0, y:onemm};
@@ -42,10 +42,10 @@ export class Env {
 		this.p = this.c = Env.originPosition;
 		this.shouldCapturePos = false;
 		this.capturedPositions = List.empty;
-		this.objectmargin = xypicGlobalContext.measure.objectmargin;
-		this.objectheight = xypicGlobalContext.measure.objectheight;
-		this.objectwidth = xypicGlobalContext.measure.objectwidth;
-		this.labelmargin = xypicGlobalContext.measure.labelmargin;
+		this.objectmargin = XypicGlobalContext.measure.objectmargin;
+		this.objectheight = XypicGlobalContext.measure.objectheight;
+		this.objectwidth = XypicGlobalContext.measure.objectwidth;
+		this.labelmargin = XypicGlobalContext.measure.labelmargin;
 	}
 
 	duplicate() {
@@ -380,7 +380,7 @@ export class Curve {
 	}
 	
 	drawParallelDottedCurve(svg, spacing, vshift) {
-		var px = 1/xypicGlobalContext.measure.em, hpx = px/2;
+		var px = 1/XypicGlobalContext.measure.em, hpx = px/2;
 		var sp = px + spacing;
 		var len = this.length(1);
 		var n = Math.floor((len-px)/sp);
@@ -397,11 +397,11 @@ export class Curve {
 				var x = p.x, y = p.y
 				var dc = d*Math.cos(angle+hpi), ds = d*Math.sin(angle+hpi);
 				svg.createSvgElement("circle", {
-					cx:xypicGlobalContext.measure.em2px(x+dc), cy:-xypicGlobalContext.measure.em2px(y+ds), r:0.12,
+					cx:XypicGlobalContext.measure.em2px(x+dc), cy:-XypicGlobalContext.measure.em2px(y+ds), r:0.12,
 					fill: "currentColor"
 				});
 				svg.createSvgElement("circle", {
-					cx:xypicGlobalContext.measure.em2px(x-dc), cy:-xypicGlobalContext.measure.em2px(y-ds), r:0.12,
+					cx:XypicGlobalContext.measure.em2px(x-dc), cy:-XypicGlobalContext.measure.em2px(y-ds), r:0.12,
 					fill: "currentColor"
 				});
 			}
@@ -441,7 +441,7 @@ export class Curve {
 	}
 	
 	drawSquigCurve(svg, variant) {
-		var thickness = xypicGlobalContext.measure.length2em("0.15em");
+		var thickness = XypicGlobalContext.measure.length2em("0.15em");
 		var len = this.length(1);
 		var wave = 4*thickness;
 		var amp = thickness;
@@ -458,9 +458,9 @@ export class Curve {
 					angle = this.angle(t);
 					nx = amp*Math.cos(angle+hpi);
 					ny = amp*Math.sin(angle+hpi);
-					d1 = "M"+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-					d2 = "M"+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
-					d3 = "M"+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+					d1 = "M"+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+					d2 = "M"+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
+					d3 = "M"+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 					
 					for (var i = 0; i < n; i++) {
 						s = shiftLen + wave*i + thickness;
@@ -469,9 +469,9 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi);
 						ny = amp*Math.sin(angle+hpi);
-						d1 += " Q"+xypicGlobalContext.measure.em2px(p.x+2*nx)+","+xypicGlobalContext.measure.em2px(-p.y-2*ny);
-						d2 += " Q"+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-						d3 += " Q"+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
+						d1 += " Q"+XypicGlobalContext.measure.em2px(p.x+2*nx)+","+XypicGlobalContext.measure.em2px(-p.y-2*ny);
+						d2 += " Q"+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+						d3 += " Q"+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
 						
 						s = shiftLen + wave*i + 2*thickness;
 						t = this.tOfLength(s);
@@ -479,9 +479,9 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi);
 						ny = amp*Math.sin(angle+hpi);
-						d1 += " "+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-						d2 += " "+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
-						d3 += " "+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+						d1 += " "+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+						d2 += " "+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
+						d3 += " "+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 						
 						s = shiftLen + wave*i + 3*thickness;
 						t = this.tOfLength(s);
@@ -489,9 +489,9 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi);
 						ny = amp*Math.sin(angle+hpi);
-						d1 += " Q"+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
-						d2 += " Q"+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
-						d3 += " "+xypicGlobalContext.measure.em2px(p.x-2*nx)+","+xypicGlobalContext.measure.em2px(-p.y+2*ny);
+						d1 += " Q"+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
+						d2 += " Q"+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
+						d3 += " "+XypicGlobalContext.measure.em2px(p.x-2*nx)+","+XypicGlobalContext.measure.em2px(-p.y+2*ny);
 						
 						s = shiftLen + wave*(i+1);
 						t = this.tOfLength(s);
@@ -499,9 +499,9 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi);
 						ny = amp*Math.sin(angle+hpi);
-						d1 += " "+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-						d2 += " "+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
-						d3 += " "+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+						d1 += " "+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+						d2 += " "+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
+						d3 += " "+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 					}
 					svg.createSvgElement("path", {"d":d1});
 					svg.createSvgElement("path", {"d":d2});
@@ -515,8 +515,8 @@ export class Curve {
 					angle = this.angle(t);
 					nx = amp*Math.cos(angle+hpi)/2;
 					ny = amp*Math.sin(angle+hpi)/2;
-					d1 = "M"+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-					d2 = "M"+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+					d1 = "M"+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+					d2 = "M"+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 					
 					for (var i = 0; i < n; i++) {
 						s = shiftLen + wave*i + thickness;
@@ -525,8 +525,8 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi)/2;
 						ny = amp*Math.sin(angle+hpi)/2;
-						d1 += " Q"+xypicGlobalContext.measure.em2px(p.x+3*nx)+","+xypicGlobalContext.measure.em2px(-p.y-3*ny);
-						d2 += " Q"+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
+						d1 += " Q"+XypicGlobalContext.measure.em2px(p.x+3*nx)+","+XypicGlobalContext.measure.em2px(-p.y-3*ny);
+						d2 += " Q"+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
 						
 						s = shiftLen + wave*i + 2*thickness;
 						t = this.tOfLength(s);
@@ -534,8 +534,8 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi)/2;
 						ny = amp*Math.sin(angle+hpi)/2;
-						d1 += " "+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-						d2 += " "+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+						d1 += " "+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+						d2 += " "+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 						
 						s = shiftLen + wave*i + 3*thickness;
 						t = this.tOfLength(s);
@@ -543,8 +543,8 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi)/2;
 						ny = amp*Math.sin(angle+hpi)/2;
-						d1 += " Q"+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
-						d2 += " Q"+xypicGlobalContext.measure.em2px(p.x-3*nx)+","+xypicGlobalContext.measure.em2px(-p.y+3*ny);
+						d1 += " Q"+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
+						d2 += " Q"+XypicGlobalContext.measure.em2px(p.x-3*nx)+","+XypicGlobalContext.measure.em2px(-p.y+3*ny);
 						
 						s = shiftLen + wave*(i+1);
 						t = this.tOfLength(s);
@@ -552,8 +552,8 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi)/2;
 						ny = amp*Math.sin(angle+hpi)/2;
-						d1 += " "+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-						d2 += " "+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+						d1 += " "+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+						d2 += " "+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 					}
 					svg.createSvgElement("path", {"d":d1});
 					svg.createSvgElement("path", {"d":d2});
@@ -563,7 +563,7 @@ export class Curve {
 					s = shiftLen;
 					t = this.tOfLength(s);
 					p = this.position(t);
-					d1 = "M"+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
+					d1 = "M"+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
 					
 					for (var i = 0; i < n; i++) {
 						s = shiftLen + wave*i + thickness;
@@ -572,12 +572,12 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi);
 						ny = amp*Math.sin(angle+hpi);
-						d1 += " Q"+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
+						d1 += " Q"+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
 						
 						s = shiftLen + wave*i + 2*thickness;
 						t = this.tOfLength(s);
 						p = this.position(t);
-						d1 += " "+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
+						d1 += " "+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
 						
 						s = shiftLen + wave*i + 3*thickness;
 						t = this.tOfLength(s);
@@ -585,12 +585,12 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi);
 						ny = amp*Math.sin(angle+hpi);
-						d1 += " Q"+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+						d1 += " Q"+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 						
 						s = shiftLen + wave*(i+1);
 						t = this.tOfLength(s);
 						p = this.position(t);
-						d1 += " "+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
+						d1 += " "+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
 					}
 					svg.createSvgElement("path", {"d":d1});
 			}
@@ -598,7 +598,7 @@ export class Curve {
 	}
 	
 	drawDashSquigCurve(svg, variant) {
-		var thickness = xypicGlobalContext.measure.thickness;
+		var thickness = XypicGlobalContext.measure.thickness;
 		var len = this.length(1);
 		var wave = 4*thickness;
 		var amp = thickness;
@@ -617,9 +617,9 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi);
 						ny = amp*Math.sin(angle+hpi);
-						d1 += " M"+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-						d2 += " M"+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
-						d3 += " M"+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+						d1 += " M"+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+						d2 += " M"+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
+						d3 += " M"+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 						
 						s = shiftLen + wave*i*2 + thickness;
 						t = this.tOfLength(s);
@@ -627,9 +627,9 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi);
 						ny = amp*Math.sin(angle+hpi);
-						d1 += " Q"+xypicGlobalContext.measure.em2px(p.x+2*nx)+","+xypicGlobalContext.measure.em2px(-p.y-2*ny);
-						d2 += " Q"+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-						d3 += " Q"+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
+						d1 += " Q"+XypicGlobalContext.measure.em2px(p.x+2*nx)+","+XypicGlobalContext.measure.em2px(-p.y-2*ny);
+						d2 += " Q"+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+						d3 += " Q"+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
 						
 						s = shiftLen + wave*i*2 + 2*thickness;
 						t = this.tOfLength(s);
@@ -637,9 +637,9 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi);
 						ny = amp*Math.sin(angle+hpi);
-						d1 += " "+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-						d2 += " "+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
-						d3 += " "+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+						d1 += " "+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+						d2 += " "+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
+						d3 += " "+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 						
 						s = shiftLen + wave*i*2 + 3*thickness;
 						t = this.tOfLength(s);
@@ -647,9 +647,9 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi);
 						ny = amp*Math.sin(angle+hpi);
-						d1 += " Q"+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
-						d2 += " Q"+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
-						d3 += " "+xypicGlobalContext.measure.em2px(p.x-2*nx)+","+xypicGlobalContext.measure.em2px(-p.y+2*ny);
+						d1 += " Q"+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
+						d2 += " Q"+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
+						d3 += " "+XypicGlobalContext.measure.em2px(p.x-2*nx)+","+XypicGlobalContext.measure.em2px(-p.y+2*ny);
 						
 						s = shiftLen + wave*(i*2+1);
 						t = this.tOfLength(s);
@@ -657,9 +657,9 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi);
 						ny = amp*Math.sin(angle+hpi);
-						d1 += " "+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-						d2 += " "+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
-						d3 += " "+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+						d1 += " "+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+						d2 += " "+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
+						d3 += " "+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 					}
 					svg.createSvgElement("path", {"d":d1});
 					svg.createSvgElement("path", {"d":d2});
@@ -675,8 +675,8 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi)/2;
 						ny = amp*Math.sin(angle+hpi)/2;
-						d1 += " M"+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-						d2 += " M"+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+						d1 += " M"+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+						d2 += " M"+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 						
 						s = shiftLen + wave*i*2 + thickness;
 						t = this.tOfLength(s);
@@ -684,8 +684,8 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi)/2;
 						ny = amp*Math.sin(angle+hpi)/2;
-						d1 += " Q"+xypicGlobalContext.measure.em2px(p.x+3*nx)+","+xypicGlobalContext.measure.em2px(-p.y-3*ny);
-						d2 += " Q"+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
+						d1 += " Q"+XypicGlobalContext.measure.em2px(p.x+3*nx)+","+XypicGlobalContext.measure.em2px(-p.y-3*ny);
+						d2 += " Q"+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
 						
 						s = shiftLen + wave*i*2 + 2*thickness;
 						t = this.tOfLength(s);
@@ -693,8 +693,8 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi)/2;
 						ny = amp*Math.sin(angle+hpi)/2;
-						d1 += " "+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-						d2 += " "+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+						d1 += " "+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+						d2 += " "+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 						
 						s = shiftLen + wave*i*2 + 3*thickness;
 						t = this.tOfLength(s);
@@ -702,8 +702,8 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi)/2;
 						ny = amp*Math.sin(angle+hpi)/2;
-						d1 += " Q"+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
-						d2 += " Q"+xypicGlobalContext.measure.em2px(p.x-3*nx)+","+xypicGlobalContext.measure.em2px(-p.y+3*ny);
+						d1 += " Q"+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
+						d2 += " Q"+XypicGlobalContext.measure.em2px(p.x-3*nx)+","+XypicGlobalContext.measure.em2px(-p.y+3*ny);
 						
 						s = shiftLen + wave*(i*2+1);
 						t = this.tOfLength(s);
@@ -711,8 +711,8 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi)/2;
 						ny = amp*Math.sin(angle+hpi)/2;
-						d1 += " "+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
-						d2 += " "+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+						d1 += " "+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
+						d2 += " "+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 					}
 					svg.createSvgElement("path", {"d":d1});
 					svg.createSvgElement("path", {"d":d2});
@@ -724,7 +724,7 @@ export class Curve {
 						s = shiftLen + wave*i*2;
 						t = this.tOfLength(s);
 						p = this.position(t);
-						d1 += " M"+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
+						d1 += " M"+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
 						
 						s = shiftLen + wave*i*2 + thickness;
 						t = this.tOfLength(s);
@@ -732,12 +732,12 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi);
 						ny = amp*Math.sin(angle+hpi);
-						d1 += " Q"+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
+						d1 += " Q"+XypicGlobalContext.measure.em2px(p.x+nx)+","+XypicGlobalContext.measure.em2px(-p.y-ny);
 						
 						s = shiftLen + wave*i*2 + 2*thickness;
 						t = this.tOfLength(s);
 						p = this.position(t);
-						d1 += " "+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
+						d1 += " "+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
 						
 						s = shiftLen + wave*i*2 + 3*thickness;
 						t = this.tOfLength(s);
@@ -745,12 +745,12 @@ export class Curve {
 						angle = this.angle(t);
 						nx = amp*Math.cos(angle+hpi);
 						ny = amp*Math.sin(angle+hpi);
-						d1 += " Q"+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
+						d1 += " Q"+XypicGlobalContext.measure.em2px(p.x-nx)+","+XypicGlobalContext.measure.em2px(-p.y+ny);
 						
 						s = shiftLen + wave*(i*2+1);
 						t = this.tOfLength(s);
 						p = this.position(t);
-						d1 += " "+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
+						d1 += " "+XypicGlobalContext.measure.em2px(p.x)+","+XypicGlobalContext.measure.em2px(-p.y);
 					}
 					svg.createSvgElement("path", {"d":d1});
 			}
@@ -770,7 +770,7 @@ export class Curve {
 	}
 	
 	_drawCurve(svg, objectForDrop, objectForConnect) {
-		var thickness = xypicGlobalContext.measure.length2em("0.15em");
+		var thickness = XypicGlobalContext.measure.length2em("0.15em");
 		var vshift;
 		if (objectForConnect !== undefined) {
 			var main = objectForConnect.dirMain();
@@ -824,12 +824,12 @@ export class Curve {
 						case "3":
 							vshift = thickness;
 							this.drawParallelDottedCurve(svg, thickness, vshift)
-							this.drawPrimitive(svg, xypicGlobalContext.measure.dottedDasharray);
+							this.drawPrimitive(svg, XypicGlobalContext.measure.dottedDasharray);
 							break;
 							
 						default:
 							vshift = 0;
-							this.drawPrimitive(svg, xypicGlobalContext.measure.dottedDasharray);
+							this.drawPrimitive(svg, XypicGlobalContext.measure.dottedDasharray);
 							break;
 					}
 					break;
@@ -850,7 +850,7 @@ export class Curve {
 								var shiftLen = (len - dash) / 2 - Math.floor((len - dash) / 2 / dash) * dash;
 								var shiftT = this.tOfLength(shiftLen);
 								var shifted = this.divide(shiftT)[1];
-								shifted.drawPrimitive(svg, xypicGlobalContext.measure.em2px(dash) + " " + xypicGlobalContext.measure.em2px(dash))
+								shifted.drawPrimitive(svg, XypicGlobalContext.measure.em2px(dash) + " " + XypicGlobalContext.measure.em2px(dash))
 								break;
 								
 							default:
@@ -858,7 +858,7 @@ export class Curve {
 								var shiftLen = (len - dash) / 2 - Math.floor((len - dash) / 2 / dash) * dash;
 								var shiftT = this.tOfLength(shiftLen);
 								var shifted = this.divide(shiftT)[1];
-								shifted.drawPrimitive(svg, xypicGlobalContext.measure.em2px(dash) + " " + xypicGlobalContext.measure.em2px(dash));
+								shifted.drawPrimitive(svg, XypicGlobalContext.measure.em2px(dash) + " " + XypicGlobalContext.measure.em2px(dash));
 						}
 					}
 					break;
@@ -917,7 +917,7 @@ export class Curve {
 					
 					var compositeLen = conLen + dropLen;
 					if (compositeLen == 0) {
-						compositeLen = xypicGlobalContext.measure.strokeWidth;
+						compositeLen = XypicGlobalContext.measure.strokeWidth;
 					}
 					
 					var len = this.length(1);
@@ -956,7 +956,7 @@ export class Curve {
 			var objectWidth = objectBBox.l + objectBBox.r;
 			var objectLen = objectWidth;
 			if (objectLen == 0) {
-				objectLen = xypicGlobalContext.measure.strokeWidth;
+				objectLen = XypicGlobalContext.measure.strokeWidth;
 			}
 			
 			var len = this.length(1);
@@ -979,7 +979,7 @@ export class Curve {
 	
 	toShape(context, objectForDrop, objectForConnect) {
 		var env = context.env;
-		var thickness = xypicGlobalContext.measure.length2em("0.15em");
+		var thickness = XypicGlobalContext.measure.length2em("0.15em");
 		var shape = Shape.none;
 		var vshift;
 		if (objectForConnect !== undefined) {
@@ -1084,7 +1084,7 @@ export class Curve {
 					
 					var compositeLen = conLen + dropLen;
 					if (compositeLen == 0) {
-						compositeLen = xypicGlobalContext.measure.strokeWidth;
+						compositeLen = XypicGlobalContext.measure.strokeWidth;
 					}
 					
 					var len = this.length(1);
@@ -1118,7 +1118,7 @@ export class Curve {
 			var objectWidth = objectBBox.l + objectBBox.r;
 			var objectLen = objectWidth;
 			if (objectLen == 0) {
-				objectLen = xypicGlobalContext.measure.strokeWidth;
+				objectLen = XypicGlobalContext.measure.strokeWidth;
 			}
 			
 			var len = this.length(1);
@@ -1464,9 +1464,9 @@ Curve.QuadBezier = class Curve_QuadBezier extends Curve {
 	drawPrimitive(svg, dasharray) {
 		var cp0 = this.cp0, cp1 = this.cp1, cp2 = this.cp2;
 		svg.createSvgElement("path", {
-			"d":"M"+xypicGlobalContext.measure.em2px(cp0.x)+","+xypicGlobalContext.measure.em2px(-cp0.y)+
-				" Q"+xypicGlobalContext.measure.em2px(cp1.x)+","+xypicGlobalContext.measure.em2px(-cp1.y)+
-				" "+xypicGlobalContext.measure.em2px(cp2.x)+","+xypicGlobalContext.measure.em2px(-cp2.y),
+			"d":"M"+XypicGlobalContext.measure.em2px(cp0.x)+","+XypicGlobalContext.measure.em2px(-cp0.y)+
+				" Q"+XypicGlobalContext.measure.em2px(cp1.x)+","+XypicGlobalContext.measure.em2px(-cp1.y)+
+				" "+XypicGlobalContext.measure.em2px(cp2.x)+","+XypicGlobalContext.measure.em2px(-cp2.y),
 			"stroke-dasharray":dasharray
 		});
 	}
@@ -1778,10 +1778,10 @@ Curve.CubicBezier = class Curve_CubicBezier extends Curve {
 	drawPrimitive(svg, dasharray) {
 		var cp0 = this.cp0, cp1 = this.cp1, cp2 = this.cp2, cp3 = this.cp3;
 		svg.createSvgElement("path", {
-			"d":"M"+xypicGlobalContext.measure.em2px(cp0.x)+","+xypicGlobalContext.measure.em2px(-cp0.y)+
-				" C"+xypicGlobalContext.measure.em2px(cp1.x)+","+xypicGlobalContext.measure.em2px(-cp1.y)+
-				" "+xypicGlobalContext.measure.em2px(cp2.x)+","+xypicGlobalContext.measure.em2px(-cp2.y)+
-				" "+xypicGlobalContext.measure.em2px(cp3.x)+","+xypicGlobalContext.measure.em2px(-cp3.y),
+			"d":"M"+XypicGlobalContext.measure.em2px(cp0.x)+","+XypicGlobalContext.measure.em2px(-cp0.y)+
+				" C"+XypicGlobalContext.measure.em2px(cp1.x)+","+XypicGlobalContext.measure.em2px(-cp1.y)+
+				" "+XypicGlobalContext.measure.em2px(cp2.x)+","+XypicGlobalContext.measure.em2px(-cp2.y)+
+				" "+XypicGlobalContext.measure.em2px(cp3.x)+","+XypicGlobalContext.measure.em2px(-cp3.y),
 			"stroke-dasharray":dasharray
 		});
 	}
@@ -1934,14 +1934,14 @@ Curve.CubicBeziers = class Curve_CubicBeziers extends Curve {
 		var cbs = this.cbs;
 		var cb = cbs[0];
 		var cp0 = cb.cp0, cp1 = cb.cp1, cp2 = cb.cp2, cp3 = cb.cp3;
-		var d = ("M"+xypicGlobalContext.measure.em2px(cp0.x)+","+xypicGlobalContext.measure.em2px(-cp0.y)+
-				" C"+xypicGlobalContext.measure.em2px(cp1.x)+","+xypicGlobalContext.measure.em2px(-cp1.y)+
-				" "+xypicGlobalContext.measure.em2px(cp2.x)+","+xypicGlobalContext.measure.em2px(-cp2.y)+
-				" "+xypicGlobalContext.measure.em2px(cp3.x)+","+xypicGlobalContext.measure.em2px(-cp3.y));
+		var d = ("M"+XypicGlobalContext.measure.em2px(cp0.x)+","+XypicGlobalContext.measure.em2px(-cp0.y)+
+				" C"+XypicGlobalContext.measure.em2px(cp1.x)+","+XypicGlobalContext.measure.em2px(-cp1.y)+
+				" "+XypicGlobalContext.measure.em2px(cp2.x)+","+XypicGlobalContext.measure.em2px(-cp2.y)+
+				" "+XypicGlobalContext.measure.em2px(cp3.x)+","+XypicGlobalContext.measure.em2px(-cp3.y));
 		for (var i = 1; i < n; i++) {
 			cb = cbs[i];
 			cp2 = cb.cp2, cp3 = cb.cp3;
-			d += " S"+xypicGlobalContext.measure.em2px(cp2.x)+","+xypicGlobalContext.measure.em2px(-cp2.y)+" "+xypicGlobalContext.measure.em2px(cp3.x)+","+xypicGlobalContext.measure.em2px(-cp3.y);
+			d += " S"+XypicGlobalContext.measure.em2px(cp2.x)+","+XypicGlobalContext.measure.em2px(-cp2.y)+" "+XypicGlobalContext.measure.em2px(cp3.x)+","+XypicGlobalContext.measure.em2px(-cp3.y);
 		}
 		svg.createSvgElement("path", {"d":d, "stroke-dasharray":dasharray});
 	}
@@ -1953,10 +1953,10 @@ Curve.CubicBeziers = class Curve_CubicBeziers extends Curve {
 		for (var i = 0; i < n; i+=2) {
 			var cb = cbs[i];
 			var cp0 = cb.cp0, cp1 = cb.cp1, cp2 = cb.cp2, cp3 = cb.cp3;
-			d += ("M"+xypicGlobalContext.measure.em2px(cp0.x)+","+xypicGlobalContext.measure.em2px(-cp0.y)+
-					" C"+xypicGlobalContext.measure.em2px(cp1.x)+","+xypicGlobalContext.measure.em2px(-cp1.y)+
-					" "+xypicGlobalContext.measure.em2px(cp2.x)+","+xypicGlobalContext.measure.em2px(-cp2.y)+
-					" "+xypicGlobalContext.measure.em2px(cp3.x)+","+xypicGlobalContext.measure.em2px(-cp3.y));
+			d += ("M"+XypicGlobalContext.measure.em2px(cp0.x)+","+XypicGlobalContext.measure.em2px(-cp0.y)+
+					" C"+XypicGlobalContext.measure.em2px(cp1.x)+","+XypicGlobalContext.measure.em2px(-cp1.y)+
+					" "+XypicGlobalContext.measure.em2px(cp2.x)+","+XypicGlobalContext.measure.em2px(-cp2.y)+
+					" "+XypicGlobalContext.measure.em2px(cp3.x)+","+XypicGlobalContext.measure.em2px(-cp3.y));
 		}
 		svg.createSvgElement("path", {"d":d});
 	}
@@ -2345,7 +2345,7 @@ Curve.Line = class Curve_Line {
 	toShape(context, object, main, variant) {
 		// 多重線の幅、点線・破線の幅の基準
 		var env = context.env;
-		var thickness = xypicGlobalContext.measure.thickness;
+		var thickness = XypicGlobalContext.measure.thickness;
 		var s = this.s;
 		var e = this.e;
 		if (s.x !== e.x || s.y !== e.y) {
@@ -2439,7 +2439,7 @@ Curve.Line = class Curve_Line {
 					
 					var arrowLen = arrowBBox.l + arrowBBox.r;
 					if (arrowLen == 0) {
-						arrowLen = xypicGlobalContext.measure.strokeWidth;
+						arrowLen = XypicGlobalContext.measure.strokeWidth;
 					}
 					
 					var len = Math.sqrt(dx * dx + dy * dy);
@@ -2499,7 +2499,7 @@ Curve.Line = class Curve_Line {
 	
 	_drawLine(svg, object, main, variant) {
 		// 多重線の幅、点線・破線の幅の基準
-		var t = xypicGlobalContext.measure.thickness;
+		var t = XypicGlobalContext.measure.thickness;
 		var s = this.s;
 		var e = this.e;
 		if (s.x !== e.x || s.y !== e.y) {
@@ -2520,11 +2520,11 @@ Curve.Line = class Curve_Line {
 					break;
 				case '.':
 				case '..':
-					this.drawStraightLine(svg, s, e, shift, angle, t, variant, xypicGlobalContext.measure.dottedDasharray);
+					this.drawStraightLine(svg, s, e, shift, angle, t, variant, XypicGlobalContext.measure.dottedDasharray);
 					break;
 				case ':':
 				case '::':
-					this.drawStraightLine(svg, s, e, shift, angle, t, "2", xypicGlobalContext.measure.dottedDasharray);
+					this.drawStraightLine(svg, s, e, shift, angle, t, "2", XypicGlobalContext.measure.dottedDasharray);
 					break;
 				case '--':
 				case '==':
@@ -2533,7 +2533,7 @@ Curve.Line = class Curve_Line {
 					if (len >= dash) {
 						var shiftLen = (len - dash) / 2 - Math.floor((len - dash) / 2 / dash) * dash;
 						shift = { x:shiftLen * Math.cos(angle), y:shiftLen * Math.sin(angle) };
-						this.drawStraightLine(svg, s, e, shift, angle, t, (main === "=="? "2" : variant), xypicGlobalContext.measure.em2px(dash) + " " + xypicGlobalContext.measure.em2px(dash));
+						this.drawStraightLine(svg, s, e, shift, angle, t, (main === "=="? "2" : variant), XypicGlobalContext.measure.em2px(dash) + " " + XypicGlobalContext.measure.em2px(dash));
 					}
 					break;
 				case '~':
@@ -2549,13 +2549,13 @@ Curve.Line = class Curve_Line {
 						var ty = t * Math.sin(angle);
 						var sx = s.x + shift.x;
 						var sy = -s.y - shift.y;
-						var d = "M" + xypicGlobalContext.measure.em2px(sx) + "," + xypicGlobalContext.measure.em2px(sy) +
-							" Q" + xypicGlobalContext.measure.em2px(sx + tx + cx) + "," + xypicGlobalContext.measure.em2px(sy - ty - cy) +
-							" " + xypicGlobalContext.measure.em2px(sx + 2 * tx) + "," + xypicGlobalContext.measure.em2px(sy - 2 * ty) +
-							" T" + xypicGlobalContext.measure.em2px(sx + 4 * tx) + "," + xypicGlobalContext.measure.em2px(sy - 4 * ty);
+						var d = "M" + XypicGlobalContext.measure.em2px(sx) + "," + XypicGlobalContext.measure.em2px(sy) +
+							" Q" + XypicGlobalContext.measure.em2px(sx + tx + cx) + "," + XypicGlobalContext.measure.em2px(sy - ty - cy) +
+							" " + XypicGlobalContext.measure.em2px(sx + 2 * tx) + "," + XypicGlobalContext.measure.em2px(sy - 2 * ty) +
+							" T" + XypicGlobalContext.measure.em2px(sx + 4 * tx) + "," + XypicGlobalContext.measure.em2px(sy - 4 * ty);
 						for (var i = 1; i < n; i++) {
-							d += " T" + xypicGlobalContext.measure.em2px(sx + (4 * i + 2) * tx) + "," + xypicGlobalContext.measure.em2px(sy - (4 * i + 2) * ty) +
-								" T" + xypicGlobalContext.measure.em2px(sx + (4 * i + 4) * tx) + "," + xypicGlobalContext.measure.em2px(sy - (4 * i + 4) * ty);
+							d += " T" + XypicGlobalContext.measure.em2px(sx + (4 * i + 2) * tx) + "," + XypicGlobalContext.measure.em2px(sy - (4 * i + 2) * ty) +
+								" T" + XypicGlobalContext.measure.em2px(sx + (4 * i + 4) * tx) + "," + XypicGlobalContext.measure.em2px(sy - (4 * i + 4) * ty);
 						}
 						this.drawSquigglyLineShape(svg, d, s, e, cx, cy, variant);
 					}
@@ -2575,10 +2575,10 @@ Curve.Line = class Curve_Line {
 						var sy = -s.y - shift.y;
 						var d = "";
 						for (var i = 0; i <= n; i++) {
-							d += " M" + xypicGlobalContext.measure.em2px(sx + 8 * i * tx) + "," + xypicGlobalContext.measure.em2px(sy - 8 * i * ty) + 
-								" Q" + xypicGlobalContext.measure.em2px(sx + (8 * i + 1) * tx + cx) + "," + xypicGlobalContext.measure.em2px(sy - (8 * i + 1) * ty - cy) + 
-								" " + xypicGlobalContext.measure.em2px(sx + (8 * i + 2) * tx) + "," + xypicGlobalContext.measure.em2px(sy - (8 * i + 2) * ty) + 
-								" T" + xypicGlobalContext.measure.em2px(sx + (8 * i + 4) * tx) + "," + xypicGlobalContext.measure.em2px(sy - (8 * i + 4) * ty);
+							d += " M" + XypicGlobalContext.measure.em2px(sx + 8 * i * tx) + "," + XypicGlobalContext.measure.em2px(sy - 8 * i * ty) + 
+								" Q" + XypicGlobalContext.measure.em2px(sx + (8 * i + 1) * tx + cx) + "," + XypicGlobalContext.measure.em2px(sy - (8 * i + 1) * ty - cy) + 
+								" " + XypicGlobalContext.measure.em2px(sx + (8 * i + 2) * tx) + "," + XypicGlobalContext.measure.em2px(sy - (8 * i + 2) * ty) + 
+								" T" + XypicGlobalContext.measure.em2px(sx + (8 * i + 4) * tx) + "," + XypicGlobalContext.measure.em2px(sy - (8 * i + 4) * ty);
 						}
 						this.drawSquigglyLineShape(svg, d, s, e, cx, cy, variant);
 					}
@@ -2596,7 +2596,7 @@ Curve.Line = class Curve_Line {
 					
 					var arrowLen = arrowBBox.l + arrowBBox.r;
 					if (arrowLen == 0) {
-						arrowLen = xypicGlobalContext.measure.strokeWidth;
+						arrowLen = XypicGlobalContext.measure.strokeWidth;
 					}
 					
 					var len = Math.sqrt(dx * dx + dy * dy);
@@ -2626,37 +2626,37 @@ Curve.Line = class Curve_Line {
 			var cx = t*Math.cos(angle+Math.PI/2);
 			var cy = t*Math.sin(angle+Math.PI/2);
 			svg.createSvgElement("line", {
-				x1:xypicGlobalContext.measure.em2px(s.x+shift.x), y1:-xypicGlobalContext.measure.em2px(s.y+shift.y),
-				x2:xypicGlobalContext.measure.em2px(e.x), y2:-xypicGlobalContext.measure.em2px(e.y), 
+				x1:XypicGlobalContext.measure.em2px(s.x+shift.x), y1:-XypicGlobalContext.measure.em2px(s.y+shift.y),
+				x2:XypicGlobalContext.measure.em2px(e.x), y2:-XypicGlobalContext.measure.em2px(e.y), 
 				"stroke-dasharray":dasharray
 			});
 			svg.createSvgElement("line", {
-				x1:xypicGlobalContext.measure.em2px(s.x+cx+shift.x), y1:-xypicGlobalContext.measure.em2px(s.y+cy+shift.y),
-				x2:xypicGlobalContext.measure.em2px(e.x+cx), y2:-xypicGlobalContext.measure.em2px(e.y+cy), 
+				x1:XypicGlobalContext.measure.em2px(s.x+cx+shift.x), y1:-XypicGlobalContext.measure.em2px(s.y+cy+shift.y),
+				x2:XypicGlobalContext.measure.em2px(e.x+cx), y2:-XypicGlobalContext.measure.em2px(e.y+cy), 
 				"stroke-dasharray":dasharray
 			});
 			svg.createSvgElement("line", {
-				x1:xypicGlobalContext.measure.em2px(s.x-cx+shift.x), y1:-xypicGlobalContext.measure.em2px(s.y-cy+shift.y),
-				x2:xypicGlobalContext.measure.em2px(e.x-cx), y2:-xypicGlobalContext.measure.em2px(e.y-cy), 
+				x1:XypicGlobalContext.measure.em2px(s.x-cx+shift.x), y1:-XypicGlobalContext.measure.em2px(s.y-cy+shift.y),
+				x2:XypicGlobalContext.measure.em2px(e.x-cx), y2:-XypicGlobalContext.measure.em2px(e.y-cy), 
 				"stroke-dasharray":dasharray
 			});
 		} else if (variant === "2") {
 			var cx = t*Math.cos(angle+Math.PI/2)/2;
 			var cy = t*Math.sin(angle+Math.PI/2)/2;
 			svg.createSvgElement("line", {
-				x1:xypicGlobalContext.measure.em2px(s.x+cx+shift.x), y1:-xypicGlobalContext.measure.em2px(s.y+cy+shift.y),
-				x2:xypicGlobalContext.measure.em2px(e.x+cx), y2:-xypicGlobalContext.measure.em2px(e.y+cy), 
+				x1:XypicGlobalContext.measure.em2px(s.x+cx+shift.x), y1:-XypicGlobalContext.measure.em2px(s.y+cy+shift.y),
+				x2:XypicGlobalContext.measure.em2px(e.x+cx), y2:-XypicGlobalContext.measure.em2px(e.y+cy), 
 				"stroke-dasharray":dasharray
 			});
 			svg.createSvgElement("line", {
-				x1:xypicGlobalContext.measure.em2px(s.x-cx+shift.x), y1:-xypicGlobalContext.measure.em2px(s.y-cy+shift.y),
-				x2:xypicGlobalContext.measure.em2px(e.x-cx), y2:-xypicGlobalContext.measure.em2px(e.y-cy), 
+				x1:XypicGlobalContext.measure.em2px(s.x-cx+shift.x), y1:-XypicGlobalContext.measure.em2px(s.y-cy+shift.y),
+				x2:XypicGlobalContext.measure.em2px(e.x-cx), y2:-XypicGlobalContext.measure.em2px(e.y-cy), 
 				"stroke-dasharray":dasharray
 			});
 		} else {
 			svg.createSvgElement("line", {
-				x1:xypicGlobalContext.measure.em2px(s.x+shift.x), y1:-xypicGlobalContext.measure.em2px(s.y+shift.y),
-				x2:xypicGlobalContext.measure.em2px(e.x), y2:-xypicGlobalContext.measure.em2px(e.y), 
+				x1:XypicGlobalContext.measure.em2px(s.x+shift.x), y1:-XypicGlobalContext.measure.em2px(s.y+shift.y),
+				x2:XypicGlobalContext.measure.em2px(e.x), y2:-XypicGlobalContext.measure.em2px(e.y), 
 				"stroke-dasharray":dasharray
 			});
 		}
@@ -2909,10 +2909,10 @@ CurveSegment.Line = class CurveSegment_Line extends CurveSegment {
 		}
 		var xmin = this.p0.x;
 		var xmax = this.p1.x;
-		xypicGlobalContext.svgForDebug.createSvgElement("line", {
-			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmax)),
-			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmax)),
-			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"red"
+		XypicGlobalContext.svgForDebug.createSvgElement("line", {
+			x1:XypicGlobalContext.measure.em2px(xmin), y1:-XypicGlobalContext.measure.em2px(y(xmin, lmax)),
+			x2:XypicGlobalContext.measure.em2px(xmax), y2:-XypicGlobalContext.measure.em2px(y(xmax, lmax)),
+			"stroke-width":XypicGlobalContext.measure.em2px(0.02 * XypicGlobalContext.measure.oneem), stroke:"red"
 		});
 	}
 };
@@ -2956,15 +2956,15 @@ CurveSegment.QuadBezier = class CurveSegment_QuadBezier extends CurveSegment {
 		}
 		var xmin = this.cp0.x
 		var xmax = this.cp2.x
-		xypicGlobalContext.svgForDebug.createSvgElement("line", {
-			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmin)),
-			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmin)),
-			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"blue"
+		XypicGlobalContext.svgForDebug.createSvgElement("line", {
+			x1:XypicGlobalContext.measure.em2px(xmin), y1:-XypicGlobalContext.measure.em2px(y(xmin, lmin)),
+			x2:XypicGlobalContext.measure.em2px(xmax), y2:-XypicGlobalContext.measure.em2px(y(xmax, lmin)),
+			"stroke-width":XypicGlobalContext.measure.em2px(0.02 * XypicGlobalContext.measure.oneem), stroke:"blue"
 		});
-		xypicGlobalContext.svgForDebug.createSvgElement("line", {
-			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmax)),
-			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmax)),
-			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"red"
+		XypicGlobalContext.svgForDebug.createSvgElement("line", {
+			x1:XypicGlobalContext.measure.em2px(xmin), y1:-XypicGlobalContext.measure.em2px(y(xmin, lmax)),
+			x2:XypicGlobalContext.measure.em2px(xmax), y2:-XypicGlobalContext.measure.em2px(y(xmax, lmax)),
+			"stroke-width":XypicGlobalContext.measure.em2px(0.02 * XypicGlobalContext.measure.oneem), stroke:"red"
 		});
 	}
 };
@@ -3012,15 +3012,15 @@ CurveSegment.CubicBezier = class CurveSegment_CubicBezier extends CurveSegment {
 		}
 		var xmin = this.cp0.x
 		var xmax = this.cp3.x
-		xypicGlobalContext.svgForDebug.createSvgElement("line", {
-			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmin)),
-			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmin)),
-			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"blue"
+		XypicGlobalContext.svgForDebug.createSvgElement("line", {
+			x1:XypicGlobalContext.measure.em2px(xmin), y1:-XypicGlobalContext.measure.em2px(y(xmin, lmin)),
+			x2:XypicGlobalContext.measure.em2px(xmax), y2:-XypicGlobalContext.measure.em2px(y(xmax, lmin)),
+			"stroke-width":XypicGlobalContext.measure.em2px(0.02 * XypicGlobalContext.measure.oneem), stroke:"blue"
 		});
-		xypicGlobalContext.svgForDebug.createSvgElement("line", {
-			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmax)),
-			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmax)),
-			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"red"
+		XypicGlobalContext.svgForDebug.createSvgElement("line", {
+			x1:XypicGlobalContext.measure.em2px(xmin), y1:-XypicGlobalContext.measure.em2px(y(xmin, lmax)),
+			x2:XypicGlobalContext.measure.em2px(xmax), y2:-XypicGlobalContext.measure.em2px(y(xmax, lmax)),
+			"stroke-width":XypicGlobalContext.measure.em2px(0.02 * XypicGlobalContext.measure.oneem), stroke:"red"
 		});
 	}
 };
@@ -3207,15 +3207,15 @@ CurveSegment.Arc = class CurveSegment_Arc extends CurveSegment {
 		var x1 = this.x + this.r * Math.cos(this.angleMax);
 		var xmin = x0;
 		var xmax = x1;
-		xypicGlobalContext.svgForDebug.createSvgElement("line", {
-			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmin)),
-			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmin)),
-			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"blue"
+		XypicGlobalContext.svgForDebug.createSvgElement("line", {
+			x1:XypicGlobalContext.measure.em2px(xmin), y1:-XypicGlobalContext.measure.em2px(y(xmin, lmin)),
+			x2:XypicGlobalContext.measure.em2px(xmax), y2:-XypicGlobalContext.measure.em2px(y(xmax, lmin)),
+			"stroke-width":XypicGlobalContext.measure.em2px(0.02 * XypicGlobalContext.measure.oneem), stroke:"blue"
 		});
-		xypicGlobalContext.svgForDebug.createSvgElement("line", {
-			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmax)),
-			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmax)),
-			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"red"
+		XypicGlobalContext.svgForDebug.createSvgElement("line", {
+			x1:XypicGlobalContext.measure.em2px(xmin), y1:-XypicGlobalContext.measure.em2px(y(xmin, lmax)),
+			x2:XypicGlobalContext.measure.em2px(xmax), y2:-XypicGlobalContext.measure.em2px(y(xmax, lmax)),
+			"stroke-width":XypicGlobalContext.measure.em2px(0.02 * XypicGlobalContext.measure.oneem), stroke:"red"
 		});
 	}
 };

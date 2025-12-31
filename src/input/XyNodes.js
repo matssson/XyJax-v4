@@ -18,7 +18,7 @@
 
 import {AbstractMmlNode, TEXCLASS} from "@mathjax/src/js/core/MmlTree/MmlNode.js";
 import {MML} from "@mathjax/src/js/core/MmlTree/MML.js";
-import {xypicGlobalContext} from "../core/xypicGlobalContext.js";
+import {XypicGlobalContext} from "../core/XypicGlobalContext.js";
 
 
 export class AST {};
@@ -31,7 +31,7 @@ class BaseXyMmlNode extends AbstractMmlNode {
 		this.texClass = TEXCLASS.ORD;
 
 		const commandId = properties["data-cmd-id"];
-		const command = xypicGlobalContext.xypicCommandMap[commandId];
+		const command = XypicGlobalContext.xypicCommandMap[commandId];
 		this.cmd = command;
 
 		const textMmlIds = JSON.parse(properties["data-text-mml-ids"]);

@@ -15,7 +15,7 @@
  *  limitations under the License.
  */
 
-import {xypicGlobalContext} from "../core/xypicGlobalContext.js";
+import {XypicGlobalContext} from "../core/XypicGlobalContext.js";
 import {XypicUtil} from "../util/XypicUtil.js";
 import {List} from "../fp/List.js";
 import {Frame} from "./Frames.js";
@@ -96,15 +96,15 @@ class World extends Svg {
 		}
 
 		if (svg.style) {
-			svg.style.width = xypicGlobalContext.measure.Em(width);
-			svg.style.height = xypicGlobalContext.measure.Em(height + depth);
+			svg.style.width = XypicGlobalContext.measure.Em(width);
+			svg.style.height = XypicGlobalContext.measure.Em(height + depth);
 		}
 
 		var def = {
 			fill: "none", 
 			stroke: color, 
 			"stroke-linecap": "round",
-			"stroke-width": xypicGlobalContext.measure.em2px(strokeWidth)
+			"stroke-width": XypicGlobalContext.measure.em2px(strokeWidth)
 		}
 
 		this.drawArea = this.createElement("g");
@@ -122,11 +122,11 @@ class World extends Svg {
 	}
 
 	setHeight(height) {
-		this.xypicWrapper.setStyle(this.svg, "height", xypicGlobalContext.measure.Em(height));
+		this.xypicWrapper.setStyle(this.svg, "height", XypicGlobalContext.measure.Em(height));
 	}
 
 	setWidth(width) {
-		this.xypicWrapper.setStyle(this.svg, "width", xypicGlobalContext.measure.Em(width));
+		this.xypicWrapper.setStyle(this.svg, "width", XypicGlobalContext.measure.Em(width));
 	}
 
 	setAttribute(name, value) {
@@ -195,7 +195,7 @@ class Translate {
 	}
 
 	toTranslateForm() {
-		return "translate(" + xypicGlobalContext.measure.em2px(this.dx) + "," + xypicGlobalContext.measure.em2px(-this.dy) + ") ";
+		return "translate(" + XypicGlobalContext.measure.em2px(this.dx) + "," + XypicGlobalContext.measure.em2px(-this.dy) + ") ";
 	}
 }
 

@@ -17,7 +17,7 @@
 
 import {ModifierRepository, DirRepository} from "../output/Repositories.js";
 
-export const xypicGlobalContext = {
+export const XypicGlobalContext = {
     repositories: {
         modifierRepository: new ModifierRepository(),
         dirRepository: new DirRepository()
