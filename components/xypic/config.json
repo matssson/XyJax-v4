@@ -1,0 +1,12 @@
+{
+  "webpack": {
+    "name": "xypic",
+    "dist": "../../build/",
+    "libs": [
+      "components/js/core/lib",
+      "components/js/input/tex-base/lib",
+      "components/js/output/chtml/lib",
+      "components/js/output/svg/lib"
+    ]
+  }
+}

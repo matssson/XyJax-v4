@@ -396,11 +396,11 @@ export class Curve {
 				var p = this.position(t);
 				var x = p.x, y = p.y
 				var dc = d*Math.cos(angle+hpi), ds = d*Math.sin(angle+hpi);
-				svg.createSVGElement("circle", {
+				svg.createSvgElement("circle", {
 					cx:xypicGlobalContext.measure.em2px(x+dc), cy:-xypicGlobalContext.measure.em2px(y+ds), r:0.12,
 					fill: "currentColor"
 				});
-				svg.createSVGElement("circle", {
+				svg.createSvgElement("circle", {
 					cx:xypicGlobalContext.measure.em2px(x-dc), cy:-xypicGlobalContext.measure.em2px(y-ds), r:0.12,
 					fill: "currentColor"
 				});
@@ -503,9 +503,9 @@ export class Curve {
 						d2 += " "+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
 						d3 += " "+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
 					}
-					svg.createSVGElement("path", {"d":d1});
-					svg.createSVGElement("path", {"d":d2});
-					svg.createSVGElement("path", {"d":d3});
+					svg.createSvgElement("path", {"d":d1});
+					svg.createSvgElement("path", {"d":d2});
+					svg.createSvgElement("path", {"d":d3});
 					break;
 					
 				case "2":
@@ -555,8 +555,8 @@ export class Curve {
 						d1 += " "+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
 						d2 += " "+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
 					}
-					svg.createSVGElement("path", {"d":d1});
-					svg.createSVGElement("path", {"d":d2});
+					svg.createSvgElement("path", {"d":d1});
+					svg.createSvgElement("path", {"d":d2});
 					break;
 					
 				default:
@@ -592,7 +592,7 @@ export class Curve {
 						p = this.position(t);
 						d1 += " "+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
 					}
-					svg.createSVGElement("path", {"d":d1});
+					svg.createSvgElement("path", {"d":d1});
 			}
 		}
 	}
@@ -661,9 +661,9 @@ export class Curve {
 						d2 += " "+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
 						d3 += " "+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
 					}
-					svg.createSVGElement("path", {"d":d1});
-					svg.createSVGElement("path", {"d":d2});
-					svg.createSVGElement("path", {"d":d3});
+					svg.createSvgElement("path", {"d":d1});
+					svg.createSvgElement("path", {"d":d2});
+					svg.createSvgElement("path", {"d":d3});
 					break;
 					
 				case "2":
@@ -714,8 +714,8 @@ export class Curve {
 						d1 += " "+xypicGlobalContext.measure.em2px(p.x+nx)+","+xypicGlobalContext.measure.em2px(-p.y-ny);
 						d2 += " "+xypicGlobalContext.measure.em2px(p.x-nx)+","+xypicGlobalContext.measure.em2px(-p.y+ny);
 					}
-					svg.createSVGElement("path", {"d":d1});
-					svg.createSVGElement("path", {"d":d2});
+					svg.createSvgElement("path", {"d":d1});
+					svg.createSvgElement("path", {"d":d2});
 					break;
 					
 				default:
@@ -752,7 +752,7 @@ export class Curve {
 						p = this.position(t);
 						d1 += " "+xypicGlobalContext.measure.em2px(p.x)+","+xypicGlobalContext.measure.em2px(-p.y);
 					}
-					svg.createSVGElement("path", {"d":d1});
+					svg.createSvgElement("path", {"d":d1});
 			}
 		}
 	}
@@ -1463,7 +1463,7 @@ Curve.QuadBezier = class Curve_QuadBezier extends Curve {
 	
 	drawPrimitive(svg, dasharray) {
 		var cp0 = this.cp0, cp1 = this.cp1, cp2 = this.cp2;
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			"d":"M"+xypicGlobalContext.measure.em2px(cp0.x)+","+xypicGlobalContext.measure.em2px(-cp0.y)+
 				" Q"+xypicGlobalContext.measure.em2px(cp1.x)+","+xypicGlobalContext.measure.em2px(-cp1.y)+
 				" "+xypicGlobalContext.measure.em2px(cp2.x)+","+xypicGlobalContext.measure.em2px(-cp2.y),
@@ -1777,7 +1777,7 @@ Curve.CubicBezier = class Curve_CubicBezier extends Curve {
 	
 	drawPrimitive(svg, dasharray) {
 		var cp0 = this.cp0, cp1 = this.cp1, cp2 = this.cp2, cp3 = this.cp3;
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			"d":"M"+xypicGlobalContext.measure.em2px(cp0.x)+","+xypicGlobalContext.measure.em2px(-cp0.y)+
 				" C"+xypicGlobalContext.measure.em2px(cp1.x)+","+xypicGlobalContext.measure.em2px(-cp1.y)+
 				" "+xypicGlobalContext.measure.em2px(cp2.x)+","+xypicGlobalContext.measure.em2px(-cp2.y)+
@@ -1943,7 +1943,7 @@ Curve.CubicBeziers = class Curve_CubicBeziers extends Curve {
 			cp2 = cb.cp2, cp3 = cb.cp3;
 			d += " S"+xypicGlobalContext.measure.em2px(cp2.x)+","+xypicGlobalContext.measure.em2px(-cp2.y)+" "+xypicGlobalContext.measure.em2px(cp3.x)+","+xypicGlobalContext.measure.em2px(-cp3.y);
 		}
-		svg.createSVGElement("path", {"d":d, "stroke-dasharray":dasharray});
+		svg.createSvgElement("path", {"d":d, "stroke-dasharray":dasharray});
 	}
 	
 	drawSkipped(svg) {
@@ -1958,7 +1958,7 @@ Curve.CubicBeziers = class Curve_CubicBeziers extends Curve {
 					" "+xypicGlobalContext.measure.em2px(cp2.x)+","+xypicGlobalContext.measure.em2px(-cp2.y)+
 					" "+xypicGlobalContext.measure.em2px(cp3.x)+","+xypicGlobalContext.measure.em2px(-cp3.y));
 		}
-		svg.createSVGElement("path", {"d":d});
+		svg.createSvgElement("path", {"d":d});
 	}
 
 	static interpolation(ts, xs, ys) {
@@ -2625,17 +2625,17 @@ Curve.Line = class Curve_Line {
 		if (variant === "3") {
 			var cx = t*Math.cos(angle+Math.PI/2);
 			var cy = t*Math.sin(angle+Math.PI/2);
-			svg.createSVGElement("line", {
+			svg.createSvgElement("line", {
 				x1:xypicGlobalContext.measure.em2px(s.x+shift.x), y1:-xypicGlobalContext.measure.em2px(s.y+shift.y),
 				x2:xypicGlobalContext.measure.em2px(e.x), y2:-xypicGlobalContext.measure.em2px(e.y), 
 				"stroke-dasharray":dasharray
 			});
-			svg.createSVGElement("line", {
+			svg.createSvgElement("line", {
 				x1:xypicGlobalContext.measure.em2px(s.x+cx+shift.x), y1:-xypicGlobalContext.measure.em2px(s.y+cy+shift.y),
 				x2:xypicGlobalContext.measure.em2px(e.x+cx), y2:-xypicGlobalContext.measure.em2px(e.y+cy), 
 				"stroke-dasharray":dasharray
 			});
-			svg.createSVGElement("line", {
+			svg.createSvgElement("line", {
 				x1:xypicGlobalContext.measure.em2px(s.x-cx+shift.x), y1:-xypicGlobalContext.measure.em2px(s.y-cy+shift.y),
 				x2:xypicGlobalContext.measure.em2px(e.x-cx), y2:-xypicGlobalContext.measure.em2px(e.y-cy), 
 				"stroke-dasharray":dasharray
@@ -2643,18 +2643,18 @@ Curve.Line = class Curve_Line {
 		} else if (variant === "2") {
 			var cx = t*Math.cos(angle+Math.PI/2)/2;
 			var cy = t*Math.sin(angle+Math.PI/2)/2;
-			svg.createSVGElement("line", {
+			svg.createSvgElement("line", {
 				x1:xypicGlobalContext.measure.em2px(s.x+cx+shift.x), y1:-xypicGlobalContext.measure.em2px(s.y+cy+shift.y),
 				x2:xypicGlobalContext.measure.em2px(e.x+cx), y2:-xypicGlobalContext.measure.em2px(e.y+cy), 
 				"stroke-dasharray":dasharray
 			});
-			svg.createSVGElement("line", {
+			svg.createSvgElement("line", {
 				x1:xypicGlobalContext.measure.em2px(s.x-cx+shift.x), y1:-xypicGlobalContext.measure.em2px(s.y-cy+shift.y),
 				x2:xypicGlobalContext.measure.em2px(e.x-cx), y2:-xypicGlobalContext.measure.em2px(e.y-cy), 
 				"stroke-dasharray":dasharray
 			});
 		} else {
-			svg.createSVGElement("line", {
+			svg.createSvgElement("line", {
 				x1:xypicGlobalContext.measure.em2px(s.x+shift.x), y1:-xypicGlobalContext.measure.em2px(s.y+shift.y),
 				x2:xypicGlobalContext.measure.em2px(e.x), y2:-xypicGlobalContext.measure.em2px(e.y), 
 				"stroke-dasharray":dasharray
@@ -2665,18 +2665,18 @@ Curve.Line = class Curve_Line {
 	drawSquigglyLineShape(svg, d, s, e, cx, cy, variant) {
 		var g1, g2;
 		if (variant === "3") {
-			svg.createSVGElement("path", { d:d });
+			svg.createSvgElement("path", { d:d });
 			g1 = svg.createGroup(svg.transformBuilder().translate(cx, cy));
-			g1.createSVGElement("path", { d:d });
+			g1.createSvgElement("path", { d:d });
 			g2 = svg.createGroup(svg.transformBuilder().translate(-cx, -cy));
-			g2.createSVGElement("path", { d:d });
+			g2.createSvgElement("path", { d:d });
 		} else if (variant === "2") {
 			g1 = svg.createGroup(svg.transformBuilder().translate(cx / 2, cy / 2));
-			g1.createSVGElement("path", { d:d });
+			g1.createSvgElement("path", { d:d });
 			g2 = svg.createGroup(svg.transformBuilder().translate(-cx / 2, -cy / 2));
-			g2.createSVGElement("path", { d:d });
+			g2.createSvgElement("path", { d:d });
 		} else {
-			svg.createSVGElement("path", { d:d });
+			svg.createSvgElement("path", { d:d });
 		}
 	}
 };
@@ -2909,7 +2909,7 @@ CurveSegment.Line = class CurveSegment_Line extends CurveSegment {
 		}
 		var xmin = this.p0.x;
 		var xmax = this.p1.x;
-		xypicGlobalContext.svgForDebug.createSVGElement("line", {
+		xypicGlobalContext.svgForDebug.createSvgElement("line", {
 			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmax)),
 			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmax)),
 			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"red"
@@ -2956,12 +2956,12 @@ CurveSegment.QuadBezier = class CurveSegment_QuadBezier extends CurveSegment {
 		}
 		var xmin = this.cp0.x
 		var xmax = this.cp2.x
-		xypicGlobalContext.svgForDebug.createSVGElement("line", {
+		xypicGlobalContext.svgForDebug.createSvgElement("line", {
 			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmin)),
 			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmin)),
 			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"blue"
 		});
-		xypicGlobalContext.svgForDebug.createSVGElement("line", {
+		xypicGlobalContext.svgForDebug.createSvgElement("line", {
 			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmax)),
 			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmax)),
 			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"red"
@@ -3012,12 +3012,12 @@ CurveSegment.CubicBezier = class CurveSegment_CubicBezier extends CurveSegment {
 		}
 		var xmin = this.cp0.x
 		var xmax = this.cp3.x
-		xypicGlobalContext.svgForDebug.createSVGElement("line", {
+		xypicGlobalContext.svgForDebug.createSvgElement("line", {
 			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmin)),
 			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmin)),
 			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"blue"
 		});
-		xypicGlobalContext.svgForDebug.createSVGElement("line", {
+		xypicGlobalContext.svgForDebug.createSvgElement("line", {
 			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmax)),
 			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmax)),
 			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"red"
@@ -3207,12 +3207,12 @@ CurveSegment.Arc = class CurveSegment_Arc extends CurveSegment {
 		var x1 = this.x + this.r * Math.cos(this.angleMax);
 		var xmin = x0;
 		var xmax = x1;
-		xypicGlobalContext.svgForDebug.createSVGElement("line", {
+		xypicGlobalContext.svgForDebug.createSvgElement("line", {
 			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmin)),
 			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmin)),
 			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"blue"
 		});
-		xypicGlobalContext.svgForDebug.createSVGElement("line", {
+		xypicGlobalContext.svgForDebug.createSvgElement("line", {
 			x1:xypicGlobalContext.measure.em2px(xmin), y1:-xypicGlobalContext.measure.em2px(y(xmin, lmax)),
 			x2:xypicGlobalContext.measure.em2px(xmax), y2:-xypicGlobalContext.measure.em2px(y(xmax, lmax)),
 			"stroke-width":xypicGlobalContext.measure.em2px(0.02 * xypicGlobalContext.measure.oneem), stroke:"red"

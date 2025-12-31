@@ -1383,7 +1383,7 @@ augment(AST.ObjectBox.Curve, {
 		var controlPoints = [];
 		this.poslist.foreach(function (p) {
 			p.addPositions(controlPoints, context);
-			// svg.createSVGElement("circle", {
+			// svg.createSvgElement("circle", {
 			// 	cx:xypicGlobalContext.measure.em2px(env.c.x), cy:-xypicGlobalContext.measure.em2px(env.c.y), r:xypicGlobalContext.measure.em2px(thickness/2)
 			// });
 		});
@@ -1450,7 +1450,7 @@ augment(AST.ObjectBox.Curve, {
 				break;
 		}
 		
-//        svg.createSVGElement("rect", {
+//        svg.createSvgElement("rect", {
 //          x:xypicGlobalContext.measure.em2px(box.x-box.l), y:xypicGlobalContext.measure.em2px(-box.y-box.u), width:xypicGlobalContext.measure.em2px(box.l+box.r), height:xypicGlobalContext.measure.em2px(box.u+box.d),
 //          "stroke-width":"0.02em", stroke:"green"
 //        })
@@ -1865,7 +1865,7 @@ augment(AST.Corner.NearestEdgePoint, {
 	xy: function (context) {
 		var env = context.env;
 		var c = env.c;
-		var e = c.edgePoint(env.p.x, env.p.y);  
+		var e = c.edgePoint(env.p.x, env.p.y);
 		return { x:e.x - c.x, y:e.y - c.y };
 	},
 	angle: function (context) {

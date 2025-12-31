@@ -16,8 +16,8 @@
  */
 
 
-import {AbstractMmlNode, TEXCLASS} from "mathjax-full/js/core/MmlTree/MmlNode.js";
-import {MML} from "mathjax-full/js/core/MmlTree/MML.js";
+import {AbstractMmlNode, TEXCLASS} from "@mathjax/src/js/core/MmlTree/MmlNode.js";
+import {MML} from "@mathjax/src/js/core/MmlTree/MML.js";
 import {xypicGlobalContext} from "../core/xypicGlobalContext.js";
 
 

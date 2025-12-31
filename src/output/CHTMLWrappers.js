@@ -16,9 +16,9 @@
  */
 
 
-import {CHTMLWrapper} from "mathjax-full/js/output/chtml/Wrapper.js";
-import {CHTMLWrappers} from "mathjax-full/js/output/chtml/Wrappers.js";
-import {BBox} from 'mathjax-full/js/util/BBox.js';
+import {ChtmlWrapper} from "@mathjax/src/js/output/chtml/Wrapper.js";
+import {ChtmlWrappers} from "@mathjax/src/js/output/chtml/Wrappers.js";
+import {BBox} from '@mathjax/src/js/util/BBox.js';
 
 import createXypicError from "../core/XypicError.js";
 import {xypicGlobalContext} from "../core/xypicGlobalContext.js";
@@ -36,9 +36,9 @@ const XLINKNS = 'http://www.w3.org/1999/xlink';
 
 const round2 = XypicUtil.round2;
 
-export function CreateCHTMLWrapper(wrapper, wrappers) {
+export function CreateChtmlWrapper(wrapper, wrappers) {
 
-	class AbstractCHTMLxypic extends wrapper {
+	class AbstractChtmlXypic extends wrapper {
 		constructor(factory, node, parent=null) {
 			super(factory, node, parent);
 
@@ -78,14 +78,14 @@ export function CreateCHTMLWrapper(wrapper, wrappers) {
 			return wrapper;
 		}
 
-		toCHTML(parent) {
+		toCHTML(parents) {
 			const oldSvgForDebug = xypicGlobalContext.svgForDebug;
 			const oldSvgForTestLayout = xypicGlobalContext.svgForTestLayout;
 
 			this._textObjects = [];
 			this.setupMeasure(this);
 
-			this._toCHTML(parent);
+			this._toCHTML(parents);
 
 			xypicGlobalContext.svgForDebug = oldSvgForDebug;
 			xypicGlobalContext.svgForTestLayout = oldSvgForTestLayout;
@@ -166,7 +166,7 @@ export function CreateCHTMLWrapper(wrapper, wrappers) {
 				adaptor.append(parent.getElement(), thisRoot);
 
 				adaptor.setStyle(thisRoot, "color", svg.getCurrentColor());
-				textObjectWrapper.toCHTML(thisRoot);
+				textObjectWrapper.toCHTML([thisRoot]);
 
 				const origin = svg.getOrigin();
 				adaptor.setAttribute(thisRoot, "data-x", (c.x - halfW - origin.x + p * scale));
@@ -175,14 +175,14 @@ export function CreateCHTMLWrapper(wrapper, wrappers) {
 				parent.appendTextObject(thisRoot);
 
 				// for DEBUGGING
-				// svg.createSVGElement("rect", {
+				// svg.createSvgElement("rect", {
 				// 	x: xypicGlobalContext.measure.em2px(c.x - halfW),
 				// 	y: -xypicGlobalContext.measure.em2px(c.y - (H - D) / 2),
 				// 	width: xypicGlobalContext.measure.em2px(W),
 				// 	height: 0.01,
 				// 	stroke: "green", "stroke-width": 0.3
 				// });
-				// svg.createSVGElement("rect", {
+				// svg.createSvgElement("rect", {
 				// 	x: xypicGlobalContext.measure.em2px(c.x - halfW),
 				// 	y: -xypicGlobalContext.measure.em2px(c.y + halfHD),
 				// 	width: xypicGlobalContext.measure.em2px(W),
@@ -197,7 +197,7 @@ export function CreateCHTMLWrapper(wrapper, wrappers) {
 
 
 
-	class CHTMLxypic extends AbstractCHTMLxypic {
+	class ChtmlXypic extends AbstractChtmlXypic {
 		constructor(factory, node, parent=null) {
 			super(factory, node, parent);
 			this.shape = null;
@@ -225,7 +225,7 @@ export function CreateCHTMLWrapper(wrapper, wrappers) {
 					const em2px = xypicGlobalContext.measure.em2px;
 		
 					const color = "black";
-					const svg = Graphics.createSVG(this, H, D, W, t, color, {
+					const svg = Graphics.createSvg(this, H, D, W, t, color, {
 						viewBox: [0, -em2px(H + D), em2px(W), em2px(H + D)].join(" "),
 						role: "img", 
 						focusable: false,
@@ -285,9 +285,9 @@ export function CreateCHTMLWrapper(wrapper, wrappers) {
 			};
 		}
 
-		_toCHTML(parent) {
-			const chtml = this.standardCHTMLnode(parent);
-			this.cthml = chtml;
+		_toCHTML(parents) {
+			const chtml = this.standardChtmlNodes(parents)[0];
+			this.chtml = chtml;
 			const adaptor = this.adaptor;
 
 			const p = this.length2em("0.2em");
@@ -299,7 +299,7 @@ export function CreateCHTMLWrapper(wrapper, wrappers) {
 			const em2px = xypicGlobalContext.measure.em2px;
 
 			const color = "black";
-			const svg = Graphics.createSVG(this, H, D, W, t, color, {
+			const svg = Graphics.createSvg(this, H, D, W, t, color, {
 				viewBox: [0, -em2px(H + D), em2px(W), em2px(H + D)].join(" "),
 				role: "img", 
 				focusable: false,
@@ -367,10 +367,10 @@ export function CreateCHTMLWrapper(wrapper, wrappers) {
 		}
 	}
 
-	wrappers[CHTMLxypic.prototype.kind] = CHTMLxypic;
+	wrappers[ChtmlXypic.prototype.kind] = ChtmlXypic;
 
 
-	class CHTMLnewdir extends AbstractCHTMLxypic {
+	class ChtmlNewDir extends AbstractChtmlXypic {
 		constructor(factory, node, parent=null) {
 			super(factory, node, parent);
 		}
@@ -379,16 +379,16 @@ export function CreateCHTMLWrapper(wrapper, wrappers) {
 			return AST.xypic.newdir.prototype.kind;
 		}
 
-		_toCHTML(parent) {
+		_toCHTML(parents) {
 			let newdir = this.node.cmd;
 			xypicGlobalContext.repositories.dirRepository.put(newdir.dirMain, newdir.compositeObject);
 		}
 	}
 
-	wrappers[CHTMLnewdir.prototype.kind] = CHTMLnewdir;
+	wrappers[ChtmlNewDir.prototype.kind] = ChtmlNewDir;
 
 
-	class CHTMLincludegraphics extends AbstractCHTMLxypic {
+	class ChtmlIncludeGraphics extends AbstractChtmlXypic {
 		constructor(factory, node, parent=null) {
 			super(factory, node, parent);
 			this._setupGraphics();
@@ -424,9 +424,9 @@ export function CreateCHTMLWrapper(wrapper, wrappers) {
 			bbox.updateFrom(new BBox({ w: this.imageWidth, h: this.imageHeight, d: 0 }));
 		}
 
-		_toCHTML(parent) {
-			const chtml = this.standardCHTMLnode(parent);
-			this.cthml = chtml;
+		_toCHTML(parents) {
+			const chtml = this.standardChtmlNodes(parents)[0];
+			this.chtml = chtml;
 			this.adaptor.setStyle(chtml, "position", "relative");
 			this.adaptor.setStyle(chtml, "vertical-align", "0em");
 
@@ -438,9 +438,9 @@ export function CreateCHTMLWrapper(wrapper, wrappers) {
 		}
 	}
 
-	wrappers[CHTMLincludegraphics.prototype.kind] = CHTMLincludegraphics;
+	wrappers[ChtmlIncludeGraphics.prototype.kind] = ChtmlIncludeGraphics;
 }
 
-if (CHTMLWrapper !== undefined) {
-	CreateCHTMLWrapper(CHTMLWrapper, CHTMLWrappers);
+if (ChtmlWrapper !== undefined) {
+	CreateChtmlWrapper(ChtmlWrapper, ChtmlWrappers);
 }

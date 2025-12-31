@@ -1,7 +1,7 @@
 {
   "name": "xyjax",
-  "version": "3.0.1",
-  "description": "XyJax for MathJax 3",
+  "version": "4.1.0",
+  "description": "XyJax for MathJax 4",
   "license": "Apache-2.0",
   "author": "Isao Sonobe",
   "repository": {
@@ -11,9 +11,9 @@
   "main": "components/xypic/xypic.js",
   "scripts": {
     "icloud_nosync_install": "mkdir -p node_modules; touch node_modules/.nosync; npm install",
-    "build_mathjax": "cd node_modules/mathjax-full && npm run compile && npm run make-components",
-    "build_mathjax_for_debug": "cd node_modules/mathjax-full && npm install --save source-map-support && sed -i 's/module.exports = PACKAGE;/module.exports = function (name, js, libs, dir, dist) { const config = PACKAGE(name, js, libs, dir, dist); config[\"devtool\"] = \"inline-source-map\"; return config };/' components/webpack.common.js && npm run compile && npm run make-components",
-    "build": "cd components/xypic && node ../../node_modules/mathjax-full/components/bin/pack",
+    "build_mathjax": "cd node_modules/@mathjax/src && npm run compile && npm run make-components",
+    "build_mathjax_for_debug": "cd node_modules/@mathjax/src && npm install --save source-map-support && sed -i 's/module.exports = PACKAGE;/module.exports = function (name, js, libs, dir, dist) { const config = PACKAGE(name, js, libs, dir, dist); config[\"devtool\"] = \"inline-source-map\"; return config };/' components/webpack.common.js && npm run compile && npm run make-components",
+    "build": "cd components/xypic && node ../../node_modules/@mathjax/src/components/bin/makeAll",
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm ./build/*.js ./build/*.txt"
   },
@@ -38,6 +38,6 @@
   },
   "dependencies": {
     "esm": "^3.2.25",
-    "mathjax-full": "3.2.2"
+    "@mathjax/src": "4.1.0"
   }
 }

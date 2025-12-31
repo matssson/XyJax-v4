@@ -27,13 +27,13 @@ const round2 = XypicUtil.round2;
 
 
 export class Graphics {
-	static createSVG(xypicWrapper, height, depth, width, strokeWidth, color, def) {
+	static createSvg(xypicWrapper, height, depth, width, strokeWidth, color, def) {
 		return new World(xypicWrapper, height, depth, width, strokeWidth, color, def);
 	}
 }
 
 
-class SVG {
+class Svg {
 	constructor(xypicWrapper) {
 		this.xypicWrapper = xypicWrapper;
 	}
@@ -50,7 +50,7 @@ class SVG {
 		return new ChangeColorGroup(this, color);
 	}
 
-	createSVGElement(type, def) {
+	createSvgElement(type, def) {
 		let obj = this.createElement(type);
 		if (def) {
 			for (let id in def) {
@@ -79,7 +79,7 @@ class SVG {
 }
 
 
-class World extends SVG {
+class World extends Svg {
 	constructor(xypicWrapper, height, depth, width, strokeWidth, color, def) {
 		super(xypicWrapper);
 
@@ -217,12 +217,12 @@ class Rotate {
 }
 
 
-class Group extends SVG {
+class Group extends Svg {
 	constructor(parent, transform) {
 		super(parent.xypicWrapper);
 
 		this.parent = parent;
-		this.drawArea = parent.createSVGElement("g", 
+		this.drawArea = parent.createSvgElement("g", 
 			transform === undefined? {} : { transform: transform.toString() });
 		var parentOrigin = parent.getOrigin();
 		if (transform === undefined) {
@@ -251,12 +251,12 @@ class Group extends SVG {
 }
 
 
-class ChangeColorGroup extends SVG {
+class ChangeColorGroup extends Svg {
 	constructor(parent, color) {
 		super(parent.xypicWrapper);
 
 		this.parent = parent;
-		this.drawArea = parent.createSVGElement("g", {
+		this.drawArea = parent.createSvgElement("g", {
 			stroke: color
 		});
 		this.color = color;

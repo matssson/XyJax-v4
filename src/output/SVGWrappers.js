@@ -16,11 +16,11 @@
  */
 
 
-import {SVGWrapper} from "mathjax-full/js/output/svg/Wrapper.js";
-import {SVGWrappers} from "mathjax-full/js/output/svg/Wrappers.js";
+import {SvgWrapper} from "@mathjax/src/js/output/svg/Wrapper.js";
+import {SvgWrappers} from "@mathjax/src/js/output/svg/Wrappers.js";
 
 import createXypicError from "../core/XypicError.js";
-import {BBox} from 'mathjax-full/js/util/BBox.js';
+import {BBox} from '@mathjax/src/js/util/BBox.js';
 
 import {xypicGlobalContext} from "../core/xypicGlobalContext.js";
 import {AST} from "../input/XyNodes.js";
@@ -37,9 +37,9 @@ const XLINKNS = 'http://www.w3.org/1999/xlink';
 
 const round2 = XypicUtil.round2;
 
-export function CreateSVGWrapper(wrapper, wrappers) {
+export function CreateSvgWrapper(wrapper, wrappers) {
 
-	class AbstractSVGxypic extends wrapper {
+	class AbstractSvgXypic extends wrapper {
 		constructor(factory, node, parent=null) {
 			super(factory, node, parent);
 
@@ -79,14 +79,14 @@ export function CreateSVGWrapper(wrapper, wrappers) {
 			return wrapper;
 		}
 
-		toSVG(parent) {
+		toSVG(parents) {
 			const oldSvgForDebug = xypicGlobalContext.svgForDebug;
 			const oldSvgForTestLayout = xypicGlobalContext.svgForTestLayout;
 
 			this._textObjects = [];
 			this.setupMeasure(this);
 
-			this._toSVG(parent);
+			this._toSVG(parents);
 
 			xypicGlobalContext.svgForDebug = oldSvgForDebug;
 			xypicGlobalContext.svgForTestLayout = oldSvgForTestLayout;
@@ -168,7 +168,7 @@ export function CreateSVGWrapper(wrapper, wrappers) {
 
 				adaptor.setAttribute(thisRoot, "stroke", svg.getCurrentColor());
 				adaptor.setAttribute(thisRoot, "fill", svg.getCurrentColor());
-				textObjectWrapper.toSVG(thisRoot);
+				textObjectWrapper.toSVG([thisRoot]);
 
 				const origin = svg.getOrigin();
 				adaptor.setAttribute(thisRoot, "data-x", (c.x - halfW - origin.x + p * scale));
@@ -177,14 +177,14 @@ export function CreateSVGWrapper(wrapper, wrappers) {
 				parent.appendTextObject(thisRoot);
 
 				// for DEBUGGING
-				// svg.createSVGElement("rect", {
+				// svg.createSvgElement("rect", {
 				// 	x: xypicGlobalContext.measure.em2px(c.x - halfW),
 				// 	y: -xypicGlobalContext.measure.em2px(c.y - (H - D) / 2),
 				// 	width: xypicGlobalContext.measure.em2px(W),
 				// 	height: 0.01,
 				// 	stroke: "green", "stroke-width": 0.3
 				// });
-				// svg.createSVGElement("rect", {
+				// svg.createSvgElement("rect", {
 				// 	x: xypicGlobalContext.measure.em2px(c.x - halfW),
 				// 	y: -xypicGlobalContext.measure.em2px(c.y + halfHD),
 				// 	width: xypicGlobalContext.measure.em2px(W),
@@ -199,7 +199,7 @@ export function CreateSVGWrapper(wrapper, wrappers) {
 
 
 
-	class SVGxypic extends AbstractSVGxypic {
+	class SvgXypic extends AbstractSvgXypic {
 		constructor(factory, node, parent=null) {
 			super(factory, node, parent);
 			this.shape = null;
@@ -227,7 +227,7 @@ export function CreateSVGWrapper(wrapper, wrappers) {
 					const em2px = xypicGlobalContext.measure.em2px;
 		
 					const color = "black";
-					const svg = Graphics.createSVG(this, H, D, W, t, color, {
+					const svg = Graphics.createSvg(this, H, D, W, t, color, {
 						viewBox: [0, -em2px(H + D), em2px(W), em2px(H + D)].join(" "),
 						role: "img", 
 						focusable: false,
@@ -280,8 +280,8 @@ export function CreateSVGWrapper(wrapper, wrappers) {
 			};
 		}
 
-		_toSVG(parent) {
-			const svgNode = this.standardSVGnode(parent);
+		_toSVG(parents) {
+			const svgNode = this.standardSvgNodes(parents)[0];
 			this.svgNode = svgNode;
 			const adaptor = this.adaptor;
 
@@ -294,7 +294,7 @@ export function CreateSVGWrapper(wrapper, wrappers) {
 			const em2px = xypicGlobalContext.measure.em2px;
 
 			const color = "black";
-			const svg = Graphics.createSVG(this, H, D, W, t, color, {
+			const svg = Graphics.createSvg(this, H, D, W, t, color, {
 				viewBox: [0, -em2px(H + D), em2px(W), em2px(H + D)].join(" "),
 				role: "img", 
 				focusable: false,
@@ -368,10 +368,10 @@ export function CreateSVGWrapper(wrapper, wrappers) {
 		}
 	}
 
-	wrappers[SVGxypic.prototype.kind] = SVGxypic;
+	wrappers[SvgXypic.prototype.kind] = SvgXypic;
 
 
-	class SVGnewdir extends AbstractSVGxypic {
+	class SvgNewDir extends AbstractSvgXypic {
 		constructor(factory, node, parent=null) {
 			super(factory, node, parent);
 		}
@@ -385,16 +385,16 @@ export function CreateSVGWrapper(wrapper, wrappers) {
 			xypicGlobalContext.repositories.dirRepository.put(newdir.dirMain, newdir.compositeObject);
 		}
 
-		_toSVG(parent) {
+		_toSVG(parents) {
 			let newdir = this.node.cmd;
 			xypicGlobalContext.repositories.dirRepository.put(newdir.dirMain, newdir.compositeObject);
 		}
 	}
 
-	wrappers[SVGnewdir.prototype.kind] = SVGnewdir;
+	wrappers[SvgNewDir.prototype.kind] = SvgNewDir;
 
 
-	class SVGincludegraphics extends AbstractSVGxypic {
+	class SvgIncludeGraphics extends AbstractSvgXypic {
 		constructor(factory, node, parent=null) {
 			super(factory, node, parent);
 			this._setupGraphics();
@@ -430,8 +430,8 @@ export function CreateSVGWrapper(wrapper, wrappers) {
 			bbox.updateFrom(new BBox({ w: this.imageWidth, h: this.imageHeight, d: 0 }));
 		}
 
-		_toSVG(parent) {
-			const svgNode = this.standardSVGnode(parent);
+		_toSVG(parents) {
+			const svgNode = this.standardSvgNodes(parents)[0];
 			this.svgNode = svgNode;
 			const fixedScale = this.fixed(1);
 			const img = this.svg("image", {
@@ -447,9 +447,9 @@ export function CreateSVGWrapper(wrapper, wrappers) {
 		}
 	}
 
-	wrappers[SVGincludegraphics.prototype.kind] = SVGincludegraphics;
+	wrappers[SvgIncludeGraphics.prototype.kind] = SvgIncludeGraphics;
 }
 
-if (SVGWrapper !== undefined) {
-	CreateSVGWrapper(SVGWrapper, SVGWrappers);
+if (SvgWrapper !== undefined) {
+	CreateSvgWrapper(SvgWrapper, SvgWrappers);
 }

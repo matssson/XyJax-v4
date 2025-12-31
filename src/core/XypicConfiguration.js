@@ -19,11 +19,11 @@
 // for DEBUGGING
 // import {} from "../util/EnableSourceMap.js";
 
-import {Configuration} from "mathjax-full/js/input/tex/Configuration.js";
-import {CommandMap, EnvironmentMap} from "mathjax-full/js/input/tex/SymbolMap.js";
-import BaseMethods from "mathjax-full/js/input/tex/base/BaseMethods.js";
-import ParseMethods from "mathjax-full/js/input/tex/ParseMethods.js";
-import TexParser from "mathjax-full/js/input/tex/TexParser.js";
+import {Configuration} from "@mathjax/src/js/input/tex/Configuration.js";
+import {CommandMap, EnvironmentMap} from "@mathjax/src/js/input/tex/TokenMap.js";
+import BaseMethods from "@mathjax/src/js/input/tex/base/BaseMethods.js";
+import ParseMethods from "@mathjax/src/js/input/tex/ParseMethods.js";
+import TexParser from "@mathjax/src/js/input/tex/TexParser.js";
 
 import createXypicError from "../core/XypicError.js";
 

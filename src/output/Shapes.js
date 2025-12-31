@@ -26,7 +26,7 @@ export class Shape {
 	// <<interface>>
 	/**
 	 * 図形を描画する。
-	 * @param {Graphics.SVG} svg SVG
+	 * @param {Graphics.Svg} svg Svg
 	 */
 	// draw function (svg) {}
 	
@@ -179,7 +179,7 @@ Shape.CircleSegmentShape = class Shape_CircleSegmentShape extends Shape {
 	}
 
 	draw(svg) {
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + xypicGlobalContext.measure.em2px(this.sx) + "," + xypicGlobalContext.measure.em2px(-this.sy) + " A" + xypicGlobalContext.measure.em2px(this.r) + "," + xypicGlobalContext.measure.em2px(this.r) + " 0 " + this.large + "," + this.flip + " " + xypicGlobalContext.measure.em2px(this.ex) + "," + xypicGlobalContext.measure.em2px(-this.ey)
 		});
 	}
@@ -204,7 +204,7 @@ Shape.FullCircleShape = class Shape_FullCircleShape extends Shape {
 	}
 
 	draw(svg) {
-		svg.createSVGElement("circle", {
+		svg.createSvgElement("circle", {
 			cx:xypicGlobalContext.measure.em2px(this.x), cy:xypicGlobalContext.measure.em2px(-this.y), r:xypicGlobalContext.measure.em2px(this.r)
 		});
 	}
@@ -257,7 +257,7 @@ Shape.RectangleShape = class Shape_RectangleShape extends Shape {
 		if (this.fillColor !== undefined) {
 			def["fill"] = this.fillColor;
 		}
-		svg.createSVGElement("rect", def);
+		svg.createSvgElement("rect", def);
 		if (this.isDoubled) {
 			def = {
 				x:xypicGlobalContext.measure.em2px(this.x - this.left + xypicGlobalContext.measure.thickness), 
@@ -277,7 +277,7 @@ Shape.RectangleShape = class Shape_RectangleShape extends Shape {
 			if (this.fillColor !== undefined) {
 				def["fill"] = this.fillColor;
 			}
-			svg.createSVGElement("rect", def);
+			svg.createSvgElement("rect", def);
 		}
 	}
 
@@ -325,7 +325,7 @@ Shape.EllipseShape = class Shape_EllipseShape extends Shape {
 		if (this.fillColor !== undefined) {
 			def["fill"] = this.fillColor;
 		}
-		svg.createSVGElement("ellipse", def);
+		svg.createSvgElement("ellipse", def);
 		if (this.isDoubled) {
 			def = {
 				cx:xypicGlobalContext.measure.em2px(this.x), 
@@ -344,7 +344,7 @@ Shape.EllipseShape = class Shape_EllipseShape extends Shape {
 			if (this.fillColor !== undefined) {
 				def["fill"] = this.fillColor;
 			}
-			svg.createSVGElement("ellipse", def);
+			svg.createSvgElement("ellipse", def);
 		}
 	}
 
@@ -380,7 +380,7 @@ Shape.BoxShadeShape = class Shape_BoxShadeShape extends Shape {
 		var u = xypicGlobalContext.measure.em2px(this.up);
 		var d = xypicGlobalContext.measure.em2px(this.down);
 		var depth = xypicGlobalContext.measure.em2px(this.depth);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d: "M" + (x - l + depth) + "," + (-y + d) + 
 				"L" + (x + r) + "," + (-y + d) + 
 				"L" + (x + r) + "," + (-y - u + depth) + 
@@ -498,7 +498,7 @@ Shape.LeftBrace = class Shape_LeftBrace extends Shape {
 			"Q" + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(0.496125) + 
 			" " + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(0.759375) + 
 			"Z";
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:d, 
 			fill:this.color, 
 			stroke:this.color, 
@@ -577,7 +577,7 @@ Shape.LeftParenthesis = class Shape_LeftParenthesis extends Shape {
 			"Q" + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(up) + 
 			" " + xypicGlobalContext.measure.em2px(-0.0675) + " " + xypicGlobalContext.measure.em2px(up) + 
 			"Z";
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:d, 
 			fill:this.color, 
 			stroke:this.color, 
@@ -645,7 +645,7 @@ Shape.ImageShape = class Shape_ImageShape extends Shape {
 
 	draw(svg) {
 		var c = this.c;
-		svg.createSVGElement("image", {
+		svg.createSvgElement("image", {
 			x: xypicGlobalContext.measure.em2px(c.x - c.l),
 			y: xypicGlobalContext.measure.em2px(-c.y - c.u),
 			width: xypicGlobalContext.measure.em2px(c.l + c.r),
@@ -712,10 +712,10 @@ Shape.GT2ArrowheadShape = class Shape_GT2ArrowheadShape extends Shape.ArrowheadS
 		var scale = xypicGlobalContext.measure.oneem;
 		var gu = svg.createGroup(svg.transformBuilder().rotateDegree(-10));
 		var gd = svg.createGroup(svg.transformBuilder().rotateDegree(10));
-		gu.createSVGElement("path", {
+		gu.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		gd.createSVGElement("path", {
+		gd.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + ","+xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -745,13 +745,13 @@ Shape.GT3ArrowheadShape = class Shape_GT3ArrowheadShape extends Shape.ArrowheadS
 		var scale = xypicGlobalContext.measure.oneem;
 		var gu = svg.createGroup(svg.transformBuilder().rotateDegree(-15));
 		var gd = svg.createGroup(svg.transformBuilder().rotateDegree(15));
-		gu.createSVGElement("path", {
+		gu.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:xypicGlobalContext.measure.em2px(-0.507 * scale), y2:0
 		});
-		gd.createSVGElement("path", {
+		gd.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -774,7 +774,7 @@ Shape.UpperGTArrowheadShape = class Shape_UpperGTArrowheadShape extends Shape.Ar
 
 	drawDelegate(svg) {
 		var scale = xypicGlobalContext.measure.oneem;
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
@@ -797,7 +797,7 @@ Shape.LowerGTArrowheadShape = class Shape_LowerGTArrowheadShape extends Shape.Ar
 
 	drawDelegate(svg) {
 		var scale = xypicGlobalContext.measure.oneem;
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -820,10 +820,10 @@ Shape.GTArrowheadShape = class Shape_GTArrowheadShape extends Shape.ArrowheadSha
 
 	drawDelegate(svg) {
 		var scale = xypicGlobalContext.measure.oneem;
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
@@ -853,10 +853,10 @@ Shape.LT2ArrowheadShape = class Shape_LT2ArrowheadShape extends Shape.ArrowheadS
 		var scale = xypicGlobalContext.measure.oneem;
 		var gu = svg.createGroup(svg.transformBuilder().rotateDegree(10)); 
 		var gd = svg.createGroup(svg.transformBuilder().rotateDegree(-10));
-		gu.createSVGElement("path", {
+		gu.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		gd.createSVGElement("path", {
+		gd.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -886,13 +886,13 @@ Shape.LT3ArrowheadShape = class Shape_LT3ArrowheadShape extends Shape.ArrowheadS
 		var scale = xypicGlobalContext.measure.oneem;
 		var gu = svg.createGroup(svg.transformBuilder().rotateDegree(15));
 		var gd = svg.createGroup(svg.transformBuilder().rotateDegree(-15));
-		gu.createSVGElement("path", {
+		gu.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:xypicGlobalContext.measure.em2px(0.507 * scale), y2:0
 		});
-		gd.createSVGElement("path", {
+		gd.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -915,7 +915,7 @@ Shape.UpperLTArrowheadShape = class Shape_UpperLTArrowheadShape extends Shape.Ar
 
 	drawDelegate(svg) {
 		var scale = xypicGlobalContext.measure.oneem;
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
@@ -938,7 +938,7 @@ Shape.LowerLTArrowheadShape = class Shape_LowerLTArrowheadShape extends Shape.Ar
 
 	drawDelegate(svg) {
 		var scale = xypicGlobalContext.measure.oneem;
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -961,10 +961,10 @@ Shape.LTArrowheadShape = class Shape_LTArrowheadShape extends Shape.ArrowheadSha
 
 	drawDelegate(svg) {
 		var scale = xypicGlobalContext.measure.oneem;
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -986,7 +986,7 @@ Shape.UpperColumnArrowheadShape = class Shape_UpperColumnArrowheadShape extends 
 
 	drawDelegate(svg) {
 		var l = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:0, y2:-l
 		});
 	}
@@ -1008,7 +1008,7 @@ Shape.LowerColumnArrowheadShape = class Shape_LowerColumnArrowheadShape extends 
 
 	drawDelegate(svg) {
 		var l = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:0, y2:l
 		});
 	}
@@ -1030,7 +1030,7 @@ Shape.Column2ArrowheadShape = class Shape_Column2ArrowheadShape extends Shape.Ar
 
 	drawDelegate(svg) {
 		var l = xypicGlobalContext.measure.em2px(0.5 * (xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness));
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
 	}
@@ -1052,7 +1052,7 @@ Shape.Column3ArrowheadShape = class Shape_Column3ArrowheadShape extends Shape.Ar
 
 	drawDelegate(svg) {
 		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
 	}
@@ -1075,7 +1075,7 @@ Shape.ColumnArrowheadShape = class Shape_ColumnArrowheadShape extends Shape.Arro
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
 	}
@@ -1098,7 +1098,7 @@ Shape.UpperLParenArrowheadShape = class Shape_UpperLParenArrowheadShape extends 
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,1 0," + (-2 * r)
 		});
 	}
@@ -1121,7 +1121,7 @@ Shape.LowerLParenArrowheadShape = class Shape_LowerLParenArrowheadShape extends 
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,0 0," + (2 * r)
 		});
 	}
@@ -1144,7 +1144,7 @@ Shape.LParenArrowheadShape = class Shape_LParenArrowheadShape extends Shape.Arro
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + r + "," + (-r) + " A " + r + "," + r + " 0 0,0 " + r + "," + r
 		});
 	}
@@ -1167,7 +1167,7 @@ Shape.UpperRParenArrowheadShape = class Shape_UpperRParenArrowheadShape extends 
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,0 0," + (-2 * r)
 		});
 	}
@@ -1190,7 +1190,7 @@ Shape.LowerRParenArrowheadShape = class Shape_LowerRParenArrowheadShape extends 
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,1 0," + (2 * r)
 		});
 	}
@@ -1213,7 +1213,7 @@ Shape.RParenArrowheadShape = class Shape_RParenArrowheadShape extends Shape.Arro
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + (-r) + "," + (-r) + " A " + r + "," + r + " 0 0,1 " + (-r) + "," + r
 		});
 	}
@@ -1236,7 +1236,7 @@ Shape.LowerBackquoteArrowheadShape = class Shape_LowerBackquoteArrowheadShape ex
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,0 " + (-r) + "," + (r)
 		});
 	}
@@ -1259,7 +1259,7 @@ Shape.UpperBackquoteArrowheadShape = class Shape_UpperBackquoteArrowheadShape ex
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,1 " + (-r) + "," + (-r)
 		});
 	}
@@ -1282,7 +1282,7 @@ Shape.LowerQuoteArrowheadShape = class Shape_LowerQuoteArrowheadShape extends Sh
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,1 " + r + "," + (r)
 		});
 	}
@@ -1305,7 +1305,7 @@ Shape.UpperQuoteArrowheadShape = class Shape_UpperQuoteArrowheadShape extends Sh
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var r = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 A " + r + "," + r + " 0 0,0 " + r + "," + (-r)
 		});
 	}
@@ -1326,7 +1326,7 @@ Shape.AsteriskArrowheadShape = class Shape_AsteriskArrowheadShape extends Shape.
 	}
 
 	drawDelegate(svg) {
-		svg.createSVGElement("circle", {
+		svg.createSvgElement("circle", {
 			cx:0, cy:0, r:xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness),
 			fill: "currentColor"
 		});
@@ -1348,7 +1348,7 @@ Shape.OArrowheadShape = class Shape_OArrowheadShape extends Shape.ArrowheadShape
 	}
 
 	drawDelegate(svg) {
-		svg.createSVGElement("circle", {
+		svg.createSvgElement("circle", {
 			cx:0, cy:0, r:xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness)
 		});
 	}
@@ -1371,10 +1371,10 @@ Shape.PlusArrowheadShape = class Shape_PlusArrowheadShape extends Shape.Arrowhea
 	drawDelegate(svg) {
 		var halfLen = xypicGlobalContext.measure.lineElementLength / 2;
 		var halfLenPx = xypicGlobalContext.measure.em2px(halfLen);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:-halfLenPx, y1:0, x2:halfLenPx, y2:0
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:halfLenPx, x2:0, y2:-halfLenPx
 		});
 	}
@@ -1397,10 +1397,10 @@ Shape.XArrowheadShape = class Shape_XArrowheadShape extends Shape.ArrowheadShape
 	drawDelegate(svg) {
 		var halfLen = xypicGlobalContext.measure.lineElementLength / 2;
 		var halfLenPx = xypicGlobalContext.measure.em2px(halfLen);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:-halfLenPx, y1:0, x2:halfLenPx, y2:0
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:halfLenPx, x2:0, y2:-halfLenPx
 		});
 	}
@@ -1423,7 +1423,7 @@ Shape.SlashArrowheadShape = class Shape_SlashArrowheadShape extends Shape.Arrowh
 	drawDelegate(svg) {
 		var halfLen = xypicGlobalContext.measure.lineElementLength / 2;
 		var halfLenPx = xypicGlobalContext.measure.em2px(halfLen);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:halfLenPx, x2:0, y2:-halfLenPx
 		});
 	}
@@ -1446,13 +1446,13 @@ Shape.Line3ArrowheadShape = class Shape_Line3ArrowheadShape extends Shape.Arrowh
 	drawDelegate(svg) {
 		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
 		var vshift = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:vshift, x2:lineLen, y2:vshift
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:lineLen, y2:0
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:-vshift, x2:lineLen, y2:-vshift
 		});
 	}
@@ -1475,10 +1475,10 @@ Shape.Line2ArrowheadShape = class Shape_Line2ArrowheadShape extends Shape.Arrowh
 	drawDelegate(svg) {
 		var vshift = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.thickness);
 		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:vshift, x2:lineLen, y2:vshift
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:-vshift, x2:lineLen, y2:-vshift
 		});
 	}
@@ -1500,7 +1500,7 @@ Shape.LineArrowheadShape = class Shape_LineArrowheadShape extends Shape.Arrowhea
 
 	drawDelegate(svg) {
 		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:lineLen, y2:0
 		});
 	}
@@ -1525,15 +1525,15 @@ Shape.Dot3ArrowheadShape = class Shape_Dot3ArrowheadShape extends Shape.Arrowhea
 		var vshift = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
 		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
 		var dasharray = xypicGlobalContext.measure.dottedDasharray;
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:vshift, x2:lineLen, y2:vshift,
 			"stroke-dasharray": dasharray
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:lineLen, y2:0,
 			"stroke-dasharray": dasharray
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:-vshift, x2:lineLen, y2:-vshift,
 			"stroke-dasharray": dasharray
 		});
@@ -1559,11 +1559,11 @@ Shape.Dot2ArrowheadShape = class Shape_Dot2ArrowheadShape extends Shape.Arrowhea
 		var vshift = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.thickness);
 		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
 		var dasharray = xypicGlobalContext.measure.dottedDasharray;
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:vshift, x2:lineLen, y2:vshift,
 		"stroke-dasharray": dasharray
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:-vshift, x2:lineLen, y2:-vshift,
 		"stroke-dasharray": dasharray
 		});
@@ -1588,7 +1588,7 @@ Shape.DotArrowheadShape = class Shape_DotArrowheadShape extends Shape.ArrowheadS
 		var scale = xypicGlobalContext.measure.oneem;
 		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
 		var dasharray = xypicGlobalContext.measure.dottedDasharray;
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:lineLen, y2:0,
 			"stroke-dasharray": dasharray
 		});
@@ -1611,7 +1611,7 @@ Shape.Tilde3ArrowheadShape = class Shape_Tilde3ArrowheadShape extends Shape.Arro
 
 	drawDelegate(svg) {
 		var s = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + (-2 * s) + "," + s + 
 				" Q" + (-s) + ",0" + 
 				" 0," + s +
@@ -1644,7 +1644,7 @@ Shape.Tilde2ArrowheadShape = class Shape_Tilde2ArrowheadShape extends Shape.Arro
 
 	drawDelegate(svg) {
 		var s = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + (-2 * s) + "," + (0.5 * s) + 
 				" Q" + (-s) + "," + (-0.5 * s) +
 				" 0," + (0.5 * s) +
@@ -1673,7 +1673,7 @@ Shape.TildeArrowheadShape = class Shape_TildeArrowheadShape extends Shape.Arrowh
 
 	drawDelegate(svg) {
 		var s = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + (-2 * s) + ",0" + 
 				" Q" + (-s) + "," + (-s) +
 				" 0,0" +
@@ -1698,7 +1698,7 @@ Shape.TildeArrowheadShape = class Shape_TildeArrowheadShape extends Shape.Arrowh
 
 	drawDelegate(svg) {
 		var s = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + (-2 * s) + ",0" + 
 				" Q" + (-s) + "," + (-s) +
 				" 0,0" +
@@ -1725,16 +1725,16 @@ Shape.GTGTArrowheadShape = class Shape_GTGTArrowheadShape extends Shape.Arrowhea
 		var scale = xypicGlobalContext.measure.oneem;
 		var t = xypicGlobalContext.measure.thickness;
 		var hshift = xypicGlobalContext.measure.em2px(2 * t);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + (-hshift) + ",0 Q" + (xypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + (-hshift) + ",0 Q" + (xypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
@@ -1759,10 +1759,10 @@ Shape.UpperGTGTArrowheadShape = class Shape_UpperGTGTArrowheadShape extends Shap
 		var scale = xypicGlobalContext.measure.oneem;
 		var t = xypicGlobalContext.measure.thickness;
 		var hshift = xypicGlobalContext.measure.em2px(2 * t);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + (-hshift) + ",0 Q" + (xypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
@@ -1787,10 +1787,10 @@ Shape.LowerGTGTArrowheadShape = class Shape_LowerGTGTArrowheadShape extends Shap
 		var scale = xypicGlobalContext.measure.oneem;
 		var t = xypicGlobalContext.measure.thickness;
 		var hshift = xypicGlobalContext.measure.em2px(2 * t);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + (-hshift) + ",0 Q" + (xypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -1821,18 +1821,18 @@ Shape.GTGT2ArrowheadShape = class Shape_GTGT2ArrowheadShape extends Shape.Arrowh
 		var t = xypicGlobalContext.measure.thickness;
 		var gu1 = svg.createGroup(svg.transformBuilder().rotateDegree(-10));
 		var gd1 = svg.createGroup(svg.transformBuilder().rotateDegree(10));
-		gu1.createSVGElement("path", {
+		gu1.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		gd1.createSVGElement("path", {
+		gd1.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + ","+xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		var gu2 = svg.createGroup(svg.transformBuilder().translate(-2 * t, 0).rotateDegree(-10));
 		var gd2 = svg.createGroup(svg.transformBuilder().translate(-2 * t, 0).rotateDegree(10));
-		gu2.createSVGElement("path", {
+		gu2.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		gd2.createSVGElement("path", {
+		gd2.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + ","+xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -1863,21 +1863,21 @@ Shape.GTGT3ArrowheadShape = class Shape_GTGT3ArrowheadShape extends Shape.Arrowh
 		var t = xypicGlobalContext.measure.thickness;
 		var gu1 = svg.createGroup(svg.transformBuilder().rotateDegree(-15));
 		var gd1 = svg.createGroup(svg.transformBuilder().rotateDegree(15));
-		gu1.createSVGElement("path", {
+		gu1.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		gd1.createSVGElement("path", {
+		gd1.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + ","+xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		var gu2 = svg.createGroup(svg.transformBuilder().translate(-2 * t, 0).rotateDegree(-15));
 		var gd2 = svg.createGroup(svg.transformBuilder().translate(-2 * t, 0).rotateDegree(15));
-		gu2.createSVGElement("path", {
+		gu2.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		gd2.createSVGElement("path", {
+		gd2.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + ","+xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:xypicGlobalContext.measure.em2px(-0.507 * scale - 2 * t), y2:0
 		});
 	}
@@ -1902,16 +1902,16 @@ Shape.LTLTArrowheadShape = class Shape_LTLTArrowheadShape extends Shape.Arrowhea
 		var scale = xypicGlobalContext.measure.oneem;
 		var t = xypicGlobalContext.measure.thickness;
 		var hshift = xypicGlobalContext.measure.em2px(2 * t);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + hshift + ",0 Q" + (xypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + hshift + ",0 Q" + (xypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -1936,10 +1936,10 @@ Shape.UpperLTLTArrowheadShape = class Shape_UpperLTLTArrowheadShape extends Shap
 		var scale = xypicGlobalContext.measure.oneem;
 		var t = xypicGlobalContext.measure.thickness;
 		var hshift = xypicGlobalContext.measure.em2px(2 * t);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + hshift + ",0 Q" + (xypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
@@ -1964,10 +1964,10 @@ Shape.LowerLTLTArrowheadShape = class Shape_LowerLTLTArrowheadShape extends Shap
 		var scale = xypicGlobalContext.measure.oneem;
 		var t = xypicGlobalContext.measure.thickness;
 		var hshift = xypicGlobalContext.measure.em2px(2 * t);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + hshift + ",0 Q" + (xypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -1998,18 +1998,18 @@ Shape.LTLT2ArrowheadShape = class Shape_LTLT2ArrowheadShape extends Shape.Arrowh
 		var t = xypicGlobalContext.measure.thickness;
 		var gu1 = svg.createGroup(svg.transformBuilder().translate(2 * t, 0).rotateDegree(10)); 
 		var gd1 = svg.createGroup(svg.transformBuilder().translate(2 * t, 0).rotateDegree(-10));
-		gu1.createSVGElement("path", {
+		gu1.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		gd1.createSVGElement("path", {
+		gd1.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		var gu2 = svg.createGroup(svg.transformBuilder().rotateDegree(10)); 
 		var gd2 = svg.createGroup(svg.transformBuilder().rotateDegree(-10));
-		gu2.createSVGElement("path", {
+		gu2.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		gd2.createSVGElement("path", {
+		gd2.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -2040,21 +2040,21 @@ Shape.LTLT3ArrowheadShape = class Shape_LTLT3ArrowheadShape extends Shape.Arrowh
 		var t = xypicGlobalContext.measure.thickness;
 		var gu1 = svg.createGroup(svg.transformBuilder().translate(2 * t, 0).rotateDegree(15)); 
 		var gd1 = svg.createGroup(svg.transformBuilder().translate(2 * t, 0).rotateDegree(-15));
-		gu1.createSVGElement("path", {
+		gu1.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		gd1.createSVGElement("path", {
+		gd1.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 		var gu2 = svg.createGroup(svg.transformBuilder().rotateDegree(15)); 
 		var gd2 = svg.createGroup(svg.transformBuilder().rotateDegree(-15));
-		gu2.createSVGElement("path", {
+		gu2.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		gd2.createSVGElement("path", {
+		gd2.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:xypicGlobalContext.measure.em2px(0.507 * scale + 2 * t), y2:0
 		});
 	}
@@ -2077,10 +2077,10 @@ Shape.ColumnColumnArrowheadShape = class Shape_ColumnColumnArrowheadShape extend
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:-xypicGlobalContext.measure.em2px(t), y1:l, x2:-xypicGlobalContext.measure.em2px(t), y2:-l
 		});
 	}
@@ -2103,10 +2103,10 @@ Shape.UpperColumnColumnArrowheadShape = class Shape_UpperColumnColumnArrowheadSh
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var l = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:0, y2:-l
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:-xypicGlobalContext.measure.em2px(t), y1:0, x2:-xypicGlobalContext.measure.em2px(t), y2:-l
 		});
 	}
@@ -2129,10 +2129,10 @@ Shape.LowerColumnColumnArrowheadShape = class Shape_LowerColumnColumnArrowheadSh
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var l = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:0, y2:l
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:-xypicGlobalContext.measure.em2px(t), y1:0, x2:-xypicGlobalContext.measure.em2px(t), y2:l
 		});
 	}
@@ -2155,10 +2155,10 @@ Shape.ColumnColumn2ArrowheadShape = class Shape_ColumnColumn2ArrowheadShape exte
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var l = xypicGlobalContext.measure.em2px(0.5 * (xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness));
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:-xypicGlobalContext.measure.em2px(t), y1:l, x2:-xypicGlobalContext.measure.em2px(t), y2:-l
 		});
 	}
@@ -2182,10 +2182,10 @@ Shape.ColumnColumn3ArrowheadShape = class Shape_ColumnColumn3ArrowheadShape exte
 		var t = xypicGlobalContext.measure.thickness;
 		var t = xypicGlobalContext.measure.thickness;
 		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:-xypicGlobalContext.measure.em2px(t), y1:l, x2:-xypicGlobalContext.measure.em2px(t), y2:-l
 		});
 	}
@@ -2207,11 +2207,11 @@ Shape.ColumnLineArrowheadShape = class Shape_ColumnLineArrowheadShape extends Sh
 
 	drawDelegate(svg) {
 		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
 		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:lineLen, y2:0
 		});
 	}
@@ -2234,11 +2234,11 @@ Shape.UpperColumnLineArrowheadShape = class Shape_UpperColumnLineArrowheadShape 
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var l = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:0, y2:-l
 		});
 		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:lineLen, y2:0
 		});
 	}
@@ -2261,11 +2261,11 @@ Shape.LowerColumnLineArrowheadShape = class Shape_LowerColumnLineArrowheadShape 
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var l = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:0, y2:l
 		});
 		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:lineLen, y2:0
 		});
 	}
@@ -2288,15 +2288,15 @@ Shape.ColumnLine2ArrowheadShape = class Shape_ColumnLine2ArrowheadShape extends 
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var l = xypicGlobalContext.measure.em2px(0.5 * (xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness));
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:-l, x2:0, y2:l
 		});
 		var vshift = xypicGlobalContext.measure.em2px(0.5 * t);
 		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:vshift, x2:lineLen, y2:vshift
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:-vshift, x2:lineLen, y2:-vshift
 		});
 	}
@@ -2319,18 +2319,18 @@ Shape.ColumnLine3ArrowheadShape = class Shape_ColumnLine3ArrowheadShape extends 
 	drawDelegate(svg) {
 		var t = xypicGlobalContext.measure.thickness;
 		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength + xypicGlobalContext.measure.thickness);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:-l, x2:0, y2:l
 		});
 		var lineLen = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
 		var vshift = xypicGlobalContext.measure.em2px(t);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:vshift, x2:lineLen, y2:vshift
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:0, x2:lineLen, y2:0
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:-vshift, x2:lineLen, y2:-vshift
 		});
 	}
@@ -2354,13 +2354,13 @@ Shape.GTColumnArrowheadShape = class Shape_GTColumnArrowheadShape extends Shape.
 	drawDelegate(svg) {
 		var scale = xypicGlobalContext.measure.oneem;
 		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
@@ -2385,20 +2385,20 @@ Shape.GTGTColumnArrowheadShape = class Shape_GTGTColumnArrowheadShape extends Sh
 		var scale = xypicGlobalContext.measure.oneem;
 		var t = xypicGlobalContext.measure.thickness;
 		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
 		var hshift = xypicGlobalContext.measure.em2px(2 * t);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + (-hshift) + ",0 Q" + (xypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + (-hshift) + ",0 Q" + (xypicGlobalContext.measure.em2px(-0.222 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(-0.489 * scale) - hshift) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
 	}
@@ -2423,13 +2423,13 @@ Shape.ColumnLTArrowheadShape = class Shape_ColumnLTArrowheadShape extends Shape.
 		var scale = xypicGlobalContext.measure.oneem;
 		var t = xypicGlobalContext.measure.thickness;
 		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -2454,20 +2454,20 @@ Shape.ColumnLTLTArrowheadShape = class Shape_ColumnLTLTArrowheadShape extends Sh
 		var scale = xypicGlobalContext.measure.oneem;
 		var t = xypicGlobalContext.measure.thickness;
 		var l = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:l, x2:0, y2:-l
 		});
 		var hshift = xypicGlobalContext.measure.em2px(2 * t);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + hshift + ",0 Q" + (xypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + hshift + ",0 Q" + (xypicGlobalContext.measure.em2px(0.222 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + (xypicGlobalContext.measure.em2px(0.489 * scale) + hshift) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(0.222 * scale) + "," + xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
 	}
@@ -2490,10 +2490,10 @@ Shape.SlashSlashArrowheadShape = class Shape_SlashSlashArrowheadShape extends Sh
 	drawDelegate(svg) {
 		var hshift = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.thickness);
 		var halfLenPx = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.lineElementLength);
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:0, y1:halfLenPx, x2:0, y2:-halfLenPx
 		});
-		svg.createSVGElement("line", {
+		svg.createSvgElement("line", {
 			x1:-hshift, y1:halfLenPx, x2:-hshift, y2:-halfLenPx
 		});
 	}
@@ -2530,13 +2530,13 @@ Shape.LineGT2ArrowheadShape = class Shape_LineGT2ArrowheadShape extends Shape.Ar
 		
 		var gu = svg.createGroup(svg.transformBuilder().translate(halfLen, 0).rotateDegree(-10));
 		var gd = svg.createGroup(svg.transformBuilder().translate(halfLen, 0).rotateDegree(10));
-		gu.createSVGElement("path", {
+		gu.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + "," + xypicGlobalContext.measure.em2px(-0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(-0.147 * scale)
 		});
-		gd.createSVGElement("path", {
+		gd.createSvgElement("path", {
 			d:"M0,0 Q" + xypicGlobalContext.measure.em2px(-0.222 * scale) + ","+xypicGlobalContext.measure.em2px(0.020 * scale) + " " + xypicGlobalContext.measure.em2px(-0.489 * scale) + "," + xypicGlobalContext.measure.em2px(0.147 * scale)
 		});
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + (-hshift) + "," + vshift + " L" + (hshift - delta) + "," + vshift + 
 				" M" + (-hshift) + "," + (-vshift) + " L" + (hshift - delta) + "," + (-vshift)
 		});
@@ -2562,7 +2562,7 @@ Shape.TwocellEqualityArrowheadShape = class Shape_TwocellEqualityArrowheadShape 
 		var scale = xypicGlobalContext.measure.oneem;
 		var hshift = xypicGlobalContext.measure.em2px(xypicGlobalContext.measure.lineElementLength);
 		var vshift = xypicGlobalContext.measure.em2px(0.5 * xypicGlobalContext.measure.thickness);
-		svg.createSVGElement("path", {
+		svg.createSvgElement("path", {
 			d:"M" + (-hshift) + "," + vshift + " L" + hshift + "," + vshift + 
 				" M" + (-hshift) + "," + (-vshift) + " L" + hshift + "," + (-vshift)
 		});

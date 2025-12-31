@@ -18,9 +18,9 @@
 import './preload.js';
 import '../../src/core/XypicConfiguration.js';
 
-import {CreateCHTMLWrapper} from '../../src/output/CHTMLWrappers.js';
-import {CreateSVGWrapper} from '../../src/output/SVGWrappers.js';
-import {VERSION} from 'mathjax-full/js/components/version.js';
+import {CreateChtmlWrapper} from '../../src/output/ChtmlWrappers.js';
+import {CreateSvgWrapper} from '../../src/output/SvgWrappers.js';
+import {VERSION} from '@mathjax/src/js/components/version.js';
 
 //
 //    Add component version information
@@ -36,16 +36,16 @@ if (MathJax.loader) {
 //
 const {Loader} = MathJax._.components.loader;
 if (Loader) {
-  if (!MathJax._.output.chtml.Wrapper.CHTMLWrapper) {
+  if (!MathJax._.output.chtml.Wrapper.ChtmlWrapper) {
     Loader.ready('output/chtml').then(() => {
       const chtml = MathJax._.output.chtml
-      CreateCHTMLWrapper(chtml.Wrapper.CHTMLWrapper, chtml.Wrappers_ts.CHTMLWrappers);
+      CreateChtmlWrapper(chtml.Wrapper.ChtmlWrapper, chtml.Wrappers_ts.ChtmlWrappers);
     }).catch(err => console.log('Caught', err));
   }
-  if (!MathJax._.output.svg.Wrapper.SVGWrapper) {
+  if (!MathJax._.output.svg.Wrapper.SvgWrapper) {
     Loader.ready('output/svg').then(() => {
       const svg = MathJax._.output.svg;
-      CreateSVGWrapper(svg.Wrapper.SVGWrapper, svg.Wrappers_ts.SVGWrappers);
+      CreateSvgWrapper(svg.Wrapper.SvgWrapper, svg.Wrappers_ts.SvgWrappers);
     }).catch(err => console.log('Caught', err));
   }
 }
