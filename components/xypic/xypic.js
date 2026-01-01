@@ -23,19 +23,13 @@ import {CreateSvgWrapper} from '../../src/output/SvgWrappers.js';
 import {VERSION} from '@mathjax/src/js/components/version.js';
 
 //
-//    Add component version information
-//
-if (MathJax.loader) {
-  MathJax.loader.checkVersion('[xypic]', VERSION, 'tex-extension');
-}
-
-//
 //    Check to see which output jax are loaded, and
 //    set up callbacks for if the other is loaded via the menu
 //    so that we can set up the wrappers for them.
 //
 const {Loader} = MathJax._.components.loader;
 if (Loader) {
+  Loader.checkVersion("[xypic]", VERSION, "tex-extension"); // Add component version information
   if (!MathJax._.output.chtml.Wrapper.ChtmlWrapper) {
     Loader.ready('output/chtml').then(() => {
       const chtml = MathJax._.output.chtml
