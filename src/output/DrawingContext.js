@@ -15,44 +15,42 @@
  *  limitations under the License.
  */
 
-
-import {Shape} from "./Shapes.js";
-
+import { Shape } from "./Shapes.js";
 
 export class DrawingContext {
-	constructor(shape, env) {
-		this.shape = shape;
-		this.env = env;
-	}
-	
-	duplicateEnv() {
-		var newEnv = this.env.duplicate();
-		return new DrawingContext(this.shape, newEnv);
-	}
-	
-	/**
-	 * shapeを最前面に追加する。
-	 * @param {xypic.Shape} shape 追加する図形
-	 */
-	appendShapeToFront(shape) {
-		if (shape.isNone) {
-		} else if (this.shape.isNone) {
-			this.shape = shape;
-		} else {
-			this.shape = new Shape.CompositeShape(shape, this.shape);
-		}
-	}
-	
-	/**
-	 * shapeを最背面に追加する。
-	 * @param {xypic.Shape} shape 追加する図形
-	 */
-	appendShapeToBack(shape) {
-		if (shape.isNone) {
-		} else if (this.shape.isNone) {
-			this.shape = shape;
-		} else {
-			this.shape = new Shape.CompositeShape(this.shape, shape);
-		}
-	}
+  constructor(shape, env) {
+    this.shape = shape;
+    this.env = env;
+  }
+
+  duplicateEnv() {
+    var newEnv = this.env.duplicate();
+    return new DrawingContext(this.shape, newEnv);
+  }
+
+  /**
+   * shapeを最前面に追加する。
+   * @param {xypic.Shape} shape 追加する図形
+   */
+  appendShapeToFront(shape) {
+    if (shape.isNone) {
+    } else if (this.shape.isNone) {
+      this.shape = shape;
+    } else {
+      this.shape = new Shape.CompositeShape(shape, this.shape);
+    }
+  }
+
+  /**
+   * shapeを最背面に追加する。
+   * @param {xypic.Shape} shape 追加する図形
+   */
+  appendShapeToBack(shape) {
+    if (shape.isNone) {
+    } else if (this.shape.isNone) {
+      this.shape = shape;
+    } else {
+      this.shape = new Shape.CompositeShape(this.shape, shape);
+    }
+  }
 }

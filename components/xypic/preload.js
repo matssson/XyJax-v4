@@ -15,21 +15,21 @@
  *  limitations under the License.
  */
 
-import {MathJax, combineDefaults} from '@mathjax/src/js/components/global.js';
+import { MathJax, combineDefaults } from "@mathjax/src/js/components/global.js";
 
 //
 //  Make sure all output directories are available, even if one or more isn't loaded
 //
-combineDefaults(MathJax._, 'output', {
+combineDefaults(MathJax._, "output", {
   common: {
-    Wrapper: {}
+    Wrapper: {},
   },
   chtml: {
     Wrapper: {},
-    Wrappers_ts: {}
+    Wrappers_ts: {},
   },
   svg: {
     Wrapper: {},
-    Wrappers_ts: {}
-  }
+    Wrappers_ts: {},
+  },
 });

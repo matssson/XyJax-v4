@@ -15,52 +15,54 @@
  *  limitations under the License.
  */
 
-
-import {XypicConstants} from "./XypicConstants.js";
-
+import { XypicConstants } from "./XypicConstants.js";
 
 export const XypicUtil = {
-	extProd: function (v1, v2) {
-		return [v1[1]*v2[2]-v1[2]*v2[1], v1[2]*v2[0]-v1[0]*v2[2], v1[0]*v2[1]-v1[1]*v2[0]];
-	},
+  extProd: function (v1, v2) {
+    return [
+      v1[1] * v2[2] - v1[2] * v2[1],
+      v1[2] * v2[0] - v1[0] * v2[2],
+      v1[0] * v2[1] - v1[1] * v2[0],
+    ];
+  },
 
-	sign: function (x) {
-		return (x < 0? -1 : (x > 0? 1 : 0));
-	},
+  sign: function (x) {
+    return x < 0 ? -1 : x > 0 ? 1 : 0;
+  },
 
-	sign2: function (x) {
-		return (x < 0? -1 : 1);
-	},
+  sign2: function (x) {
+    return x < 0 ? -1 : 1;
+  },
 
-	roundEpsilon: function (x) {
-		if (Math.abs(x) < XypicConstants.machinePrecision) {
-			return 0;
-		} else {
-			return x;
-		}
-	},
+  roundEpsilon: function (x) {
+    if (Math.abs(x) < XypicConstants.machinePrecision) {
+      return 0;
+    } else {
+      return x;
+    }
+  },
 
-	memoize: function (object, funcName) {
-		var func = object[funcName];
-		var memo = function () {
-			var value = func.call(this);
-			var constFunc = function () {
-				return value;
-			}
+  memoize: function (object, funcName) {
+    var func = object[funcName];
+    var memo = function () {
+      var value = func.call(this);
+      var constFunc = function () {
+        return value;
+      };
 
-			constFunc.reset = reset;
-			object[funcName] = constFunc;
-			return value;
-		}
+      constFunc.reset = reset;
+      object[funcName] = constFunc;
+      return value;
+    };
 
-		var reset = function () {
-			object[funcName] = memo;
-		}
-		memo.reset = reset;
-		reset();
-	},
+    var reset = function () {
+      object[funcName] = memo;
+    };
+    memo.reset = reset;
+    reset();
+  },
 
-	round2: function (x) {
-		return Math.round(x * 100) / 100;
-	}
-}
+  round2: function (x) {
+    return Math.round(x * 100) / 100;
+  },
+};

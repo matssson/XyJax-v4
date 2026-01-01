@@ -15,68 +15,65 @@
  *  limitations under the License.
  */
 
-
-import {List} from "./List.js";
-
+import { List } from "./List.js";
 
 export class Range {
-	constructor(start, end) {
-		if (start > end) {
-			this.start = end;
-			this.end = start;
-		} else {
-			this.start = start;
-			this.end = end;
-		}
-	}
+  constructor(start, end) {
+    if (start > end) {
+      this.start = end;
+      this.end = start;
+    } else {
+      this.start = start;
+      this.end = end;
+    }
+  }
 
-	/**
-	 * returns difference ranges between this range and a given range: this range \ a given range.
-	 */
-	difference(range) {
-		var diff = List.empty;
-		var a0 = this.start;
-		var a1 = this.end;
-		var b0 = range.start;
-		var b1 = range.end;
-		if (a1 <= b0) {
-			// a0 < a1 <= b0 < b1
-			diff = diff.prepend(this);
-		} else if (b1 <= a0) {
-			// b0 < b1 <= a0 < a1
-			diff = diff.prepend(this);
-		} else if (a0 < b0) {
-			if (a1 <= b1) {
-				// a0 < b0 <= a1 <= b1
-				diff = diff.prepend(new Range(a0, b0));
-			} else {
-				// a0 < b0 < b1 < a1
-				diff = diff.prepend(new Range(a0, b0));
-				diff = diff.prepend(new Range(b1, a1));
-			}
-		} else /* if (b0 <= a0) */ {
-			if (b1 < a1) {
-				// b0 <= a0 <= b1 < a1
-				diff = diff.prepend(new Range(b1, a1));
-			} /* else {
+  /**
+   * returns difference ranges between this range and a given range: this range \ a given range.
+   */
+  difference(range) {
+    var diff = List.empty;
+    var a0 = this.start;
+    var a1 = this.end;
+    var b0 = range.start;
+    var b1 = range.end;
+    if (a1 <= b0) {
+      // a0 < a1 <= b0 < b1
+      diff = diff.prepend(this);
+    } else if (b1 <= a0) {
+      // b0 < b1 <= a0 < a1
+      diff = diff.prepend(this);
+    } else if (a0 < b0) {
+      if (a1 <= b1) {
+        // a0 < b0 <= a1 <= b1
+        diff = diff.prepend(new Range(a0, b0));
+      } else {
+        // a0 < b0 < b1 < a1
+        diff = diff.prepend(new Range(a0, b0));
+        diff = diff.prepend(new Range(b1, a1));
+      }
+    } else /* if (b0 <= a0) */ {
+      if (b1 < a1) {
+        // b0 <= a0 <= b1 < a1
+        diff = diff.prepend(new Range(b1, a1));
+      } /* else {
 				// b0 <= a0 < a1 <= b1
 			} */
-		}
-		return diff;
-	}
+    }
+    return diff;
+  }
 
-	differenceRanges(ranges) {
-		var result = List.empty.prepend(this);
-		ranges.foreach(function (range) {
-			result = result.flatMap(function (remaining) {
-				return remaining.difference(range);
-			});
-		});
-		return result;
-	}
+  differenceRanges(ranges) {
+    var result = List.empty.prepend(this);
+    ranges.foreach(function (range) {
+      result = result.flatMap(function (remaining) {
+        return remaining.difference(range);
+      });
+    });
+    return result;
+  }
 
-	toString() {
-		return "[" + this.start + ", " + this.end + "]";
-	}
+  toString() {
+    return "[" + this.start + ", " + this.end + "]";
+  }
 }
-

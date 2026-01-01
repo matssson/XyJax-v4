@@ -15,10 +15,9 @@
  *  limitations under the License.
  */
 
-
 export const XypicConstants = {
-	whiteSpaceRegex: /^(\s+|%[^\r\n]*(\r\n|\r|\n)?)+/,
-	lengthResolution: 128,
-	interpolationResolution: 5,
-	machinePrecision: 1e-12
-}
+  whiteSpaceRegex: /^(\s+|%[^\r\n]*(\r\n|\r|\n)?)+/,
+  lengthResolution: 128,
+  interpolationResolution: 5,
+  machinePrecision: 1e-12,
+};

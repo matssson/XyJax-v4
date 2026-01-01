@@ -1,43 +1,41 @@
-<!DOCTYPE html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width">
-  <title>XyJax v3 Sample Page (CDN)</title>
-  <script>
-  MathJax = {
-    loader: {
-      load: ['[xypic]'],
-      paths: {xypic: 'https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/xypic'}
-    },
-    tex: {
-      packages: {'[+]': ['xypic']}
-    }
-  };
-  </script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full.js"></script>
-  <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg-full.js"></script> -->
-</head>
-<body>
-
-<blockquote>
-
-<h1>XyJax version 3 Sample Page (CDN)</h1>
-<hr>
-<p>
-
-\[
-\begin{xy}
-\xymatrix {
-U \ar@/_/[ddr]_y \ar@{.>}[dr]|{\langle x,y \rangle} \ar@/^/[drr]^x \\
- & X \times_Z Y \ar[d]^q \ar[r]_p & X \ar[d]_f \\
- & Y \ar[r]^g & Z
-}
-\end{xy}
-\]
-
-</p>
-<hr>
-</blockquote>
-
-</body>
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width" />
+    <title>XyJax v3 Sample Page (CDN)</title>
+    <script>
+      MathJax = {
+        loader: {
+          load: ["[xypic]"],
+          paths: {
+            xypic:
+              "https://cdn.jsdelivr.net/gh/sonoisa/XyJax-v3@3.0.1/build/xypic",
+          },
+        },
+        tex: {
+          packages: { "[+]": ["xypic"] },
+        },
+      };
+    </script>
+    <script
+      id="MathJax-script"
+      async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full.js"
+    ></script>
+    <!-- <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg-full.js"></script> -->
+  </head>
+  <body>
+    <blockquote>
+      <h1>XyJax version 3 Sample Page (CDN)</h1>
+      <hr />
+      <p>
+        \[ \begin{xy} \xymatrix { U \ar@/_/[ddr]_y \ar@{.>}[dr]|{\langle x,y
+        \rangle} \ar@/^/[drr]^x \\ & X \times_Z Y \ar[d]^q \ar[r]_p & X \ar[d]_f
+        \\ & Y \ar[r]^g & Z } \end{xy} \]
+      </p>
+      <hr />
+    </blockquote>
+  </body>
+</html>

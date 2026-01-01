@@ -15,82 +15,81 @@
  *  limitations under the License.
  */
 
-
 export class Option {}
 
 class Some extends Option {
-	constructor(value) {
-		super();
-		this.get = value;
-	}
+  constructor(value) {
+    super();
+    this.get = value;
+  }
 
-	get isEmpty() {
-		return false;
-	}
+  get isEmpty() {
+    return false;
+  }
 
-	get isDefined() {
-		return true;
-	}
+  get isDefined() {
+    return true;
+  }
 
-	getOrElse(ignore) {
-		return this.get;
-	}
+  getOrElse(ignore) {
+    return this.get;
+  }
 
-	flatMap(k) {
-		return k(this.get);
-	}
+  flatMap(k) {
+    return k(this.get);
+  }
 
-	map(f) {
-		return new Some(f(this.get));
-	}
+  map(f) {
+    return new Some(f(this.get));
+  }
 
-	foreach(f) {
-		f(this.get);
-	}
+  foreach(f) {
+    f(this.get);
+  }
 
-	toString() {
-		return "Some(" + this.get + ")";
-	}
+  toString() {
+    return "Some(" + this.get + ")";
+  }
 
-	static unapply(x) {
-		return new Some(x.get);
-	}
+  static unapply(x) {
+    return new Some(x.get);
+  }
 }
 
 class None extends Option {
-	constructor() {
-		super();
-	}
+  constructor() {
+    super();
+  }
 
-	get isEmpty() {
-		return true;
-	}
+  get isEmpty() {
+    return true;
+  }
 
-	get isDefined() {
-		return false;
-	}
+  get isDefined() {
+    return false;
+  }
 
-	getOrElse(value) {
-		return value; 
-	}
+  getOrElse(value) {
+    return value;
+  }
 
-	flatMap(k) {
-		return this;
-	}
+  flatMap(k) {
+    return this;
+  }
 
-	foreach(f) {}
+  foreach(f) {}
 
-	map(k) {
-		return this; 
-	}
+  map(k) {
+    return this;
+  }
 
-	toString() {
-		return "None"; 
-	}
+  toString() {
+    return "None";
+  }
 
-	static unapply(x) {
-		return new Some(x);
-	}
+  static unapply(x) {
+    return new Some(x);
+  }
 }
 
 Option.Some = Some;

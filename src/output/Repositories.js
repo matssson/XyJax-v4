@@ -15,38 +15,36 @@
  *  limitations under the License.
  */
 
-
 export class DirRepository {
-	constructor() {
-		this.userDirMap = {};
-	}
+  constructor() {
+    this.userDirMap = {};
+  }
 
-	get(dirMain) {
-		return this.userDirMap[dirMain];
-	}
+  get(dirMain) {
+    return this.userDirMap[dirMain];
+  }
 
-	put(dirMain, compositeObject) {
-		this.userDirMap[dirMain] = compositeObject;
-	}
+  put(dirMain, compositeObject) {
+    this.userDirMap[dirMain] = compositeObject;
+  }
 }
 
-
 export class ModifierRepository {
-	constructor() {
-		this.userModifierMap = {};
-	}
+  constructor() {
+    this.userModifierMap = {};
+  }
 
-	get(shapeName) {
-		var modifier = ModifierRepository.embeddedModifierMap[shapeName];
-		if (modifier !== undefined) {
-			return modifier;
-		}
-		return this.userModifierMap[shapeName];
-	}
+  get(shapeName) {
+    var modifier = ModifierRepository.embeddedModifierMap[shapeName];
+    if (modifier !== undefined) {
+      return modifier;
+    }
+    return this.userModifierMap[shapeName];
+  }
 
-	put(shapeName, modifier) {
-		if (ModifierRepository.embeddedModifierMap[shapeName] === undefined) {
-			this.userModifierMap[shapeName] = modifier;
-		}
-	}
+  put(shapeName, modifier) {
+    if (ModifierRepository.embeddedModifierMap[shapeName] === undefined) {
+      this.userModifierMap[shapeName] = modifier;
+    }
+  }
 }

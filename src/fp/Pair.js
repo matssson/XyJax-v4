@@ -15,18 +15,17 @@
  *  limitations under the License.
  */
 
-
 export class Pair {
-	constructor(head, tail) {
-		this.head = head;
-		this.tail = tail;
-	}
+  constructor(head, tail) {
+    this.head = head;
+    this.tail = tail;
+  }
 
-	toString() {
-		return '(' + this.head + '~' + this.tail + ')';
-	}
+  toString() {
+    return "(" + this.head + "~" + this.tail + ")";
+  }
 
-	static unapply(x) {
-		return new Option.Some([x.head, x.tail]);
-	}
+  static unapply(x) {
+    return new Option.Some([x.head, x.tail]);
+  }
 }

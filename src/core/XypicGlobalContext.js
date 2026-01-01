@@ -15,15 +15,15 @@
  *  limitations under the License.
  */
 
-import {ModifierRepository, DirRepository} from "../output/Repositories.js";
+import { ModifierRepository, DirRepository } from "../output/Repositories.js";
 
 export const XypicGlobalContext = {
-    repositories: {
-        modifierRepository: new ModifierRepository(),
-        dirRepository: new DirRepository()
-    },
-    xypicCommandIdCounter: 0,
-    xypicCommandMap: {},
-    textObjectIdCounter: 0,
-    wrapperOfTextObjectMap: {}
-}
+  repositories: {
+    modifierRepository: new ModifierRepository(),
+    dirRepository: new DirRepository(),
+  },
+  xypicCommandIdCounter: 0,
+  xypicCommandMap: {},
+  textObjectIdCounter: 0,
+  wrapperOfTextObjectMap: {},
+};

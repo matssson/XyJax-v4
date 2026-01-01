@@ -17,8 +17,7 @@
 
 import TexError from "@mathjax/src/js/input/tex/TexError.js";
 
-
 export default function createXypicError(id, message) {
-    console.error(id, message);
-    return new TexError(id, message);
+  console.error(id, message);
+  return new TexError(id, message);
 }

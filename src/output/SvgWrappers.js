@@ -15,441 +15,494 @@
  *  limitations under the License.
  */
 
-
-import {SvgWrapper} from "@mathjax/src/js/output/svg/Wrapper.js";
-import {SvgWrappers} from "@mathjax/src/js/output/svg/Wrappers.js";
+import { SvgWrapper } from "@mathjax/src/js/output/svg/Wrapper.js";
+import { SvgWrappers } from "@mathjax/src/js/output/svg/Wrappers.js";
 
 import createXypicError from "../core/XypicError.js";
-import {BBox} from '@mathjax/src/js/util/BBox.js';
+import { BBox } from "@mathjax/src/js/util/BBox.js";
 
-import {XypicGlobalContext} from "../core/XypicGlobalContext.js";
-import {AST} from "../input/XyNodes.js";
-import {Shape} from "./Shapes.js";
-import {Frame} from "./Frames.js";
-import {Graphics} from "./Graphics.js";
-import {DrawingContext} from "./DrawingContext.js";
-import {Env} from "./Curves.js";
-import {XypicUtil} from "../util/XypicUtil.js";
+import { XypicGlobalContext } from "../core/XypicGlobalContext.js";
+import { AST } from "../input/XyNodes.js";
+import { Shape } from "./Shapes.js";
+import { Frame } from "./Frames.js";
+import { Graphics } from "./Graphics.js";
+import { DrawingContext } from "./DrawingContext.js";
+import { Env } from "./Curves.js";
+import { XypicUtil } from "../util/XypicUtil.js";
 
-
-const SVGNS = 'http://www.w3.org/2000/svg';
-const XLINKNS = 'http://www.w3.org/1999/xlink';
+const SVGNS = "http://www.w3.org/2000/svg";
+const XLINKNS = "http://www.w3.org/1999/xlink";
 
 const round2 = XypicUtil.round2;
 
 export function CreateSvgWrapper(wrapper, wrappers) {
-
-	class AbstractSvgXypic extends wrapper {
-		constructor(factory, node, parent=null) {
-			super(factory, node, parent);
-
-			const wrapperOfTextObjectMap = XypicGlobalContext.wrapperOfTextObjectMap;
-			const textMmls = node.textMmls;
-			const wrappers = this.childNodes;
-			const childCount = textMmls.length;
-			for (let i = 0; i < childCount; i++) {
-				const textObjectId = textMmls[i].xypicTextObjectId;
-				wrapperOfTextObjectMap[textObjectId] = wrappers[i];
-			}
-
-			// このxypicノードが内包するTextObjectのDOM
-			this._textObjects = [];
-		}
-
-		getElement() {
-			return this.svgNode;
-		}
-
-		appendTextObject(textObject) {
-			this._textObjects.push(textObject);
-		}
-
-		getChildWrapper(childMml) {
-			const textObjectId = childMml.xypicTextObjectId;
-			if (textObjectId == undefined) {
-				// 不到達コード
-				throw createXypicError("IllegalStateError", "BUG");
-			}
-			const wrapper = XypicGlobalContext.wrapperOfTextObjectMap[textObjectId];
-			if (wrapper == undefined) {
-				// 不到達コード
-				throw createXypicError("IllegalStateError", "unknown textObjectId:" + textObjectId);
-			}
-
-			return wrapper;
-		}
-
-		toSVG(parents) {
-			const oldSvgForDebug = XypicGlobalContext.svgForDebug;
-			const oldSvgForTestLayout = XypicGlobalContext.svgForTestLayout;
-
-			this._textObjects = [];
-			this.setupMeasure(this);
-
-			this._toSVG(parents);
-
-			XypicGlobalContext.svgForDebug = oldSvgForDebug;
-			XypicGlobalContext.svgForTestLayout = oldSvgForTestLayout;
-		}
-
-		setupMeasure(wrapper) {
-			const round2 = XypicUtil.round2;
-			const oneem = wrapper.length2em("1em");
-			const em = parseFloat(wrapper.px(100).replace("px", "")) / 100;
-			const axis_height = wrapper.font.params.axis_height;
-			const thickness = wrapper.length2em("0.15em");
-			const em2px = function (n) { return Math.round(parseFloat(wrapper.px(n * 100).replace("px", ""))) / 100; };
-
-			XypicGlobalContext.measure = {
-				length2em: function (len) { return round2(wrapper.length2em(len)); },
-				oneem: oneem,
-				em2length: function (len) { return round2(len / oneem) + "em"; },
-				Em: function (x) { return wrapper.em(x); },
-				em: em,
-				em2px: em2px,
-				axis_height: axis_height,
-				
-				strokeWidth: wrapper.length2em("0.04em"),
-				thickness: thickness,
-				jot: wrapper.length2em("3pt"),
-				objectmargin: wrapper.length2em("3pt"),
-				objectwidth: wrapper.length2em("0pt"),
-				objectheight: wrapper.length2em("0pt"),
-				labelmargin: wrapper.length2em("2.5pt"),
-				turnradius: wrapper.length2em("10pt"),
-				lineElementLength: wrapper.length2em("5pt"),
-				axisHeightLength: axis_height * wrapper.length2em("10pt"),
-				
-				dottedDasharray: "" + oneem + " " + em2px(thickness)
-			}
-		}
-
-		append(parent, child) {
-			this.adaptor.append(parent, child);
-		}
-
-		remove(child) {
-			this.adaptor.remove(child);
-		}
-
-		svg(kind, properties={}, children=[]) {
-			return this.adaptor.node(kind, properties, children, SVGNS);
-		}
-
-		setAttribute(node, name, value, ns) {
-			return this.adaptor.setAttribute(node, name, value, ns);
-		}
-
-		setStyle(node, name, value) {
-			this.adaptor.setStyle(node, name, value);
-		}
-
-		drawTextObject(textObject, svg, test) {
-			const p = XypicGlobalContext.measure.length2em("0.2em");
-			const parent = svg.xypicWrapper;
-			const textObjectWrapper = parent.getChildWrapper(textObject.math);
-			const adaptor = textObjectWrapper.adaptor;
-
-			const bbox = textObjectWrapper.getBBox();
-			const scale = bbox.scale;
-			const H = (bbox.h + p) * scale;
-			const D = (bbox.d + p) * scale;
-			const W = (bbox.w + 2 * p) * scale;
-
-			const halfHD = (H + D) / 2;
-			const halfW = W / 2;
-
-			const c = textObject.c;
-			textObject.originalBBox = { H:H, D:D, W:W };
-
-			if (!test) {
-				const thisRoot = textObjectWrapper.svg("g");
-				adaptor.append(parent.getElement(), thisRoot);
-
-				adaptor.setAttribute(thisRoot, "stroke", svg.getCurrentColor());
-				adaptor.setAttribute(thisRoot, "fill", svg.getCurrentColor());
-				textObjectWrapper.toSVG([thisRoot]);
-
-				const origin = svg.getOrigin();
-				adaptor.setAttribute(thisRoot, "data-x", (c.x - halfW - origin.x + p * scale));
-				adaptor.setAttribute(thisRoot, "data-y", (-c.y + ((H - D) / 2) - origin.y));
-				adaptor.setAttribute(thisRoot, "data-xypic-id", textObject.math.xypicTextObjectId);
-				parent.appendTextObject(thisRoot);
-
-				// for DEBUGGING
-				// svg.createSvgElement("rect", {
-				// 	x: XypicGlobalContext.measure.em2px(c.x - halfW),
-				// 	y: -XypicGlobalContext.measure.em2px(c.y - (H - D) / 2),
-				// 	width: XypicGlobalContext.measure.em2px(W),
-				// 	height: 0.01,
-				// 	stroke: "green", "stroke-width": 0.3
-				// });
-				// svg.createSvgElement("rect", {
-				// 	x: XypicGlobalContext.measure.em2px(c.x - halfW),
-				// 	y: -XypicGlobalContext.measure.em2px(c.y + halfHD),
-				// 	width: XypicGlobalContext.measure.em2px(W),
-				// 	height: XypicGlobalContext.measure.em2px(H + D),
-				// 	stroke: "green", "stroke-width":0.5
-				// });
-			}
-
-			return c.toRect({ u:halfHD, d:halfHD, l:halfW, r:halfW });
-		}
-	}
-
-
-
-	class SvgXypic extends AbstractSvgXypic {
-		constructor(factory, node, parent=null) {
-			super(factory, node, parent);
-			this.shape = null;
-		}
-
-		computeBBox(bbox, recompute=false) {
-			bbox.empty();
-
-			const xypicData = this.node.cmd;
-			if (xypicData) {
-				const p = this.length2em("0.2em");
-
-				if (this.shape == null) {
-					const oldSvgForDebug = XypicGlobalContext.svgForDebug;
-					const oldSvgForTestLayout = XypicGlobalContext.svgForTestLayout;
-					this._textObjects = [];
-					this.setupMeasure(this);
-		
-					const adaptor = this.adaptor;
-		
-					const t = XypicGlobalContext.measure.strokeWidth;
-		
-					const H = 1, D = 0, W = 1;
-		
-					const em2px = XypicGlobalContext.measure.em2px;
-		
-					const color = "black";
-					const svg = Graphics.createSvg(this, H, D, W, t, color, {
-						viewBox: [0, -em2px(H + D), em2px(W), em2px(H + D)].join(" "),
-						role: "img", 
-						focusable: false,
-						overflow: "visible"
-					});
-		
-					XypicGlobalContext.svgForDebug = svg;
-					XypicGlobalContext.svgForTestLayout = svg;
-		
-					const env = new Env();
-					const context = new DrawingContext(Shape.none, env);
-					xypicData.toShape(context);
-					const shape = context.shape;
-					this.shape = shape;
-
-					XypicGlobalContext.svgForDebug = oldSvgForDebug;
-					XypicGlobalContext.svgForTestLayout = oldSvgForTestLayout;
-				}
-
-				const shape = this.shape;
-				let box = shape.getBoundingBox();
-				
-				if (box !== undefined) {
-					box = new Frame.Rect(
-						0, 0,
-						{
-							l: Math.max(0, -(box.x - box.l)),
-							r: Math.max(0, box.x + box.r),
-							u: Math.max(0, box.y + box.u),
-							d: Math.max(0, -(box.y - box.d))
-						}
-					);
-					bbox.updateFrom(new BBox({ w: box.l + box.r + 2 * p, h: box.u + 2 * p, d: box.d }));
-				}
-			}
-		}
-
-		get kind() {
-			return AST.xypic.prototype.kind;
-		}
-
-		static get styles() {
-			return {
-				'g[data-mml-node="xypic"] path': {
-					"stroke-width": "inherit"
-				},
-				'.MathJax g[data-mml-node="xypic"] path': {
-					"stroke-width": "inherit"
-				}
-			};
-		}
-
-		_toSVG(parents) {
-			const svgNode = this.standardSvgNodes(parents)[0];
-			this.svgNode = svgNode;
-			const adaptor = this.adaptor;
-
-			const p = this.length2em("0.2em");
-			const t = XypicGlobalContext.measure.strokeWidth;
-
-			const bbox = { h:1, d:0, w:1, lw:0, rw:1 };
-			const H = bbox.h, D = bbox.d, W = bbox.w;
-
-			const em2px = XypicGlobalContext.measure.em2px;
-
-			const color = "black";
-			const svg = Graphics.createSvg(this, H, D, W, t, color, {
-				viewBox: [0, -em2px(H + D), em2px(W), em2px(H + D)].join(" "),
-				role: "img", 
-				focusable: false,
-				overflow: "visible"
-			});
-
-			XypicGlobalContext.svgForDebug = svg;
-			XypicGlobalContext.svgForTestLayout = svg;
-
-			adaptor.append(svgNode, svg.drawArea);
-
-			const xypicData = this.node.cmd;
-			if (xypicData) {
-				if (this.shape == null) {
-					const env = new Env();
-					const context = new DrawingContext(Shape.none, env);
-					xypicData.toShape(context);
-					const shape = context.shape;
-					this.shape = shape;
-				}
-
-				const shape = this.shape;
-				shape.draw(svg);
-				let box = shape.getBoundingBox();
-				
-				if (box !== undefined) {
-					box = new Frame.Rect(
-						0, 0,
-						{
-							l: Math.max(0, -(box.x - box.l)),
-							r: Math.max(0, box.x + box.r),
-							u: Math.max(0, box.y + box.u),
-							d: Math.max(0, -(box.y - box.d))
-						}
-					);
-
-					const xOffsetEm = box.x - box.l - p;
-					const yOffsetEm = -box.y - box.u - p;
-
-					const svgWidth = box.l + box.r + 2 * p;
-					const svgHeight = box.u + box.d + 2 * p;
-					
-					svg.setWidth(svgWidth);
-					svg.setHeight(svgHeight);
-					svg.setAttribute("viewBox", [
-							em2px(xOffsetEm), em2px(yOffsetEm), 
-							em2px(svgWidth), em2px(svgHeight)
-						].join(" "));
-
-					// for DEBUGGING
-					// this.drawBBox();
-
-					const fixedScale = this.fixed(1) / em2px(1);
-					adaptor.setAttribute(svg.drawArea, "transform", "translate(" + this.fixed(-xOffsetEm) + "," + this.fixed(box.y + XypicGlobalContext.measure.axis_height) + ") scale(" + fixedScale + ", " + (-fixedScale) + ")");
-
-					for (let to of this._textObjects) {
-						const tx = parseFloat(adaptor.getAttribute(to, "data-x"));
-						const ty = parseFloat(adaptor.getAttribute(to, "data-y"));
-						const translateX = tx - xOffsetEm;
-						const translateY = -ty + box.y + XypicGlobalContext.measure.axis_height;
-						this.place(translateX, translateY, to);
-					}
-				} else {
-					// there is no contents
-					adaptor.remove(svg.drawArea);
-				}
-			} else {
-				// there is no contents
-				adaptor.remove(svg.drawArea);
-			}
-		}
-	}
-
-	wrappers[SvgXypic.prototype.kind] = SvgXypic;
-
-
-	class SvgNewDir extends AbstractSvgXypic {
-		constructor(factory, node, parent=null) {
-			super(factory, node, parent);
-		}
-
-		get kind() {
-			return AST.xypic.newdir.prototype.kind;
-		}
-
-		computeBBox(bbox, recompute=false) {
-			let newdir = this.node.cmd;
-			XypicGlobalContext.repositories.dirRepository.put(newdir.dirMain, newdir.compositeObject);
-		}
-
-		_toSVG(parents) {
-			let newdir = this.node.cmd;
-			XypicGlobalContext.repositories.dirRepository.put(newdir.dirMain, newdir.compositeObject);
-		}
-	}
-
-	wrappers[SvgNewDir.prototype.kind] = SvgNewDir;
-
-
-	class SvgIncludeGraphics extends AbstractSvgXypic {
-		constructor(factory, node, parent=null) {
-			super(factory, node, parent);
-			this._setupGraphics();
-			this.computeBBox(this.bbox);
-			this.bboxComputed = true;
-		}
-
-		get kind() {
-			return AST.xypic.includegraphics.prototype.kind;
-		}
-
-		_setupGraphics() {
-			this.setupMeasure(this);
-			const env = new Env();
-			const context = new DrawingContext(Shape.none, env);
-
-			const graphics = this.node.cmd;
-			graphics.setup(context);
-			if (!env.includegraphicsWidth.isDefined || !env.includegraphicsHeight.isDefined) {
-				throw createXypicError("ExecutionError", "the 'width' and 'height' attributes of the \\includegraphics are required.");
-			}
-
-			const imageWidth = env.includegraphicsWidth.get;
-			const imageHeight = env.includegraphicsHeight.get;
-			
-			this.imageWidth = this.length2em(imageWidth);
-			this.imageHeight = this.length2em(imageHeight);
-			this.filepath = graphics.filepath;
-		}
-
-		computeBBox(bbox, recompute=false) {
-			bbox.empty();
-			bbox.updateFrom(new BBox({ w: this.imageWidth, h: this.imageHeight, d: 0 }));
-		}
-
-		_toSVG(parents) {
-			const svgNode = this.standardSvgNodes(parents)[0];
-			this.svgNode = svgNode;
-			const fixedScale = this.fixed(1);
-			const img = this.svg("image", {
-				"x": "0",
-				"y": "0",
-				"preserveAspectRatio": "none",
-				"width": round2(this.imageWidth),
-				"height": round2(this.imageHeight),
-				"transform": "scale(" + fixedScale + "," + (-fixedScale) + ") translate(0," + round2(-this.imageHeight) + ")"
-			});
-			this.adaptor.setAttribute(img, "xlink:href", this.filepath, XLINKNS);
-			this.adaptor.append(svgNode, img);
-		}
-	}
-
-	wrappers[SvgIncludeGraphics.prototype.kind] = SvgIncludeGraphics;
+  class AbstractSvgXypic extends wrapper {
+    constructor(factory, node, parent = null) {
+      super(factory, node, parent);
+
+      const wrapperOfTextObjectMap = XypicGlobalContext.wrapperOfTextObjectMap;
+      const textMmls = node.textMmls;
+      const wrappers = this.childNodes;
+      const childCount = textMmls.length;
+      for (let i = 0; i < childCount; i++) {
+        const textObjectId = textMmls[i].xypicTextObjectId;
+        wrapperOfTextObjectMap[textObjectId] = wrappers[i];
+      }
+
+      // このxypicノードが内包するTextObjectのDOM
+      this._textObjects = [];
+    }
+
+    getElement() {
+      return this.svgNode;
+    }
+
+    appendTextObject(textObject) {
+      this._textObjects.push(textObject);
+    }
+
+    getChildWrapper(childMml) {
+      const textObjectId = childMml.xypicTextObjectId;
+      if (textObjectId == undefined) {
+        // 不到達コード
+        throw createXypicError("IllegalStateError", "BUG");
+      }
+      const wrapper = XypicGlobalContext.wrapperOfTextObjectMap[textObjectId];
+      if (wrapper == undefined) {
+        // 不到達コード
+        throw createXypicError(
+          "IllegalStateError",
+          "unknown textObjectId:" + textObjectId,
+        );
+      }
+
+      return wrapper;
+    }
+
+    toSVG(parents) {
+      const oldSvgForDebug = XypicGlobalContext.svgForDebug;
+      const oldSvgForTestLayout = XypicGlobalContext.svgForTestLayout;
+
+      this._textObjects = [];
+      this.setupMeasure(this);
+
+      this._toSVG(parents);
+
+      XypicGlobalContext.svgForDebug = oldSvgForDebug;
+      XypicGlobalContext.svgForTestLayout = oldSvgForTestLayout;
+    }
+
+    setupMeasure(wrapper) {
+      const round2 = XypicUtil.round2;
+      const oneem = wrapper.length2em("1em");
+      const em = parseFloat(wrapper.px(100).replace("px", "")) / 100;
+      const axis_height = wrapper.font.params.axis_height;
+      const thickness = wrapper.length2em("0.15em");
+      const em2px = function (n) {
+        return (
+          Math.round(parseFloat(wrapper.px(n * 100).replace("px", ""))) / 100
+        );
+      };
+
+      XypicGlobalContext.measure = {
+        length2em: function (len) {
+          return round2(wrapper.length2em(len));
+        },
+        oneem: oneem,
+        em2length: function (len) {
+          return round2(len / oneem) + "em";
+        },
+        Em: function (x) {
+          return wrapper.em(x);
+        },
+        em: em,
+        em2px: em2px,
+        axis_height: axis_height,
+
+        strokeWidth: wrapper.length2em("0.04em"),
+        thickness: thickness,
+        jot: wrapper.length2em("3pt"),
+        objectmargin: wrapper.length2em("3pt"),
+        objectwidth: wrapper.length2em("0pt"),
+        objectheight: wrapper.length2em("0pt"),
+        labelmargin: wrapper.length2em("2.5pt"),
+        turnradius: wrapper.length2em("10pt"),
+        lineElementLength: wrapper.length2em("5pt"),
+        axisHeightLength: axis_height * wrapper.length2em("10pt"),
+
+        dottedDasharray: "" + oneem + " " + em2px(thickness),
+      };
+    }
+
+    append(parent, child) {
+      this.adaptor.append(parent, child);
+    }
+
+    remove(child) {
+      this.adaptor.remove(child);
+    }
+
+    svg(kind, properties = {}, children = []) {
+      return this.adaptor.node(kind, properties, children, SVGNS);
+    }
+
+    setAttribute(node, name, value, ns) {
+      return this.adaptor.setAttribute(node, name, value, ns);
+    }
+
+    setStyle(node, name, value) {
+      this.adaptor.setStyle(node, name, value);
+    }
+
+    drawTextObject(textObject, svg, test) {
+      const p = XypicGlobalContext.measure.length2em("0.2em");
+      const parent = svg.xypicWrapper;
+      const textObjectWrapper = parent.getChildWrapper(textObject.math);
+      const adaptor = textObjectWrapper.adaptor;
+
+      const bbox = textObjectWrapper.getBBox();
+      const scale = bbox.scale;
+      const H = (bbox.h + p) * scale;
+      const D = (bbox.d + p) * scale;
+      const W = (bbox.w + 2 * p) * scale;
+
+      const halfHD = (H + D) / 2;
+      const halfW = W / 2;
+
+      const c = textObject.c;
+      textObject.originalBBox = { H: H, D: D, W: W };
+
+      if (!test) {
+        const thisRoot = textObjectWrapper.svg("g");
+        adaptor.append(parent.getElement(), thisRoot);
+
+        adaptor.setAttribute(thisRoot, "stroke", svg.getCurrentColor());
+        adaptor.setAttribute(thisRoot, "fill", svg.getCurrentColor());
+        textObjectWrapper.toSVG([thisRoot]);
+
+        const origin = svg.getOrigin();
+        adaptor.setAttribute(
+          thisRoot,
+          "data-x",
+          c.x - halfW - origin.x + p * scale,
+        );
+        adaptor.setAttribute(thisRoot, "data-y", -c.y + (H - D) / 2 - origin.y);
+        adaptor.setAttribute(
+          thisRoot,
+          "data-xypic-id",
+          textObject.math.xypicTextObjectId,
+        );
+        parent.appendTextObject(thisRoot);
+
+        // for DEBUGGING
+        // svg.createSvgElement("rect", {
+        // 	x: XypicGlobalContext.measure.em2px(c.x - halfW),
+        // 	y: -XypicGlobalContext.measure.em2px(c.y - (H - D) / 2),
+        // 	width: XypicGlobalContext.measure.em2px(W),
+        // 	height: 0.01,
+        // 	stroke: "green", "stroke-width": 0.3
+        // });
+        // svg.createSvgElement("rect", {
+        // 	x: XypicGlobalContext.measure.em2px(c.x - halfW),
+        // 	y: -XypicGlobalContext.measure.em2px(c.y + halfHD),
+        // 	width: XypicGlobalContext.measure.em2px(W),
+        // 	height: XypicGlobalContext.measure.em2px(H + D),
+        // 	stroke: "green", "stroke-width":0.5
+        // });
+      }
+
+      return c.toRect({ u: halfHD, d: halfHD, l: halfW, r: halfW });
+    }
+  }
+
+  class SvgXypic extends AbstractSvgXypic {
+    constructor(factory, node, parent = null) {
+      super(factory, node, parent);
+      this.shape = null;
+    }
+
+    computeBBox(bbox, recompute = false) {
+      bbox.empty();
+
+      const xypicData = this.node.cmd;
+      if (xypicData) {
+        const p = this.length2em("0.2em");
+
+        if (this.shape == null) {
+          const oldSvgForDebug = XypicGlobalContext.svgForDebug;
+          const oldSvgForTestLayout = XypicGlobalContext.svgForTestLayout;
+          this._textObjects = [];
+          this.setupMeasure(this);
+
+          const adaptor = this.adaptor;
+
+          const t = XypicGlobalContext.measure.strokeWidth;
+
+          const H = 1,
+            D = 0,
+            W = 1;
+
+          const em2px = XypicGlobalContext.measure.em2px;
+
+          const color = "black";
+          const svg = Graphics.createSvg(this, H, D, W, t, color, {
+            viewBox: [0, -em2px(H + D), em2px(W), em2px(H + D)].join(" "),
+            role: "img",
+            focusable: false,
+            overflow: "visible",
+          });
+
+          XypicGlobalContext.svgForDebug = svg;
+          XypicGlobalContext.svgForTestLayout = svg;
+
+          const env = new Env();
+          const context = new DrawingContext(Shape.none, env);
+          xypicData.toShape(context);
+          const shape = context.shape;
+          this.shape = shape;
+
+          XypicGlobalContext.svgForDebug = oldSvgForDebug;
+          XypicGlobalContext.svgForTestLayout = oldSvgForTestLayout;
+        }
+
+        const shape = this.shape;
+        let box = shape.getBoundingBox();
+
+        if (box !== undefined) {
+          box = new Frame.Rect(0, 0, {
+            l: Math.max(0, -(box.x - box.l)),
+            r: Math.max(0, box.x + box.r),
+            u: Math.max(0, box.y + box.u),
+            d: Math.max(0, -(box.y - box.d)),
+          });
+          bbox.updateFrom(
+            new BBox({ w: box.l + box.r + 2 * p, h: box.u + 2 * p, d: box.d }),
+          );
+        }
+      }
+    }
+
+    get kind() {
+      return AST.xypic.prototype.kind;
+    }
+
+    static get styles() {
+      return {
+        'g[data-mml-node="xypic"] path': {
+          "stroke-width": "inherit",
+        },
+        '.MathJax g[data-mml-node="xypic"] path': {
+          "stroke-width": "inherit",
+        },
+      };
+    }
+
+    _toSVG(parents) {
+      const svgNode = this.standardSvgNodes(parents)[0];
+      this.svgNode = svgNode;
+      const adaptor = this.adaptor;
+
+      const p = this.length2em("0.2em");
+      const t = XypicGlobalContext.measure.strokeWidth;
+
+      const bbox = { h: 1, d: 0, w: 1, lw: 0, rw: 1 };
+      const H = bbox.h,
+        D = bbox.d,
+        W = bbox.w;
+
+      const em2px = XypicGlobalContext.measure.em2px;
+
+      const color = "black";
+      const svg = Graphics.createSvg(this, H, D, W, t, color, {
+        viewBox: [0, -em2px(H + D), em2px(W), em2px(H + D)].join(" "),
+        role: "img",
+        focusable: false,
+        overflow: "visible",
+      });
+
+      XypicGlobalContext.svgForDebug = svg;
+      XypicGlobalContext.svgForTestLayout = svg;
+
+      adaptor.append(svgNode, svg.drawArea);
+
+      const xypicData = this.node.cmd;
+      if (xypicData) {
+        if (this.shape == null) {
+          const env = new Env();
+          const context = new DrawingContext(Shape.none, env);
+          xypicData.toShape(context);
+          const shape = context.shape;
+          this.shape = shape;
+        }
+
+        const shape = this.shape;
+        shape.draw(svg);
+        let box = shape.getBoundingBox();
+
+        if (box !== undefined) {
+          box = new Frame.Rect(0, 0, {
+            l: Math.max(0, -(box.x - box.l)),
+            r: Math.max(0, box.x + box.r),
+            u: Math.max(0, box.y + box.u),
+            d: Math.max(0, -(box.y - box.d)),
+          });
+
+          const xOffsetEm = box.x - box.l - p;
+          const yOffsetEm = -box.y - box.u - p;
+
+          const svgWidth = box.l + box.r + 2 * p;
+          const svgHeight = box.u + box.d + 2 * p;
+
+          svg.setWidth(svgWidth);
+          svg.setHeight(svgHeight);
+          svg.setAttribute(
+            "viewBox",
+            [
+              em2px(xOffsetEm),
+              em2px(yOffsetEm),
+              em2px(svgWidth),
+              em2px(svgHeight),
+            ].join(" "),
+          );
+
+          // for DEBUGGING
+          // this.drawBBox();
+
+          const fixedScale = this.fixed(1) / em2px(1);
+          adaptor.setAttribute(
+            svg.drawArea,
+            "transform",
+            "translate(" +
+              this.fixed(-xOffsetEm) +
+              "," +
+              this.fixed(box.y + XypicGlobalContext.measure.axis_height) +
+              ") scale(" +
+              fixedScale +
+              ", " +
+              -fixedScale +
+              ")",
+          );
+
+          for (let to of this._textObjects) {
+            const tx = parseFloat(adaptor.getAttribute(to, "data-x"));
+            const ty = parseFloat(adaptor.getAttribute(to, "data-y"));
+            const translateX = tx - xOffsetEm;
+            const translateY =
+              -ty + box.y + XypicGlobalContext.measure.axis_height;
+            this.place(translateX, translateY, to);
+          }
+        } else {
+          // there is no contents
+          adaptor.remove(svg.drawArea);
+        }
+      } else {
+        // there is no contents
+        adaptor.remove(svg.drawArea);
+      }
+    }
+  }
+
+  wrappers[SvgXypic.prototype.kind] = SvgXypic;
+
+  class SvgNewDir extends AbstractSvgXypic {
+    constructor(factory, node, parent = null) {
+      super(factory, node, parent);
+    }
+
+    get kind() {
+      return AST.xypic.newdir.prototype.kind;
+    }
+
+    computeBBox(bbox, recompute = false) {
+      let newdir = this.node.cmd;
+      XypicGlobalContext.repositories.dirRepository.put(
+        newdir.dirMain,
+        newdir.compositeObject,
+      );
+    }
+
+    _toSVG(parents) {
+      let newdir = this.node.cmd;
+      XypicGlobalContext.repositories.dirRepository.put(
+        newdir.dirMain,
+        newdir.compositeObject,
+      );
+    }
+  }
+
+  wrappers[SvgNewDir.prototype.kind] = SvgNewDir;
+
+  class SvgIncludeGraphics extends AbstractSvgXypic {
+    constructor(factory, node, parent = null) {
+      super(factory, node, parent);
+      this._setupGraphics();
+      this.computeBBox(this.bbox);
+      this.bboxComputed = true;
+    }
+
+    get kind() {
+      return AST.xypic.includegraphics.prototype.kind;
+    }
+
+    _setupGraphics() {
+      this.setupMeasure(this);
+      const env = new Env();
+      const context = new DrawingContext(Shape.none, env);
+
+      const graphics = this.node.cmd;
+      graphics.setup(context);
+      if (
+        !env.includegraphicsWidth.isDefined ||
+        !env.includegraphicsHeight.isDefined
+      ) {
+        throw createXypicError(
+          "ExecutionError",
+          "the 'width' and 'height' attributes of the \\includegraphics are required.",
+        );
+      }
+
+      const imageWidth = env.includegraphicsWidth.get;
+      const imageHeight = env.includegraphicsHeight.get;
+
+      this.imageWidth = this.length2em(imageWidth);
+      this.imageHeight = this.length2em(imageHeight);
+      this.filepath = graphics.filepath;
+    }
+
+    computeBBox(bbox, recompute = false) {
+      bbox.empty();
+      bbox.updateFrom(
+        new BBox({ w: this.imageWidth, h: this.imageHeight, d: 0 }),
+      );
+    }
+
+    _toSVG(parents) {
+      const svgNode = this.standardSvgNodes(parents)[0];
+      this.svgNode = svgNode;
+      const fixedScale = this.fixed(1);
+      const img = this.svg("image", {
+        x: "0",
+        y: "0",
+        preserveAspectRatio: "none",
+        width: round2(this.imageWidth),
+        height: round2(this.imageHeight),
+        transform:
+          "scale(" +
+          fixedScale +
+          "," +
+          -fixedScale +
+          ") translate(0," +
+          round2(-this.imageHeight) +
+          ")",
+      });
+      this.adaptor.setAttribute(img, "xlink:href", this.filepath, XLINKNS);
+      this.adaptor.append(svgNode, img);
+    }
+  }
+
+  wrappers[SvgIncludeGraphics.prototype.kind] = SvgIncludeGraphics;
 }
 
 if (SvgWrapper !== undefined) {
-	CreateSvgWrapper(SvgWrapper, SvgWrappers);
+  CreateSvgWrapper(SvgWrapper, SvgWrappers);
 }

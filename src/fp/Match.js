@@ -15,50 +15,48 @@
  *  limitations under the License.
  */
 
-
 export class Matcher {
-	constructor() {
-		this.cases = [];
-	}
+  constructor() {
+    this.cases = [];
+  }
 
-	Case(klass, f) {
-		this.cases.push([klass, f]);
-		return this;
-	}
+  Case(klass, f) {
+    this.cases.push([klass, f]);
+    return this;
+  }
 
-	match(x) {
-		var i, count, klass, op;
-		i = 0;
-		count = this.cases.length;
-		while (i < count) {
-			klass = this.cases[i][0];
-			if (x instanceof klass) {
-				op = klass.unapply(x);
-				if (op.isDefined) {
-					return this.cases[i][1](op.get);
-				}
-			}
-			i = i + 1;
-		}
-		throw new MatchError(x);
-	}
+  match(x) {
+    var i, count, klass, op;
+    i = 0;
+    count = this.cases.length;
+    while (i < count) {
+      klass = this.cases[i][0];
+      if (x instanceof klass) {
+        op = klass.unapply(x);
+        if (op.isDefined) {
+          return this.cases[i][1](op.get);
+        }
+      }
+      i = i + 1;
+    }
+    throw new MatchError(x);
+  }
 }
 
-
 export class MatchError {
-	constructor (obj) {
-		this.obj = obj;
-	}
+  constructor(obj) {
+    this.obj = obj;
+  }
 
-//	getMessage() {
-//		if (this.obj === null) {
-//			return "null"
-//		} else {
-//			return obj.toString() + " (of class " + obj. + ")"
-//		}
-//	}
+  //	getMessage() {
+  //		if (this.obj === null) {
+  //			return "null"
+  //		} else {
+  //			return obj.toString() + " (of class " + obj. + ")"
+  //		}
+  //	}
 
-	toString() {
-		return "MatchError(" + this.obj + ")";
-	}
+  toString() {
+    return "MatchError(" + this.obj + ")";
+  }
 }

@@ -15,78 +15,81 @@
  *  limitations under the License.
  */
 
-
-export class Saving {};
+export class Saving {}
 
 Saving.Position = class Saving_Position {
-	constructor(pos) {
-		this.pos = pos;
-	}
+  constructor(pos) {
+    this.pos = pos;
+  }
 
-	position(context) {
-		return this.pos;
-	}
+  position(context) {
+    return this.pos;
+  }
 
-	toString() {
-		return this.pos.toString();
-	}
-}
-
+  toString() {
+    return this.pos.toString();
+  }
+};
 
 Saving.Macro = class Saving_Macro {
-	constructor(macro) {
-		this.macro = macro;
-	}
+  constructor(macro) {
+    this.macro = macro;
+  }
 
-	position(context) {
-		env.c = this.macro.position(context);
-		return env.c;
-	}
+  position(context) {
+    env.c = this.macro.position(context);
+    return env.c;
+  }
 
-	toString() {
-		return this.macro.toString();
-	}
-}
-
+  toString() {
+    return this.macro.toString();
+  }
+};
 
 Saving.Base = class Saving_Base {
-	constructor(origin, xBase, yBase) {
-		this.origin = origin;
-		this.xBase = xBase;
-		this.yBase = yBase;
-	}
+  constructor(origin, xBase, yBase) {
+    this.origin = origin;
+    this.xBase = xBase;
+    this.yBase = yBase;
+  }
 
-	position(context) {
-		var env = context.env;
-		env.origin = this.origin;
-		env.xBase = this.xBase;
-		env.yBase = this.yBase;
-		return env.c;
-	}
+  position(context) {
+    var env = context.env;
+    env.origin = this.origin;
+    env.xBase = this.xBase;
+    env.yBase = this.yBase;
+    return env.c;
+  }
 
-	toString() {
-		return "origin:" + this.origin + ", xBase:" + this.xBase + ", yBase:" + this.yBase;
-	}
-}
-
+  toString() {
+    return (
+      "origin:" +
+      this.origin +
+      ", xBase:" +
+      this.xBase +
+      ", yBase:" +
+      this.yBase
+    );
+  }
+};
 
 Saving.Stack = class Saving_Stack {
-	constructor(stack) {
-		this.stack = stack;
-	}
+  constructor(stack) {
+    this.stack = stack;
+  }
 
-	position(context) {
-		var env = context.env;
-		if (!this.stack.isEmpty) {
-			this.stack.tail.reverse().foreach(function (p) {
-				env.capturePosition(p);
-			});
-			env.c = this.stack.head;
-		}
-		return env.c;
-	}
+  position(context) {
+    var env = context.env;
+    if (!this.stack.isEmpty) {
+      this.stack.tail.reverse().foreach(function (p) {
+        env.capturePosition(p);
+      });
+      env.c = this.stack.head;
+    }
+    return env.c;
+  }
 
-	toString() {
-		return this.stack.toString();
-	}
-}
+  toString() {
+    return this.stack.toString();
+  }
+};

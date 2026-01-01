@@ -15,31 +15,38 @@
  *  limitations under the License.
  */
 
-import './preload.js';
-import '../../src/core/XypicConfiguration.js';
+import "./preload.js";
+import "../../src/core/XypicConfiguration.js";
 
-import {CreateChtmlWrapper} from '../../src/output/ChtmlWrappers.js';
-import {CreateSvgWrapper} from '../../src/output/SvgWrappers.js';
-import {VERSION} from '@mathjax/src/js/components/version.js';
+import { CreateChtmlWrapper } from "../../src/output/ChtmlWrappers.js";
+import { CreateSvgWrapper } from "../../src/output/SvgWrappers.js";
+import { VERSION } from "@mathjax/src/js/components/version.js";
 
 //
 //    Check to see which output jax are loaded, and
 //    set up callbacks for if the other is loaded via the menu
 //    so that we can set up the wrappers for them.
 //
-const {Loader} = MathJax._.components.loader;
+const { Loader } = MathJax._.components.loader;
 if (Loader) {
   Loader.checkVersion("[xypic]", VERSION, "tex-extension"); // Add component version information
   if (!MathJax._.output.chtml.Wrapper.ChtmlWrapper) {
-    Loader.ready('output/chtml').then(() => {
-      const chtml = MathJax._.output.chtml
-      CreateChtmlWrapper(chtml.Wrapper.ChtmlWrapper, chtml.Wrappers_ts.ChtmlWrappers);
-    }).catch(err => console.log('Caught', err));
+    Loader.ready("output/chtml")
+      .then(() => {
+        const chtml = MathJax._.output.chtml;
+        CreateChtmlWrapper(
+          chtml.Wrapper.ChtmlWrapper,
+          chtml.Wrappers_ts.ChtmlWrappers,
+        );
+      })
+      .catch((err) => console.log("Caught", err));
   }
   if (!MathJax._.output.svg.Wrapper.SvgWrapper) {
-    Loader.ready('output/svg').then(() => {
-      const svg = MathJax._.output.svg;
-      CreateSvgWrapper(svg.Wrapper.SvgWrapper, svg.Wrappers_ts.SvgWrappers);
-    }).catch(err => console.log('Caught', err));
+    Loader.ready("output/svg")
+      .then(() => {
+        const svg = MathJax._.output.svg;
+        CreateSvgWrapper(svg.Wrapper.SvgWrapper, svg.Wrappers_ts.SvgWrappers);
+      })
+      .catch((err) => console.log("Caught", err));
   }
 }
