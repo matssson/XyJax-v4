@@ -33,3 +33,12 @@ combineDefaults(MathJax._, "output", {
     Wrappers_ts: {},
   },
 });
+
+//
+//  Disable all semantic enrichment, not supported
+//
+combineDefaults(MathJax.config.options, "menuOptions", {
+  settings: {
+    enrich: false,
+  },
+});
