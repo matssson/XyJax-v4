@@ -184,11 +184,7 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
           "data-x",
           c.x - halfW - origin.x + p * scale,
         );
-        adaptor.setAttribute(
-          thisRoot,
-          "data-y",
-          -c.y - halfHD - origin.y + p * scale,
-        );
+        adaptor.setAttribute(thisRoot, "data-y", -c.y + (H - D) / 2 - origin.y);
         adaptor.setAttribute(
           thisRoot,
           "data-xypic-id",
@@ -409,6 +405,14 @@ export function CreateChtmlWrapper(wrapper, wrappers) {
 
     get kind() {
       return AST.xypic.newdir.prototype.kind;
+    }
+
+    computeBBox(bbox, recompute = false) {
+      let newdir = this.node.cmd;
+      XypicGlobalContext.repositories.dirRepository.put(
+        newdir.dirMain,
+        newdir.compositeObject,
+      );
     }
 
     _toCHTML(parents) {
