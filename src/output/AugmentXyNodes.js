@@ -16,18 +16,17 @@
  */
 
 import createXypicError from "../core/XypicError.js";
-
-import { XypicConstants } from "../util/XypicConstants.js";
 import { XypicGlobalContext } from "../core/XypicGlobalContext.js";
-import { XypicUtil } from "../util/XypicUtil.js";
 import { List } from "../fp/List.js";
 import { Option } from "../fp/Option.js";
 import { AST } from "../input/XyNodes.js";
-import { Shape } from "./Shapes.js";
-import { Frame } from "./Frames.js";
-import { Env, LastCurve, Curve, CurveSegment } from "./Curves.js";
+import { XypicConstants } from "../util/XypicConstants.js";
+import { XypicUtil } from "../util/XypicUtil.js";
+import { Curve, CurveSegment, Env, LastCurve } from "./Curves.js";
 import { DrawingContext } from "./DrawingContext.js";
+import { Frame } from "./Frames.js";
 import { Saving } from "./Saving.js";
+import { Shape } from "./Shapes.js";
 
 // add methods to given class.
 export function augment(klass, methods) {

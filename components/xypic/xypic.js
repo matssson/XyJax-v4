@@ -18,9 +18,10 @@
 import "./preload.js";
 import "../../src/core/XypicConfiguration.js";
 
+import { VERSION } from "@mathjax/src/js/components/version.js";
+
 import { CreateChtmlWrapper } from "../../src/output/ChtmlWrappers.js";
 import { CreateSvgWrapper } from "../../src/output/SvgWrappers.js";
-import { VERSION } from "@mathjax/src/js/components/version.js";
 
 //
 //    Check to see which output jax are loaded, and

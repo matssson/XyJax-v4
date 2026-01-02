@@ -16,9 +16,9 @@
  */
 
 import { List } from "./List.js";
+import { Matcher, MatchError } from "./Match.js";
 import { Option } from "./Option.js";
 import { Pair } from "./Pair.js";
-import { Matcher, MatchError } from "./Match.js";
 
 /************ OffsetPosition **************/
 class OffsetPosition {

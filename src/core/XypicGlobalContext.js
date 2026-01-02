@@ -15,7 +15,7 @@
  *  limitations under the License.
  */
 
-import { ModifierRepository, DirRepository } from "../output/Repositories.js";
+import { DirRepository, ModifierRepository } from "../output/Repositories.js";
 
 export const XypicGlobalContext = {
   repositories: {

@@ -22,12 +22,12 @@ import { BBox } from "@mathjax/src/js/util/BBox.js";
 import createXypicError from "../core/XypicError.js";
 import { XypicGlobalContext } from "../core/XypicGlobalContext.js";
 import { AST } from "../input/XyNodes.js";
-import { Shape } from "./Shapes.js";
+import { XypicUtil } from "../util/XypicUtil.js";
+import { Env } from "./Curves.js";
+import { DrawingContext } from "./DrawingContext.js";
 import { Frame } from "./Frames.js";
 import { Graphics } from "./Graphics.js";
-import { DrawingContext } from "./DrawingContext.js";
-import { Env } from "./Curves.js";
-import { XypicUtil } from "../util/XypicUtil.js";
+import { Shape } from "./Shapes.js";
 
 const SVGNS = "http://www.w3.org/2000/svg";
 const XLINKNS = "http://www.w3.org/1999/xlink";

@@ -18,26 +18,23 @@
 // for DEBUGGING
 // import {} from "../util/EnableSourceMap.js";
 
+import BaseMethods from "@mathjax/src/js/input/tex/base/BaseMethods.js";
 import { Configuration } from "@mathjax/src/js/input/tex/Configuration.js";
+import ParseMethods from "@mathjax/src/js/input/tex/ParseMethods.js";
+import TexParser from "@mathjax/src/js/input/tex/TexParser.js";
 import {
   CommandMap,
   EnvironmentMap,
 } from "@mathjax/src/js/input/tex/TokenMap.js";
-import BaseMethods from "@mathjax/src/js/input/tex/base/BaseMethods.js";
-import ParseMethods from "@mathjax/src/js/input/tex/ParseMethods.js";
-import TexParser from "@mathjax/src/js/input/tex/TexParser.js";
 
 import createXypicError from "../core/XypicError.js";
-
-import { XypicConstants } from "../util/XypicConstants.js";
 import { Parsers, StringReader } from "../fp/Parsers.js";
 import { AST } from "../input/XyNodes.js";
 import { XyParser } from "../input/XyParser.js";
-
-import { XypicGlobalContext } from "./XypicGlobalContext.js";
-import { ModifierRepository, DirRepository } from "../output/Repositories.js";
-
 import {} from "../output/AugmentXyNodes.js";
+import { DirRepository, ModifierRepository } from "../output/Repositories.js";
+import { XypicConstants } from "../util/XypicConstants.js";
+import { XypicGlobalContext } from "./XypicGlobalContext.js";
 
 function parseXypic(texParser, xyParser, mmlKind) {
   const textMmls = [];

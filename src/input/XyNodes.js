@@ -15,11 +15,12 @@
  *  limitations under the License.
  */
 
+import { MML } from "@mathjax/src/js/core/MmlTree/MML.js";
 import {
   AbstractMmlNode,
   TEXCLASS,
 } from "@mathjax/src/js/core/MmlTree/MmlNode.js";
-import { MML } from "@mathjax/src/js/core/MmlTree/MML.js";
+
 import { XypicGlobalContext } from "../core/XypicGlobalContext.js";
 
 export class AST {}

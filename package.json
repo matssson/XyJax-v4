@@ -12,10 +12,11 @@
   "scripts": {
     "build": "cd components/xypic && node ../../node_modules/@mathjax/src/components/bin/makeAll",
     "clean": "rm ./build/**",
-    "prettier": "prettier --write ."
+    "lint": "eslint . --fix; prettier . --write"
   },
   "devDependencies": {
     "eslint": "^9.39.2",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
     "prettier": "^3.7.4"
   },
   "dependencies": {

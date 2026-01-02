@@ -15,7 +15,7 @@
  *  limitations under the License.
  */
 
-import { MathJax, combineDefaults } from "@mathjax/src/js/components/global.js";
+import { combineDefaults, MathJax } from "@mathjax/src/js/components/global.js";
 
 //
 //  Make sure all output directories are available, even if one or more isn't loaded

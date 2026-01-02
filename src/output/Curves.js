@@ -16,11 +16,11 @@
  */
 
 import createXypicError from "../core/XypicError.js";
-import { XypicConstants } from "../util/XypicConstants.js";
 import { XypicGlobalContext } from "../core/XypicGlobalContext.js";
-import { XypicUtil } from "../util/XypicUtil.js";
 import { List } from "../fp/List.js";
 import { Range } from "../fp/Range.js";
+import { XypicConstants } from "../util/XypicConstants.js";
+import { XypicUtil } from "../util/XypicUtil.js";
 import { DrawingContext } from "./DrawingContext.js";
 import { Frame } from "./Frames.js";
 import { Shape } from "./Shapes.js";

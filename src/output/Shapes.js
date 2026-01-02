@@ -16,8 +16,8 @@
  */
 
 import { XypicGlobalContext } from "../core/XypicGlobalContext.js";
-import { XypicUtil } from "../util/XypicUtil.js";
 import { List } from "../fp/List.js";
+import { XypicUtil } from "../util/XypicUtil.js";
 import { Frame } from "./Frames.js";
 
 export class Shape {
