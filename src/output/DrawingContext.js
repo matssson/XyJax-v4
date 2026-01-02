@@ -34,6 +34,7 @@ export class DrawingContext {
    */
   appendShapeToFront(shape) {
     if (shape.isNone) {
+      // pass
     } else if (this.shape.isNone) {
       this.shape = shape;
     } else {
@@ -47,6 +48,7 @@ export class DrawingContext {
    */
   appendShapeToBack(shape) {
     if (shape.isNone) {
+      // pass
     } else if (this.shape.isNone) {
       this.shape = shape;
     } else {

@@ -397,7 +397,7 @@ export class Parsers {
   //rep1: function (/*lazy*/ first, /*lazy*/ p)
   static repN(num, /*lazy*/ p) {
     if (num === 0) {
-      return Parsers.success(FP.List.empty);
+      return Parsers.success(List.empty);
     }
     return new Parser(function (input) {
       var elems, i, p0, res;

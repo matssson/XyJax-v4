@@ -3723,7 +3723,6 @@ Shape.ColumnColumn3ArrowheadShape = class Shape_ColumnColumn3ArrowheadShape exte
 
   drawDelegate(svg) {
     var t = XypicGlobalContext.measure.thickness;
-    var t = XypicGlobalContext.measure.thickness;
     var l = XypicGlobalContext.measure.em2px(
       0.5 * XypicGlobalContext.measure.lineElementLength +
         XypicGlobalContext.measure.thickness,

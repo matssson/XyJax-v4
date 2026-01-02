@@ -37,6 +37,7 @@ Saving.Macro = class Saving_Macro {
   }
 
   position(context) {
+    var env = context.env;
     env.c = this.macro.position(context);
     return env.c;
   }

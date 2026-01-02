@@ -541,6 +541,8 @@ Frame.Ellipse = class Frame_Ellipse extends Frame {
       var dxm = xm0 - x;
       var dym = ym0 - y;
 
+      var sign = XypicUtil.sign;
+
       if (sign(xp0 - cx) === sign(x - cx) && sign(yp0 - cy) === sign(y - cy)) {
         return new Frame.Point(xm0, ym0);
       } else {

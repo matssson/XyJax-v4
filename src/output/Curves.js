@@ -3658,7 +3658,7 @@ CurveSegment.Line = class CurveSegment_Line extends CurveSegment {
 
   drawFatLine() {
     var fatLine = this.fatLine();
-    var lmin = fatLine.min;
+    var lmax = fatLine.max;
     var y = function (x, l) {
       return -(x * l[0] + l[2]) / l[1];
     };
