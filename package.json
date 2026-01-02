@@ -11,7 +11,8 @@
   "main": "components/xypic/xypic.js",
   "scripts": {
     "build": "cd components/xypic && node ../../node_modules/@mathjax/src/components/bin/makeAll",
-    "clean": "rm ./build/**"
+    "clean": "rm ./build/**",
+    "prettier": "prettier --write ."
   },
   "devDependencies": {
     "eslint": "^9.39.2",

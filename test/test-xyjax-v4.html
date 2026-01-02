@@ -50,7 +50,7 @@
         B \] \[ \newcommand\nt[1]{\langle\text{#1}\rangle}
         \newcommand\from{\leftarrow} \begin{array}{clcll}\hline \text{Impl} &
         \text{Syntax} &&&\quad& \text{Action} \\\hline \checkmark & \nt{xy env}
-        & \to & \bf\text{\\begin\{xy\} $\nt{pos}\,\nt{decor}$ \\end\{xy\}} && c
+        & \to & \textbf{\\begin\{xy\} $\nt{pos}\,\nt{decor}$ \\end\{xy\}} && c
         \from \nt{coord} \\ \checkmark & \nt{pos} & \to & \nt{coord} && c \from
         \nt{coord} \\ \checkmark & & | & \nt{pos}\,{\bf+}\,\nt{coord} && c \from
         \nt{pos} + \nt{coord}^{3a} \\ \checkmark & & | &
@@ -234,14 +234,14 @@
         +/d2em/*[r]{\text{antiquewhite}}; +/d2em/*=<30pt,10pt>[F**:aqua]{};
         +/d2em/*[r]{\text{aqua}}; \end{xy} \] \[ \begin{xy}
         *+<1.5pt>[F**:white]++[F**:red]{\text{text with background}},
-        +!D+/d1pc/, *++[F**:black][white]{\bf{\text{bold white on black}}}
-        \end{xy} \] \[ \begin{xy} (0,0) *+++[o]{ABC}="0" *\frm{.e}; "0"+/ur5em/
-        *++{UR} **@{-}, "0"+/r5em/ *++{R} **@{-}, "0"+/dr5em/ *++{DR} **@{-},
-        "0"+/d5em/ *++{D} **@{-}, "0"+/dl5em/ *++{DL} **@{-}, "0"+/l5em/ *++{L}
-        **@{-}, "0"+/ul5em/ *++{UL} **@{-}, "0"+/u5em/ *++{U} **@{-}, \end{xy}
-        \] \[ \begin{xy} (0,0) *++={A} *\frm{o}; (10,7) *++={B} *\frm{o}
-        **\frm{.} \end{xy} \] \[ \begin{xy} (0,0) *+++{A} ; (10,7) *+++{B}
-        **\frm{.} **\frm{^\}} ; **\frm{_\}} \end{xy} \] \[ \begin{xy}
+        +!D+/d1pc/, *++[F**:black][white]{\textbf{bold white on black}} \end{xy}
+        \] \[ \begin{xy} (0,0) *+++[o]{ABC}="0" *\frm{.e}; "0"+/ur5em/ *++{UR}
+        **@{-}, "0"+/r5em/ *++{R} **@{-}, "0"+/dr5em/ *++{DR} **@{-}, "0"+/d5em/
+        *++{D} **@{-}, "0"+/dl5em/ *++{DL} **@{-}, "0"+/l5em/ *++{L} **@{-},
+        "0"+/ul5em/ *++{UL} **@{-}, "0"+/u5em/ *++{U} **@{-}, \end{xy} \] \[
+        \begin{xy} (0,0) *++={A} *\frm{o}; (10,7) *++={B} *\frm{o} **\frm{.}
+        \end{xy} \] \[ \begin{xy} (0,0) *+++{A} ; (10,7) *+++{B} **\frm{.}
+        **\frm{^\}} ; **\frm{_\}} \end{xy} \] \[ \begin{xy}
         (0,0)*+++{\text{\\frm\{\_\}\}}} *\frm{_\}} *\frm{.}="0"
         +/d4em/*+++{\text{\\frm\{\_)\}}} *\frm{_)} *\frm{.},
         "0"+/r8em/*+++{\text{\\frm\{$\verb!^!$\}\}}} *\frm{^\}} *\frm{.},
